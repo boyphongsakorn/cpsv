@@ -10,7 +10,7 @@
 	
 	let items = [];
 	onMount(async () => {
-		fetch("http://192.168.31.210:6000/blog/find/all")
+		fetch("https://cpsql.pwisetthon.com/blog/find/all")
 		.then(response => response.json())
 		.then(data => {
 			//console.log(data);
@@ -25,7 +25,7 @@
 
 	//let items
 	async function wow() {
-		const response = await fetch('http://192.168.31.210:6000/blog/find/all');
+		const response = await fetch('https://cpsql.pwisetthon.com/blog/find/all');
   		const movies = await response.json();
 		//items=movies;
   		return movies;
@@ -89,13 +89,13 @@
 		});*/
 		//return 'ไม่รู้';
 		//return ican;
-		const response = await fetch('http://192.168.31.210:6000/user/find/id/'+test);
+		const response = await fetch('https://cpsql.pwisetthon.com/user/find/id/'+test);
   		const movies = await response.json();
   		return movies.user;
 	}
 
 	async function getblockname(test) {
-		const response = await fetch('http://192.168.31.210:6000/blockname/find/id/'+test);
+		const response = await fetch('https://cpsql.pwisetthon.com/blockname/find/id/'+test);
   		const movies = await response.json();
 		  //remove minecraft: from the string and return the rest
 		return movies.blockid.replace('minecraft:', '');
