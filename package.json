@@ -19,6 +19,7 @@
     "svelte-paginate": "^0.0.1"
   },
   "dependencies": {
+    "minecraft-pinger": "^1.0.5",
     "sirv-cli": "^1.0.0",
     "svelte-avatar": "^1.1.1",
     "sveltestrap": "^5.6.3"

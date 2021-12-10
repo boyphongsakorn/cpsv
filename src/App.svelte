@@ -85,6 +85,12 @@
 		isOpen = event.detail.isOpen;
 	}
 
+	async function minecraftserverstatus(){
+		const response = await fetch('https://api.mcsrvstat.us/2/four-floor.auto.playit.gg');
+  		const movies = await response.json();
+		return movies;
+	}
+
 	async function getusername(test) {
 		//let ican = 'no'
 		/*await fetch("http://localhost:3000/user/find/id/"+test)
@@ -142,11 +148,21 @@
 </script>
 
 <Navbar color="dark" dark expand="md">
-	<Container sm>
+	<Container sm style="display: flex;">
 		<NavbarBrand href="/">PWisetthon.com Svelte Beta</NavbarBrand>
 		<NavbarToggler on:click={() => (isOpen = !isOpen)} />
 		<Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
 		<Nav class="ms-auto" navbar>
+			<NavItem>
+				{#await minecraftserverstatus() then value}
+					{#if value.online == true}
+						<NavLink>Server Address : four-floor.auto.playit.gg (ออนไลน์)</NavLink>
+					{:else}
+						<NavLink>Server Address : four-floor.auto.playit.gg (ออฟไลน์)</NavLink>
+					{/if}
+					
+				{/await}
+			</NavItem>
 			<!--NavItem>
 			<NavLink href="#components/">Components</NavLink>
 			</NavItem>
