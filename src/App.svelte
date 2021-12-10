@@ -31,6 +31,18 @@
   		return movies;
 	}
 
+	async function wowplayer(userid) {
+		const response = await fetch('https://cpsql.pwisetthon.com/blog/find/user/'+userid);
+  		const movies = await response.json();
+		items=movies;
+		return true;
+  		//return movies;
+	}
+
+	function test(wow) {
+		console.log(wow);
+	}
+
 	/*const items = async function() {
 		const response = await fetch('http://localhost:3000/blog/find/all');
   		const movies = await response.json();
@@ -92,6 +104,12 @@
 		const response = await fetch('https://cpsql.pwisetthon.com/user/find/id/'+test);
   		const movies = await response.json();
   		return movies.user;
+	}
+
+	async function getallusername() {
+		const response = await fetch('https://cpsql.pwisetthon.com/user/find/all');
+  		const movies = await response.json();
+  		return movies;
 	}
 
 	async function getblockname(test) {
@@ -156,6 +174,18 @@
 <Container md>
 
 	<center><h1>ค้นหา Log การทุบหรือวางบล็อก</h1></center>
+
+	<Row>
+		<Col xs="2"><p>ดู Log ตาม Player</p></Col>
+		<Col xs="auto" style="display: flex;margin-bottom: 5px">
+			{#await getallusername() then value}
+				{#each value as item}
+					<Button color="primary" on:click={() => wowplayer(item.userid)}>{item.user}</Button>
+					<Avatar randomBgColor name="{item.user}" src="https://cravatar.eu/avatar/{item.user}"/>
+				{/each}
+			{/await}
+		</Col>
+	</Row>
 	
 	<Row>
 		{#each paginatedItems as item}
