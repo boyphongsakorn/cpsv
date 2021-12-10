@@ -180,8 +180,8 @@
 		<Col xs="auto" style="display: flex;margin-bottom: 5px">
 			{#await getallusername() then value}
 				{#each value as item}
-					<Button color="primary" on:click={() => wowplayer(item.userid)}>{item.user}</Button>
-					<Avatar randomBgColor name="{item.user}" src="https://cravatar.eu/avatar/{item.user}"/>
+					<!--Button color="primary" on:click={() => wowplayer(item.userid)}>{item.user}</Button-->
+					<Avatar randomBgColor name="{item.user}" src="https://cravatar.eu/avatar/{item.user}" on:click={() => wowplayer(item.userid)}/>
 				{/each}
 			{/await}
 		</Col>
