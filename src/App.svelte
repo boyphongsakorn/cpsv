@@ -176,7 +176,7 @@
 	<center><h1>ค้นหา Log การทุบหรือวางบล็อก</h1></center>
 
 	<Row>
-		<Col xs="2" style="margin: auto;"><p>ดู Log ตาม Player</p></Col>
+		<Col xs="2" style="margin: auto;margin-left: 0;margin-right: 0;"><p>ดู Log ตาม Player</p></Col>
 		<Col xs="auto" style="display: flex;margin-bottom: 5px">
 			{#await getallusername() then value}
 				{#each value as item}
