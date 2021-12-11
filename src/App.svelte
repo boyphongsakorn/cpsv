@@ -86,7 +86,7 @@
 	}
 
 	async function minecraftserverstatus(){
-		const response = await fetch('https://api.mcsrvstat.us/2/four-floor.auto.playit.gg');
+		const response = await fetch('https://api.mcsrvstat.us/2/accidental-watch.auto.playit.gg');
   		const movies = await response.json();
 		return movies;
 	}
@@ -156,9 +156,9 @@
 			<NavItem>
 				{#await minecraftserverstatus() then value}
 					{#if value.online == true}
-						<NavLink>Server Address : four-floor.auto.playit.gg (ออนไลน์)</NavLink>
+						<NavLink>Server Address : accidental-watch.auto.playit.gg (ออนไลน์)</NavLink>
 					{:else}
-						<NavLink>Server Address : four-floor.auto.playit.gg (ออฟไลน์)</NavLink>
+						<NavLink>Server Address : accidental-watch.auto.playit.gg (ออฟไลน์)</NavLink>
 					{/if}
 					
 				{/await}
