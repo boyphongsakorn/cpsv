@@ -196,7 +196,8 @@
 		<Col xs="auto" style="display: flex;margin-bottom: 5px">
 			{#await getallusername() then value}
 				{#each value as item}
-					<Button outline color="primary" on:click={() => wowplayer(item.userid)} style="margin-right: 5px"><Avatar randomBgColor initials="{item.user}" src="https://cravatar.eu/avatar/{item.user}"/></Button>
+				 	<!-- remove # from item.user -->
+					<Button outline color="primary" on:click={() => wowplayer(item.userid)} style="margin-right: 5px"><Avatar randomBgColor initials="{item.user.replace('#', '')}" src="https://cravatar.eu/avatar/{item.user}"/></Button>
 					<!--Avatar randomBgColor initials="{item.user}" src="https://cravatar.eu/avatar/{item.user}"/-->
 				{/each}
 			{/await}
