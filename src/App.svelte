@@ -218,7 +218,12 @@
 					<CardTitle>
 						<Row>
 							<Col>ลำดับ {item.id}</Col>
-							<Col class="test"><Avatar randomBgColor name="{value}" src="https://cravatar.eu/avatar/{value}" />
+							<Col class="test">
+								{#if value.indexOf('#') != -1}
+								<Avatar randomBgColor name="{value.replace('#', '')}" src="https://minecraftfaces.com/wp-content/bigfaces/big-{value.replace('#', '')}-face.png" />
+								{:else}
+								<Avatar randomBgColor name="{value}" src="https://cravatar.eu/avatar/{value}" />
+								{/if}
 								{#await getblockname(item.type) then value}
 									<Avatar randomBgColor name="{value}" src="https://mc.nerothe.com/img/1.18-21w42a/{value}.png" />
 								{/await}
