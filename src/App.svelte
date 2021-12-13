@@ -196,8 +196,13 @@
 		<Col xs="auto" style="display: flex;margin-bottom: 5px">
 			{#await getallusername() then value}
 				{#each value as item}
-				 	<!-- remove # from item.user -->
-					<Button outline color="primary" on:click={() => wowplayer(item.userid)} style="margin-right: 5px"><Avatar randomBgColor initials="{item.user.replace('#', '')}" src="https://cravatar.eu/avatar/{item.user}"/></Button>
+				 	<!-- if have # character on item.user  -->
+					{#if item.user.indexOf('#') != -1}
+					<!-- remove # from item.user -->
+					<Button outline color="primary" on:click={() => wowplayer(item.userid)} style="margin-right: 5px"><Avatar randomBgColor initials="{item.user.replace('#', '')}" src="https://minecraftfaces.com/wp-content/bigfaces/big-{item.user.replace('#', '')}-face.png"/></Button>
+					{:else}
+					<Button outline color="primary" on:click={() => wowplayer(item.userid)} style="margin-right: 5px"><Avatar randomBgColor initials="{item.user}" src="https://cravatar.eu/avatar/{item.user}"/></Button>
+					{/if}
 					<!--Avatar randomBgColor initials="{item.user}" src="https://cravatar.eu/avatar/{item.user}"/-->
 				{/each}
 			{/await}
