@@ -407,7 +407,7 @@
 		totalItems="{value}"
 		pageSize="40"
 		currentPage="{page}"
-		limit="{10}"
+		limit="{6}"
 		showStepOptions="{true}"
 		on:setPage="{(e) => wow(e.detail.page)}"
 		/>
