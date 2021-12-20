@@ -1,5 +1,5 @@
 <svelte:head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
 </svelte:head>
 
 <script>
@@ -7,10 +7,13 @@
 	import { apiData, drinkNames } from './store.js';
 	import Avatar from "svelte-avatar";
 	import { paginate, LightPaginationNav } from 'svelte-paginate';
+	import js from 'jquery';
 	
 	let items = [];
+	let page = 1;
 	onMount(async () => {
-		fetch("https://cpsql.pwisetthon.com/blog/find/all")
+		window.js = js;
+		fetch("https://cpsql.pwisetthon.com/blog/find/page/1")
 		.then(response => response.json())
 		.then(data => {
 			//console.log(data);
@@ -24,10 +27,15 @@
 	//let name = 'world';
 
 	//let items
-	async function wow() {
-		const response = await fetch('https://cpsql.pwisetthon.com/blog/find/all');
+	async function wow(i) {
+		if(i == undefined) {
+			i = 1;
+		}
+		const response = await fetch('https://cpsql.pwisetthon.com/blog/find/page/'+i);
   		const movies = await response.json();
 		//items=movies;
+		items = movies;
+		page = i;
   		return movies;
 	}
 
@@ -37,6 +45,18 @@
 		items=movies;
 		return true;
   		//return movies;
+	}
+
+	async function allcount() {
+		const response = await fetch('https://cpsql.pwisetthon.com/blog/find/all/count');
+  		const movies = await response.json();
+		let itemcount = movies/40;
+		let wow = [];
+		for(let i=0;i<itemcount;i++) {
+			wow.push(i+1);
+		}
+		//return wow;
+		return parseInt(movies);
 	}
 
 	function test(wow) {
@@ -49,9 +69,9 @@
   		return movies;
 	}*/
 	
-	let currentPage = 1
+	/*let currentPage = 1
   	let pageSize = 40
-	$: paginatedItems = paginate({ items, pageSize, currentPage })
+	$: paginatedItems = paginate({ items, pageSize, currentPage })*/
 
 	import {
 		Collapse,
@@ -76,7 +96,10 @@
 		CardSubtitle,
 		CardText,
 		CardTitle,
-		Tooltip
+		Tooltip,
+		Pagination,
+		PaginationItem,
+		PaginationLink
 	} from 'sveltestrap';
 
 	let isOpen = false;
@@ -210,7 +233,7 @@
 	</Row>
 	
 	<Row>
-		{#each paginatedItems as item}
+		{#each items as item}
 		<Col xs="4" sm="3">
 			<Card class="mb-3">
 				<CardHeader>
@@ -266,15 +289,54 @@
 		</Col>
 		{/each}
 	</Row>
+
+	<!--Pagination ariaLabel="Page navigation example">
+		<PaginationItem disabled>
+			<PaginationLink first href="#" />
+		</PaginationItem>
+		<PaginationItem disabled>
+			<PaginationLink previous href="#" />
+		</PaginationItem>
+		{#await allcount() then value}
+			{#each value as item}
+			<PaginationItem active>
+				<PaginationLink href="#">
+					{item}
+				</PaginationLink>
+			</PaginationItem>
+			{/each}
+		{/await}
+		<PaginationItem active>
+			<PaginationLink href="#">1</PaginationLink>
+		</PaginationItem>
+		<PaginationItem>
+			<PaginationLink href="#">2</PaginationLink>
+		</PaginationItem>
+		<PaginationItem>
+			<PaginationLink href="#">3</PaginationLink>
+		</PaginationItem>
+		<PaginationItem>
+			<PaginationLink href="#">4</PaginationLink>
+		</PaginationItem>
+		<PaginationItem>
+			<PaginationLink href="#">5</PaginationLink>
+		</PaginationItem>
+		<PaginationItem>
+			<PaginationLink next href="#" />
+		</PaginationItem>
+		<PaginationItem>
+			<PaginationLink last href="#" />
+		</PaginationItem>
+	</Pagination-->
 	  
-	  <LightPaginationNav
+	  <!--LightPaginationNav
 		totalItems="{items.length}"
 		pageSize="{pageSize}"
 		currentPage="{currentPage}"
 		limit="{1}"
 		showStepOptions="{true}"
 		on:setPage="{(e) => currentPage = e.detail.page}"
-	  />
+	  /-->
 
 	<!--Row>
 		{#each $drinkNames as drinkName}
@@ -339,5 +401,16 @@
 			</li>
 		{/each}
 	</ul-->
+
+	{#await allcount() then value}
+		<LightPaginationNav
+		totalItems="{value}"
+		pageSize="40"
+		currentPage="{page}"
+		limit="{10}"
+		showStepOptions="{true}"
+		on:setPage="{(e) => wow(e.detail.page)}"
+		/>
+	{/await}
 
 </Container>
