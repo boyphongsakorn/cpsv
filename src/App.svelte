@@ -109,7 +109,7 @@
 	}
 
 	async function minecraftserverstatus(){
-		const response = await fetch('https://api.mcsrvstat.us/2/accidental-watch.auto.playit.gg');
+		const response = await fetch('https://api.mcsrvstat.us/2/target-boc.craft.playit.gg');
   		const movies = await response.json();
 		return movies;
 	}
