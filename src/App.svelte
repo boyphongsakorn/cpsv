@@ -109,7 +109,7 @@
 	}
 
 	async function minecraftserverstatus(){
-		const response = await fetch('https://api.mcsrvstat.us/2/target-boc.craft.playit.gg');
+		const response = await fetch('https://api.mcsrvstat.us/2/playmc.pwisetthon.com');
   		const movies = await response.json();
 		return movies;
 	}
@@ -179,9 +179,9 @@
 			<NavItem>
 				{#await minecraftserverstatus() then value}
 					{#if value.online == true}
-						<NavLink>Server Address : accidental-watch.auto.playit.gg (ออนไลน์)</NavLink>
+						<NavLink>Server Address : playmc.pwisetthon.com (ออนไลน์)</NavLink>
 					{:else}
-						<NavLink>Server Address : accidental-watch.auto.playit.gg (ออฟไลน์)</NavLink>
+						<NavLink>Server Address : playmc.pwisetthon.com (ออฟไลน์)</NavLink>
 					{/if}
 					
 				{/await}
