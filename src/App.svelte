@@ -329,7 +329,9 @@
 							<Col>ลำดับ {item.id}</Col>
 							<Col class="test">
 								{#if value.indexOf('#') != -1}
-								<Avatar randomBgColor name="{value.replace('#', '')}" src="https://minecraftfaces.com/wp-content/bigfaces/big-{value.replace('#', '')}-face.png" />
+									{#await getmonsterimage(value.replace('#', '')) then imgurl}
+										<Avatar randomBgColor name="{value.replace('#', '')}" src={imgurl}/>
+									{/await}
 								{:else}
 								<Avatar randomBgColor name="{value}" src="https://cravatar.eu/avatar/{value}" />
 								{/if}
