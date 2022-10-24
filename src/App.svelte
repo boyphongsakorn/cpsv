@@ -1,7 +1,3 @@
-<svelte:head>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
-</svelte:head>
-
 <script>
 	import { onMount } from "svelte";
 	import { apiData, drinkNames } from './store.js';
@@ -121,7 +117,8 @@
 		PaginationLink,
 		Carousel,
 		CarouselControl,
-		CarouselItem
+		CarouselItem,
+		Styles
 	} from 'sveltestrap';
 
 	let isOpen = false;
@@ -188,6 +185,17 @@
   		//return movies.blockid;
 	}
 
+	async function getmonsterimage(test) {
+		let urls = 'https://anywhere.pwisetthon.com/https://minecraftfaces.com/wp-content/bigfaces/big-'+test+'-face.jpg';
+		const response = await fetch(urls);
+  		//const movies = await response.json();
+		//if response is 404 then return png url
+		if(response.status == 404) {
+			urls = 'https://anywhere.pwisetthon.com/https://minecraftfaces.com/wp-content/bigfaces/big-'+test+'-face.png';
+		}
+		return urls;
+	}
+
 	//let promise = getusername();
 
 	//create function convert unix time to datetime
@@ -210,6 +218,8 @@
 
 	let activeIndex = 0;
 </script>
+
+<Styles />
 
 <Navbar color="dark" dark expand="md">
 	<Container sm style="display: flex;">
@@ -283,7 +293,13 @@
 								{#if item.user.indexOf('#') != -1}
 									<!-- remove # from item.user -->
 									<Button outline color="primary" on:click={() => wowplayer(item.userid)} style="margin-right: 5px;display: none;"><Avatar randomBgColor initials="{item.user.replace('#', '')}" src="https://minecraftfaces.com/wp-content/bigfaces/big-{item.user.replace('#', '')}-face.png"/></Button>
-									<a href="https://mccplog.pwisetthon.com/?id={item.userid}" id="userid{item.userid}"><Button outline color="primary" style="margin-right: 5px;"><Avatar randomBgColor initials="{item.user.replace('#', '')}" src="https://minecraftfaces.com/wp-content/bigfaces/big-{item.user.replace('#', '')}-face.png"/></Button></a>
+									<a href="https://mccplog.pwisetthon.com/?id={item.userid}" id="userid{item.userid}">
+										<Button outline color="primary" style="margin-right: 5px;">
+											{#await getmonsterimage(item.user.replace('#', '')) then imgurl}
+												<Avatar randomBgColor initials="{item.user.replace('#', '')}" src={imgurl}/>
+											{/await}
+										</Button>
+									</a>
 									<Tooltip target="userid{item.userid}" placement="bottom">{item.user.replace('#', '')}</Tooltip>
 								{:else}
 									<Button outline color="primary" on:click={() => wowplayer(item.userid)} style="margin-right: 5px;display: none;"><Avatar randomBgColor initials="{item.user}" src="https://cravatar.eu/avatar/{item.user}"/></Button>
@@ -295,11 +311,10 @@
 							</center>
 						</CarouselItem>
 					{/each}
-				
 			</div>
 
-			<CarouselControl direction="prev" bind:activeIndex {value} />
-			<CarouselControl direction="next" bind:activeIndex {value} />
+			<a href on:click={() => activeIndex = Math.max(activeIndex - 1, 0)}><CarouselControl direction="prev"/></a>
+			<a href on:click={() => activeIndex = Math.min(activeIndex + 1, value.length - 1)}><CarouselControl direction="next"/></a>
 		</Carousel>
 	{/await}
 	
