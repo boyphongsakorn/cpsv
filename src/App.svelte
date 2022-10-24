@@ -201,6 +201,23 @@
 		if(response3.status == 404) {
 			urls = 'https://mc.nerothe.com/img/1.19.2/'+test+'.png';
 		}
+		//change _ to -
+		test = test.replace(/_/g, '-');
+		urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-'+test+'-face.jpg';
+		const response4 = await fetch('https://anywhere.pwisetthon.com/'+urls);
+  		//const movies = await response.json();
+		//if response is 404 then return png url
+		if(response4.status == 404) {
+			urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-'+test+'-face.png';
+		}
+		const response5 = await fetch('https://anywhere.pwisetthon.com/'+urls);
+		if(response5.status == 404) {
+			urls = 'https://minecraftitemids.com/item/64/'+test+'.png';
+		}
+		const response6 = await fetch('https://anywhere.pwisetthon.com/'+urls);
+		if(response6.status == 404) {
+			urls = 'https://mc.nerothe.com/img/1.19.2/'+test+'.png';
+		}
 		urls = 'https://img.gs/fhcphvsghs/64x64,crop/'+urls
 		return urls;
 	}
