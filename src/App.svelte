@@ -8,12 +8,21 @@
 	import Avatar from "svelte-avatar";
 	import { paginate, LightPaginationNav } from 'svelte-paginate';
 	import js from 'jquery';
+
+	const urlParams = new URLSearchParams(window.location.search);
+    const isId = urlParams.has('id');
+	let id = '';
 	
 	let items = [];
 	let page = 1;
 	onMount(async () => {
 		window.js = js;
-		fetch("https://cpsql.pwisetthon.com/blog/find/page/1")
+		let url = 'https://cpsql.pwisetthon.com/blog/find/page/1';
+		if (isId) {
+			id = urlParams.get('id');
+			url = 'https://cpsql.pwisetthon.com/blog/find/user/' + id + '/1';
+		}
+		fetch(url)
 		.then(response => response.json())
 		.then(data => {
 			//console.log(data);
@@ -31,8 +40,13 @@
 		if(i == undefined) {
 			i = 1;
 		}
-		const response = await fetch('https://cpsql.pwisetthon.com/blog/find/page/'+i);
-  		const movies = await response.json();
+		let url = 'https://cpsql.pwisetthon.com/blog/find/page/'+i;
+		if (isId) {
+			id = urlParams.get('id');
+			url = 'https://cpsql.pwisetthon.com/blog/find/user/' + id + '/' + i;
+		}
+		const response = await fetch(url);
+		const movies = await response.json();
 		//items=movies;
 		items = movies;
 		page = i;
@@ -48,7 +62,12 @@
 	}
 
 	async function allcount() {
-		const response = await fetch('https://cpsql.pwisetthon.com/blog/find/all/count');
+		let url = 'https://cpsql.pwisetthon.com/blog/find/all/count';
+		if (isId) {
+			id = urlParams.get('id');
+			url = 'https://cpsql.pwisetthon.com/blog/find/all/count/' + id;
+		}
+		const response = await fetch(url);
   		const movies = await response.json();
 		let itemcount = movies/40;
 		let wow = [];
@@ -261,9 +280,11 @@
 							{#each items as item}
 								{#if item.user.indexOf('#') != -1}
 									<!-- remove # from item.user -->
-									<Button outline color="primary" on:click={() => wowplayer(item.userid)} style="margin-right: 5px"><Avatar randomBgColor initials="{item.user.replace('#', '')}" src="https://minecraftfaces.com/wp-content/bigfaces/big-{item.user.replace('#', '')}-face.png"/></Button>
+									<Button outline color="primary" on:click={() => wowplayer(item.userid)} style="margin-right: 5px;display: none;"><Avatar randomBgColor initials="{item.user.replace('#', '')}" src="https://minecraftfaces.com/wp-content/bigfaces/big-{item.user.replace('#', '')}-face.png"/></Button>
+									<a href="https://mccplog.pwisetthon.com/?id={item.userid}"><Button outline color="primary" style="margin-right: 5px;"><Avatar randomBgColor initials="{item.user.replace('#', '')}" src="https://minecraftfaces.com/wp-content/bigfaces/big-{item.user.replace('#', '')}-face.png"/></Button></a>
 								{:else}
-									<Button outline color="primary" on:click={() => wowplayer(item.userid)} style="margin-right: 5px"><Avatar randomBgColor initials="{item.user}" src="https://cravatar.eu/avatar/{item.user}"/></Button>
+									<Button outline color="primary" on:click={() => wowplayer(item.userid)} style="margin-right: 5px;display: none;"><Avatar randomBgColor initials="{item.user}" src="https://cravatar.eu/avatar/{item.user}"/></Button>
+									<a href="https://mccplog.pwisetthon.com/?id={item.userid}"><Button outline color="primary" style="margin-right: 5px;"><Avatar randomBgColor initials="{item.user}" src="https://cravatar.eu/avatar/{item.user}"/></Button></a>
 								{/if}
 								
 							{/each}
