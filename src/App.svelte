@@ -220,6 +220,34 @@
 			if(response6.status == 404) {
 				urls = 'https://mc.nerothe.com/img/1.19.2/'+test+'.png';
 			}
+			const secondlastchange = await fetch('https://anywhere.pwisetthon.com/'+urls);
+			if(secondlastchange.status == 404) {
+				//split string by -
+				let split = test.split('-');
+				//loop
+				for(let i=0;i<split.length;i++) {
+					urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-'+test+'-face.jpg';
+					const response7 = await fetch('https://anywhere.pwisetthon.com/'+urls);
+					//const movies = await response.json();
+					//if response is 404 then return png url
+					if(response7.status == 404) {
+						urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-'+test+'-face.png';
+					}
+					const response8 = await fetch('https://anywhere.pwisetthon.com/'+urls);
+					if(response8.status == 404) {
+						urls = 'https://minecraftitemids.com/item/64/'+test+'.png';
+					}
+					const response9 = await fetch('https://anywhere.pwisetthon.com/'+urls);
+					if(response9.status == 404) {
+						urls = 'https://mc.nerothe.com/img/1.19.2/'+test+'.png';
+					}
+					const test = await fetch('https://anywhere.pwisetthon.com/'+urls);
+					if(test.status != 404) {
+						//end loop
+						break;
+					}
+				}
+			}
 		}
 		urls = 'https://img.gs/fhcphvsghs/64x64,crop/'+urls
 		return urls;
