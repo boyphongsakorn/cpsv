@@ -281,10 +281,12 @@
 								{#if item.user.indexOf('#') != -1}
 									<!-- remove # from item.user -->
 									<Button outline color="primary" on:click={() => wowplayer(item.userid)} style="margin-right: 5px;display: none;"><Avatar randomBgColor initials="{item.user.replace('#', '')}" src="https://minecraftfaces.com/wp-content/bigfaces/big-{item.user.replace('#', '')}-face.png"/></Button>
-									<a href="https://mccplog.pwisetthon.com/?id={item.userid}"><Button outline color="primary" style="margin-right: 5px;"><Avatar randomBgColor initials="{item.user.replace('#', '')}" src="https://minecraftfaces.com/wp-content/bigfaces/big-{item.user.replace('#', '')}-face.png"/></Button></a>
+									<a href="https://mccplog.pwisetthon.com/?id={item.userid}" id="userid{item.userid}"><Button outline color="primary" style="margin-right: 5px;"><Avatar randomBgColor initials="{item.user.replace('#', '')}" src="https://minecraftfaces.com/wp-content/bigfaces/big-{item.user.replace('#', '')}-face.png"/></Button></a>
+									<Tooltip target="userid{item.userid}" bottom>{item.user.replace('#', '')}</Tooltip>
 								{:else}
 									<Button outline color="primary" on:click={() => wowplayer(item.userid)} style="margin-right: 5px;display: none;"><Avatar randomBgColor initials="{item.user}" src="https://cravatar.eu/avatar/{item.user}"/></Button>
-									<a href="https://mccplog.pwisetthon.com/?id={item.userid}"><Button outline color="primary" style="margin-right: 5px;"><Avatar randomBgColor initials="{item.user}" src="https://cravatar.eu/avatar/{item.user}"/></Button></a>
+									<a href="https://mccplog.pwisetthon.com/?id={item.userid}" id="userid{item.userid}"><Button outline color="primary" style="margin-right: 5px;"><Avatar randomBgColor initials="{item.user}" src="https://cravatar.eu/avatar/{item.user}"/></Button></a>
+									<Tooltip target="userid{item.userid}" bottom>{item.user}</Tooltip>
 								{/if}
 								
 							{/each}
