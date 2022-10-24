@@ -99,7 +99,10 @@
 		Tooltip,
 		Pagination,
 		PaginationItem,
-		PaginationLink
+		PaginationLink,
+		Carousel,
+		CarouselControl,
+		CarouselItem
 	} from 'sveltestrap';
 
 	let isOpen = false;
@@ -141,6 +144,21 @@
   		return movies;
 	}
 
+	async function getallusernamecarousel() {
+		const response = await fetch('https://cpsql.pwisetthon.com/user/find/all');
+  		const movies = await response.json();
+		let list = [];
+		let fiveten = [];
+		for(let i=0;i<movies.length;i++) {
+			fiveten.push(movies[i]);
+			if((i+1)%12 == 0) {
+				list.push(fiveten);
+				fiveten = [];
+			}
+		}
+		return list;
+	}
+
 	async function getblockname(test) {
 		const response = await fetch('https://cpsql.pwisetthon.com/blockname/find/id/'+test);
   		const movies = await response.json();
@@ -168,6 +186,8 @@
 	} 
 
 	//const placements = ['top', 'right', 'left', 'bottom'];
+
+	let activeIndex = 0;
 </script>
 
 <Navbar color="dark" dark expand="md">
@@ -216,7 +236,7 @@
 
 	<Row>
 		<Col xs="2" style="margin: auto;margin-left: 0;margin-right: 0;"><p>ดู Log ตาม Player</p></Col>
-		<Col xs="auto" style="display: flex;margin-bottom: 5px">
+		<Col xs="auto" style="display: none;margin-bottom: 5px">
 			{#await getallusername() then value}
 				{#each value as item}
 				 	<!-- if have # character on item.user  -->
@@ -231,6 +251,32 @@
 			{/await}
 		</Col>
 	</Row>
+
+	{#await getallusernamecarousel() then value}
+		<Carousel dark {value} bind:activeIndex>
+			<div class="carousel-inner">
+					{#each value as items, index}
+						<CarouselItem bind:activeIndex itemIndex={index}>
+							<center>
+							{#each items as item}
+								{#if item.user.indexOf('#') != -1}
+									<!-- remove # from item.user -->
+									<Button outline color="primary" on:click={() => wowplayer(item.userid)} style="margin-right: 5px"><Avatar randomBgColor initials="{item.user.replace('#', '')}" src="https://minecraftfaces.com/wp-content/bigfaces/big-{item.user.replace('#', '')}-face.png"/></Button>
+								{:else}
+									<Button outline color="primary" on:click={() => wowplayer(item.userid)} style="margin-right: 5px"><Avatar randomBgColor initials="{item.user}" src="https://cravatar.eu/avatar/{item.user}"/></Button>
+								{/if}
+								
+							{/each}
+							</center>
+						</CarouselItem>
+					{/each}
+				
+			</div>
+
+			<CarouselControl direction="prev" bind:activeIndex {value} />
+			<CarouselControl direction="next" bind:activeIndex {value} />
+		</Carousel>
+	{/await}
 	
 	<Row>
 		{#each items as item}
