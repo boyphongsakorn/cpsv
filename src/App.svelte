@@ -197,6 +197,10 @@
 		if(response2.status == 404) {
 			urls = 'https://anywhere.pwisetthon.com/https://minecraftitemids.com/item/64/'+test+'.png';
 		}
+		const response3 = await fetch(urls);
+		if(response3.status == 404) {
+			urls = 'https://anywhere.pwisetthon.com/https://mc.nerothe.com/img/1.19.2/'+test+'.png';
+		}
 		return urls;
 	}
 
@@ -334,7 +338,7 @@
 							<Col class="test">
 								{#if value.indexOf('#') != -1}
 									{#await getmonsterimage(value.replace('#', '')) then imgurl}
-										<Avatar randomBgColor name="{value.replace('#', '')}" src={imgurl}/>
+										<Avatar randomBgColor name="{value.replace('#', '')}" src={imgurl} size="50px"/>
 									{/await}
 								{:else}
 								<Avatar randomBgColor name="{value}" src="https://cravatar.eu/avatar/{value}" />
