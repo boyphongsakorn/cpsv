@@ -193,6 +193,10 @@
 		if(response.status == 404) {
 			urls = 'https://anywhere.pwisetthon.com/https://minecraftfaces.com/wp-content/bigfaces/big-'+test+'-face.png';
 		}
+		const response2 = await fetch(urls);
+		if(response2.status == 404) {
+			urls = 'https://anywhere.pwisetthon.com/https://minecraftitemids.com/item/64/'+test+'.png';
+		}
 		return urls;
 	}
 
