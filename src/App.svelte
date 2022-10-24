@@ -334,7 +334,7 @@
 								<Avatar randomBgColor name="{value}" src="https://cravatar.eu/avatar/{value}" />
 								{/if}
 								{#await getblockname(item.type) then value}
-									<Avatar randomBgColor name="{value}" src="https://mc.nerothe.com/img/1.18-21w42a/{value}.png" />
+									<Avatar randomBgColor name="{value}" src="https://mc.nerothe.com/img/1.19.2/{value}.png" />
 								{/await}
 							</Col>
 						</Row>
