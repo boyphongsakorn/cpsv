@@ -173,6 +173,8 @@
 			if((i+1)%12 == 0) {
 				list.push(fiveten);
 				fiveten = [];
+			}else if(i == movies.length-1) {
+				list.push(fiveten);
 			}
 		}
 		return list;
