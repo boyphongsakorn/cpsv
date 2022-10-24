@@ -220,8 +220,8 @@
 			if(response6.status == 404) {
 				urls = 'https://mc.nerothe.com/img/1.19.2/'+test+'.png';
 			}
-			urls = 'https://img.gs/fhcphvsghs/64x64,crop/'+urls
 		}
+		urls = 'https://img.gs/fhcphvsghs/64x64,crop/'+urls
 		return urls;
 	}
 
