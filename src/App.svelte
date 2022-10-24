@@ -186,20 +186,20 @@
 	}
 
 	async function getmonsterimage(test) {
-		let urls = 'https://anywhere.pwisetthon.com/https://minecraftfaces.com/wp-content/bigfaces/big-'+test+'-face.jpg';
-		const response = await fetch(urls);
+		let urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-'+test+'-face.jpg';
+		const response = await fetch('https://anywhere.pwisetthon.com/'+urls);
   		//const movies = await response.json();
 		//if response is 404 then return png url
 		if(response.status == 404) {
-			urls = 'https://anywhere.pwisetthon.com/https://minecraftfaces.com/wp-content/bigfaces/big-'+test+'-face.png';
+			urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-'+test+'-face.png';
 		}
-		const response2 = await fetch(urls);
+		const response2 = await fetch('https://anywhere.pwisetthon.com/'+urls);
 		if(response2.status == 404) {
-			urls = 'https://anywhere.pwisetthon.com/https://minecraftitemids.com/item/64/'+test+'.png';
+			urls = 'https://minecraftitemids.com/item/64/'+test+'.png';
 		}
-		const response3 = await fetch(urls);
+		const response3 = await fetch('https://anywhere.pwisetthon.com/'+urls);
 		if(response3.status == 404) {
-			urls = 'https://anywhere.pwisetthon.com/https://mc.nerothe.com/img/1.19.2/'+test+'.png';
+			urls = 'https://mc.nerothe.com/img/1.19.2/'+test+'.png';
 		}
 		urls = 'https://img.gs/fhcphvsghs/64x64,crop/'+urls
 		return urls;
