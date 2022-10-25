@@ -172,7 +172,7 @@
 			if(getcountdata > 0) {
 				fiveten.push(movies[i]);
 			}
-			if(count%12 == 0) {
+			if((count+1)%12 == 0) {
 				list.push(fiveten);
 				fiveten = [];
 			}else if(i == movies.length-1) {
