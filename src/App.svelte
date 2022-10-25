@@ -175,6 +175,7 @@
 			if((count+1)%12 == 0) {
 				list.push(fiveten);
 				fiveten = [];
+				count = 0;
 			}else if(i == movies.length-1) {
 				list.push(fiveten);
 			}
