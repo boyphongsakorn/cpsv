@@ -173,7 +173,7 @@
 				fiveten.push(movies[i]);
 				count++;
 			}
-			if((count+1)%12 == 0) {
+			if(count%12 == 0) {
 				list.push(fiveten);
 				fiveten = [];
 				count = 0;
