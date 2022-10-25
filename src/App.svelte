@@ -169,14 +169,13 @@
 		for(let i=0;i<movies.length;i++) {
 			const getcount = await fetch('https://cpsql.pwisetthon.com/blog/find/all/count/'+movies[i].userid);
   			const getcountdata = await getcount.text();
-			if(getcountdata > 0) {
+			if(parseInt(getcountdata) > 0) {
 				fiveten.push(movies[i]);
 				count++;
 			}
 			if(count%12 == 0) {
 				list.push(fiveten);
 				fiveten = [];
-				count = 0;
 			}else if(i == movies.length-1) {
 				list.push(fiveten);
 			}
