@@ -179,7 +179,9 @@
 			}else if(i == movies.length-1) {
 				list.push(fiveten);
 			}
-			count++;
+			if((count+1)%12 != 0) {
+				count++;
+			}
 		}
 		return list;
 	}
