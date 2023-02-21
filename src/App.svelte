@@ -387,49 +387,6 @@
 <Container md>
   <center><h1>ค้นหา Log การทุบหรือวางบล็อก</h1></center>
 
-  <Row>
-    <Col xs="2" style="margin: auto;margin-left: 0;margin-right: 0;"
-      ><p>ดู Log ตาม Player</p></Col
-    >
-    <Col xs="auto" style="display: none;margin-bottom: 5px">
-      {#await getallusername() then value}
-        {#each value as item}
-          <!-- if have # character on item.user  -->
-          {#if item.user.indexOf("#") != -1}
-            <!-- remove # from item.user -->
-            <Button
-              outline
-              color="primary"
-              on:click={() => wowplayer(item.userid)}
-              style="margin-right: 5px"
-              ><Avatar
-                randomBgColor
-                initials={item.user.replace("#", "")}
-                src="https://minecraftfaces.com/wp-content/bigfaces/big-{item.user.replace(
-                  '#',
-                  ''
-                )}-face.png"
-              /></Button
-            >
-          {:else}
-            <Button
-              outline
-              color="primary"
-              on:click={() => wowplayer(item.userid)}
-              style="margin-right: 5px"
-              ><Avatar
-                randomBgColor
-                initials={item.user}
-                src="https://cravatar.eu/avatar/{item.user}"
-              /></Button
-            >
-          {/if}
-          <!--Avatar randomBgColor initials="{item.user}" src="https://cravatar.eu/avatar/{item.user}"/-->
-        {/each}
-      {/await}
-    </Col>
-  </Row>
-
   <p>ดู Log โดยใช้ X,Y,Z</p>
   <Row>
     <Col
@@ -472,6 +429,49 @@
         /></FormGroup
       ></Col
     >
+  </Row>
+
+  <Row>
+    <Col xs="2" style="margin: auto;margin-left: 0;margin-right: 0;"
+      ><p>ดู Log ตาม Player</p></Col
+    >
+    <Col xs="auto" style="display: none;margin-bottom: 5px">
+      {#await getallusername() then value}
+        {#each value as item}
+          <!-- if have # character on item.user  -->
+          {#if item.user.indexOf("#") != -1}
+            <!-- remove # from item.user -->
+            <Button
+              outline
+              color="primary"
+              on:click={() => wowplayer(item.userid)}
+              style="margin-right: 5px"
+              ><Avatar
+                randomBgColor
+                initials={item.user.replace("#", "")}
+                src="https://minecraftfaces.com/wp-content/bigfaces/big-{item.user.replace(
+                  '#',
+                  ''
+                )}-face.png"
+              /></Button
+            >
+          {:else}
+            <Button
+              outline
+              color="primary"
+              on:click={() => wowplayer(item.userid)}
+              style="margin-right: 5px"
+              ><Avatar
+                randomBgColor
+                initials={item.user}
+                src="https://cravatar.eu/avatar/{item.user}"
+              /></Button
+            >
+          {/if}
+          <!--Avatar randomBgColor initials="{item.user}" src="https://cravatar.eu/avatar/{item.user}"/-->
+        {/each}
+      {/await}
+    </Col>
   </Row>
 
   {#await getallusernamecarousel() then value}
