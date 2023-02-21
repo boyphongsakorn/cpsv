@@ -352,36 +352,40 @@
 		</Col>
 	</Row>
 
+	
 	<FormGroup>
-		<Label for="exampleNumber">X</Label>
+		<Row>
+			<Col><Label for="exampleNumber">X</Label>
 		<Input
 		  type="number"
 		  name="number"
 		  id="exampleNumber"
 		  placeholder="number placeholder"
-		/>
-		<Label for="exampleNumber">Y</Label>
+		/></Col>
+		<Col><Label for="exampleNumber">Y</Label>
 		<Input
 		  type="number"
 		  name="number"
 		  id="exampleNumber"
 		  placeholder="number placeholder"
-		/>
-		<Label for="exampleNumber">Z</Label>
+		/></Col>
+		<Col><Label for="exampleNumber">Z</Label>
 		<Input
 		  type="number"
 		  name="number"
 		  id="exampleNumber"
 		  placeholder="number placeholder"
-		/>
-		<Label for="exampleNumber">บวก/ลบ</Label>
+		/></Col>
+		<Col><Label for="exampleNumber">บวก/ลบ</Label>
 		<Input
 		  type="number"
 		  name="number"
 		  id="exampleNumber"
 		  placeholder="number placeholder"
-		/>
+		/></Col>
+		</Row>
 	  </FormGroup>
+	
 
 	{#await getallusernamecarousel() then value}
 		<Carousel dark {value} bind:activeIndex>
