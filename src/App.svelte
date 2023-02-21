@@ -32,7 +32,7 @@
       let xplus = parseInt(x) + parseInt(offset);
       let yplus = parseInt(y) + parseInt(offset);
       let zplus = parseInt(z) + parseInt(offset);
-      url = "https://cpsql.pwisetthon.com/blog/find/xyz/" + x + "/" + y + "/" + z + "/" + xplus + "/" + yplus + "/" + zplus;
+      url = "https://cpsql.pwisetthon.com/blog/find/xyz/" + x + "/" + y + "/" + z + "/" + xplus + "/" + yplus + "/" + zplus + "/1";
     }
     fetch(url)
       .then((response) => response.json())
@@ -91,6 +91,18 @@
     if (isId) {
       id = urlParams.get("id");
       url = "https://cpsql.pwisetthon.com/blog/find/all/count/" + id;
+    } else if (isX && isY && isZ) {
+      let x = urlParams.get("x");
+      let y = urlParams.get("y");
+      let z = urlParams.get("z");
+      let offset = 0;
+      if (isOffset) {
+        offset = urlParams.get("offset");
+      }
+      let xplus = parseInt(x) + parseInt(offset);
+      let yplus = parseInt(y) + parseInt(offset);
+      let zplus = parseInt(z) + parseInt(offset);
+      url = "https://cpsql.pwisetthon.com/blog/find/xyz/count/" + x + "/" + y + "/" + z + "/" + xplus + "/" + yplus + "/" + zplus;
     }
     const response = await fetch(url);
     const movies = await response.json();
