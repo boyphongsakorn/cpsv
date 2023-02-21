@@ -429,6 +429,14 @@
         /></FormGroup
       ></Col
     >
+    <Col xs="auto">
+      <Button
+        outline
+        color="primary"
+        style="margin-top: 30px"
+        on:click={() => wowblock()}
+        >ค้นหา</Button>
+    </Col>
   </Row>
 
   <Row>
