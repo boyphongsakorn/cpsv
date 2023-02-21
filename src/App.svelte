@@ -57,6 +57,18 @@
     if (isId) {
       id = urlParams.get("id");
       url = "https://cpsql.pwisetthon.com/blog/find/user/" + id + "/" + i;
+    } else if (isX && isY && isZ) {
+      let x = urlParams.get("x");
+      let y = urlParams.get("y");
+      let z = urlParams.get("z");
+      let offset = 0;
+      if (isOffset) {
+        offset = urlParams.get("offset");
+      }
+      let xplus = parseInt(x) + parseInt(offset);
+      let yplus = parseInt(y) + parseInt(offset);
+      let zplus = parseInt(z) + parseInt(offset);
+      url = "https://cpsql.pwisetthon.com/blog/find/xyz/" + x + "/" + y + "/" + z + "/" + xplus + "/" + yplus + "/" + zplus + "/" + i;
     }
     const response = await fetch(url);
     const movies = await response.json();
