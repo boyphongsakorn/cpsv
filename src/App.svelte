@@ -7,6 +7,10 @@
 
   const urlParams = new URLSearchParams(window.location.search);
   const isId = urlParams.has("id");
+  const isX = urlParams.has("x");
+  const isY = urlParams.has("y");
+  const isZ = urlParams.has("z");
+  const isOffset = urlParams.has("offset");
   let id = "";
 
   let items = [];
@@ -17,6 +21,18 @@
     if (isId) {
       id = urlParams.get("id");
       url = "https://cpsql.pwisetthon.com/blog/find/user/" + id + "/1";
+    } else if (isX && isY && isZ) {
+      let x = urlParams.get("x");
+      let y = urlParams.get("y");
+      let z = urlParams.get("z");
+      let offset = 0;
+      if (isOffset) {
+        offset = urlParams.get("offset");
+      }
+      let xplus = parseInt(x) + parseInt(offset);
+      let yplus = parseInt(y) + parseInt(offset);
+      let zplus = parseInt(z) + parseInt(offset);
+      url = "https://cpsql.pwisetthon.com/blog/find/xyz/" + x + "/" + y + "/" + z + "/" + xplus + "/" + yplus + "/" + zplus;
     }
     fetch(url)
       .then((response) => response.json())
@@ -58,6 +74,16 @@
     items = movies;
     return true;
     //return movies;
+  }
+
+  function wowblock() {
+    //get value from id x, y, z and plus
+    let x = document.getElementById("x").value;
+    let y = document.getElementById("y").value;
+    let z = document.getElementById("z").value;
+    let offset = document.getElementById("offset").value;
+    //change location to https://mccplog.pwisetthon.com/?x=0&y=0&z=0&offset=0
+    window.location.href ="https://mccplog.pwisetthon.com/?x=" + x + "&y=" + y + "&z=" + z + "&offset=" + offset;
   }
 
   async function allcount() {
@@ -390,21 +416,21 @@
   <p>ดู Log โดยใช้ X,Y,Z</p>
   <Row>
     <Col
-      ><FormGroup floating label="Y">
+      ><FormGroup floating label="X">
         <Input
           type="number"
           name="number"
-          id="exampleNumber"
+          id="x"
           placeholder="number placeholder"
         /></FormGroup
       ></Col
     >
     <Col
-      ><FormGroup floating label="X">
+      ><FormGroup floating label="Y">
         <Input
           type="number"
           name="number"
-          id="exampleNumber"
+          id="y"
           placeholder="number placeholder"
         /></FormGroup
       ></Col
@@ -414,7 +440,7 @@
         <Input
           type="number"
           name="number"
-          id="exampleNumber"
+          id="z"
           placeholder="number placeholder"
         /></FormGroup
       ></Col
@@ -424,7 +450,7 @@
         <Input
           type="number"
           name="number"
-          id="exampleNumber"
+          id="plus"
           placeholder="number placeholder"
         /></FormGroup
       ></Col
