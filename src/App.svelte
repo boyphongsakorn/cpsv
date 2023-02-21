@@ -351,42 +351,38 @@
 			{/await}
 		</Col>
 	</Row>
-
 	
-	<FormGroup>
 		<Row>
-			<Col><Label for="exampleNumber">X</Label>
+			<Col><FormGroup floating label="Floating Label"><Label for="exampleNumber">X</Label>
 		<Input
 		  type="number"
 		  name="number"
 		  id="exampleNumber"
 		  placeholder="number placeholder"
-		/></Col>
-		<Col><Label for="exampleNumber">Y</Label>
+		/></FormGroup></Col>
+		<Col><FormGroup floating label="Floating Label"><Label for="exampleNumber">Y</Label>
 		<Input
 		  type="number"
 		  name="number"
 		  id="exampleNumber"
 		  placeholder="number placeholder"
-		/></Col>
-		<Col><Label for="exampleNumber">Z</Label>
+		/></FormGroup></Col>
+		<Col><FormGroup floating label="Floating Label"><Label for="exampleNumber">Z</Label>
 		<Input
 		  type="number"
 		  name="number"
 		  id="exampleNumber"
 		  placeholder="number placeholder"
-		/></Col>
-		<Col><Label for="exampleNumber">บวก/ลบ</Label>
+		/></FormGroup></Col>
+		<Col><FormGroup floating label="Floating Label"><Label for="exampleNumber">บวก/ลบ</Label>
 		<Input
 		  type="number"
 		  name="number"
 		  id="exampleNumber"
 		  placeholder="number placeholder"
-		/></Col>
+		/></FormGroup></Col>
 		</Row>
-	  </FormGroup>
-	
-
+	  
 	{#await getallusernamecarousel() then value}
 		<Carousel dark {value} bind:activeIndex>
 			<div class="carousel-inner">
