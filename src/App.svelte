@@ -81,7 +81,7 @@
     let x = document.getElementById("x").value;
     let y = document.getElementById("y").value;
     let z = document.getElementById("z").value;
-    let offset = document.getElementById("offset").value;
+    let offset = document.getElementById("plus").value;
     //change location to https://mccplog.pwisetthon.com/?x=0&y=0&z=0&offset=0
     window.location.href ="https://mccplog.pwisetthon.com/?x=" + x + "&y=" + y + "&z=" + z + "&offset=" + offset;
   }
