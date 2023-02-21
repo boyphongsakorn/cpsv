@@ -102,7 +102,7 @@
       let xplus = parseInt(x) + parseInt(offset);
       let yplus = parseInt(y) + parseInt(offset);
       let zplus = parseInt(z) + parseInt(offset);
-      url = "https://cpsql.pwisetthon.com/blog/find/xyz/count/" + x + "/" + y + "/" + z + "/" + xplus + "/" + yplus + "/" + zplus;
+      url = "https://cpsql.pwisetthon.com/blog/find/count/xyz/" + x + "/" + y + "/" + z + "/" + xplus + "/" + yplus + "/" + zplus;
     }
     const response = await fetch(url);
     const movies = await response.json();
