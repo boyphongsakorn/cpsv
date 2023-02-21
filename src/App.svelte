@@ -430,9 +430,10 @@
     </Col>
   </Row>
 
+  <p>ดู Log โดยใช้ X,Y,Z</p>
   <Row>
     <Col
-      ><FormGroup floating label="Floating Label">
+      ><FormGroup floating label="Y">
         <Input
           type="number"
           name="number"
@@ -442,7 +443,7 @@
       ></Col
     >
     <Col
-      ><FormGroup floating label="Floating Label">
+      ><FormGroup floating label="X">
         <Input
           type="number"
           name="number"
@@ -452,7 +453,7 @@
       ></Col
     >
     <Col
-      ><FormGroup floating label="Floating Label">
+      ><FormGroup floating label="Z">
         <Input
           type="number"
           name="number"
