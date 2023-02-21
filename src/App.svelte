@@ -118,7 +118,10 @@
 		Carousel,
 		CarouselControl,
 		CarouselItem,
-		Styles
+		Styles,
+		FormGroup,
+		Label,
+		Input,
 	} from 'sveltestrap';
 
 	let isOpen = false;
@@ -169,10 +172,10 @@
 		for(let i=0;i<movies.length;i++) {
 			const getcount = await fetch('https://cpsql.pwisetthon.com/blog/find/all/count/'+movies[i].userid);
   			const getcountdata = await getcount.text();
-			//if(parseInt(getcountdata) > 0) {
+			if(parseInt(getcountdata) > 0) {
 				fiveten.push(movies[i]);
 				count++;
-			//}
+			}
 			//fiveten.push(movies[i]);
 			//if((i+1)%12 == 0) {
 			if(count%12 == 0) {
@@ -348,6 +351,37 @@
 			{/await}
 		</Col>
 	</Row>
+
+	<FormGroup>
+		<Label for="exampleNumber">X</Label>
+		<Input
+		  type="number"
+		  name="number"
+		  id="exampleNumber"
+		  placeholder="number placeholder"
+		/>
+		<Label for="exampleNumber">Y</Label>
+		<Input
+		  type="number"
+		  name="number"
+		  id="exampleNumber"
+		  placeholder="number placeholder"
+		/>
+		<Label for="exampleNumber">Z</Label>
+		<Input
+		  type="number"
+		  name="number"
+		  id="exampleNumber"
+		  placeholder="number placeholder"
+		/>
+		<Label for="exampleNumber">บวก/ลบ</Label>
+		<Input
+		  type="number"
+		  name="number"
+		  id="exampleNumber"
+		  placeholder="number placeholder"
+		/>
+	  </FormGroup>
 
 	{#await getallusernamecarousel() then value}
 		<Carousel dark {value} bind:activeIndex>
