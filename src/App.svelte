@@ -438,8 +438,9 @@
 <Container md>
   <center><h1>ค้นหา Log การทุบหรือวางบล็อก</h1></center>
 
-  <p>ดู Log โดยใช้ X,Y,Z</p>
+  
   <Row>
+    <Col xs="auto"><p>ดู Log โดยใช้ X,Y,Z</p></Col>
     <Col
       ><FormGroup floating label="X">
         <Input
