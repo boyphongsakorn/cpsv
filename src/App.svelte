@@ -440,7 +440,7 @@
 
   
   <Row>
-    <Col xs="auto"><p>ดู Log โดยใช้ X,Y,Z</p></Col>
+    <Col class="my-auto" xs="auto"><p>ดู Log โดยใช้ X,Y,Z</p></Col>
     <Col
       ><FormGroup floating label="X">
         <Input
