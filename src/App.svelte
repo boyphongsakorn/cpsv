@@ -491,7 +491,7 @@
   </Row>
 
   <Row>
-    <Col xs="2" style="margin: auto;margin-left: 0;margin-right: 0;"
+    <Col xs="2" style="display: none;margin: auto;margin-left: 0;margin-right: 0;"
       ><p>ดู Log ตาม Player</p></Col
     >
     <Col xs="auto" style="display: none;margin-bottom: 5px">
@@ -533,90 +533,97 @@
     </Col>
   </Row>
 
-  {#await getallusernamecarousel() then value}
-    <Carousel dark {value} bind:activeIndex>
-      <div class="carousel-inner">
-        {#each value as items, index}
-          <CarouselItem bind:activeIndex itemIndex={index}>
-            <center>
-              {#each items as item}
-                {#if item.user.indexOf("#") != -1}
-                  <!-- remove # from item.user -->
-                  <Button
-                    outline
-                    color="primary"
-                    on:click={() => wowplayer(item.userid)}
-                    style="margin-right: 5px;display: none;"
-                    ><Avatar
-                      randomBgColor
-                      initials={item.user.replace("#", "")}
-                      src="https://minecraftfaces.com/wp-content/bigfaces/big-{item.user.replace(
-                        '#',
-                        ''
-                      )}-face.png"
-                    /></Button
-                  >
-                  <a
-                    href="https://mccplog.pwisetthon.com/?id={item.userid}"
-                    id="userid{item.userid}"
-                  >
-                    <Button outline color="primary" style="margin-right: 5px;">
-                      {#await getmonsterimage(item.user.replace("#", "")) then imgurl}
-                        <Avatar
-                          randomBgColor
-                          initials={item.user.replace("#", "")}
-                          src={imgurl}
-                        />
-                      {/await}
-                    </Button>
-                  </a>
-                  <Tooltip target="userid{item.userid}" placement="bottom"
-                    >{item.user.replace("#", "")}</Tooltip
-                  >
-                {:else}
-                  <Button
-                    outline
-                    color="primary"
-                    on:click={() => wowplayer(item.userid)}
-                    style="margin-right: 5px;display: none;"
-                    ><Avatar
-                      randomBgColor
-                      initials={item.user}
-                      src="https://cravatar.eu/avatar/{item.user}"
-                    /></Button
-                  >
-                  <a
-                    href="https://mccplog.pwisetthon.com/?id={item.userid}"
-                    id="userid{item.userid}"
-                    ><Button outline color="primary" style="margin-right: 5px;"
+  <Row>
+    <Col xs="auto"
+      ><p>ดู Log ตาม Player</p></Col
+    >
+    <Col>
+    {#await getallusernamecarousel() then value}
+      <Carousel dark {value} bind:activeIndex>
+        <div class="carousel-inner">
+          {#each value as items, index}
+            <CarouselItem bind:activeIndex itemIndex={index}>
+              <center>
+                {#each items as item}
+                  {#if item.user.indexOf("#") != -1}
+                    <!-- remove # from item.user -->
+                    <Button
+                      outline
+                      color="primary"
+                      on:click={() => wowplayer(item.userid)}
+                      style="margin-right: 5px;display: none;"
+                      ><Avatar
+                        randomBgColor
+                        initials={item.user.replace("#", "")}
+                        src="https://minecraftfaces.com/wp-content/bigfaces/big-{item.user.replace(
+                          '#',
+                          ''
+                        )}-face.png"
+                      /></Button
+                    >
+                    <a
+                      href="https://mccplog.pwisetthon.com/?id={item.userid}"
+                      id="userid{item.userid}"
+                    >
+                      <Button outline color="primary" style="margin-right: 5px;">
+                        {#await getmonsterimage(item.user.replace("#", "")) then imgurl}
+                          <Avatar
+                            randomBgColor
+                            initials={item.user.replace("#", "")}
+                            src={imgurl}
+                          />
+                        {/await}
+                      </Button>
+                    </a>
+                    <Tooltip target="userid{item.userid}" placement="bottom"
+                      >{item.user.replace("#", "")}</Tooltip
+                    >
+                  {:else}
+                    <Button
+                      outline
+                      color="primary"
+                      on:click={() => wowplayer(item.userid)}
+                      style="margin-right: 5px;display: none;"
                       ><Avatar
                         randomBgColor
                         initials={item.user}
                         src="https://cravatar.eu/avatar/{item.user}"
                       /></Button
-                    ></a
-                  >
-                  <Tooltip target="userid{item.userid}" placement="bottom"
-                    >{item.user}</Tooltip
-                  >
-                {/if}
-              {/each}
-            </center>
-          </CarouselItem>
-        {/each}
-      </div>
+                    >
+                    <a
+                      href="https://mccplog.pwisetthon.com/?id={item.userid}"
+                      id="userid{item.userid}"
+                      ><Button outline color="primary" style="margin-right: 5px;"
+                        ><Avatar
+                          randomBgColor
+                          initials={item.user}
+                          src="https://cravatar.eu/avatar/{item.user}"
+                        /></Button
+                      ></a
+                    >
+                    <Tooltip target="userid{item.userid}" placement="bottom"
+                      >{item.user}</Tooltip
+                    >
+                  {/if}
+                {/each}
+              </center>
+            </CarouselItem>
+          {/each}
+        </div>
 
-      <a href on:click={() => (activeIndex = Math.max(activeIndex - 1, 0))}
-        ><CarouselControl direction="prev" /></a
-      >
-      <a
-        href
-        on:click={() =>
-          (activeIndex = Math.min(activeIndex + 1, value.length - 1))}
-        ><CarouselControl direction="next" /></a
-      >
-    </Carousel>
-  {/await}
+        <a href on:click={() => (activeIndex = Math.max(activeIndex - 1, 0))}
+          ><CarouselControl direction="prev" /></a
+        >
+        <a
+          href
+          on:click={() =>
+            (activeIndex = Math.min(activeIndex + 1, value.length - 1))}
+          ><CarouselControl direction="next" /></a
+        >
+      </Carousel>
+    {/await}
+    </Col>
+  </Row>
 
   <Row>
     {#each items as item}
