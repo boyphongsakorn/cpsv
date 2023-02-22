@@ -179,6 +179,17 @@
         return movies;
     }
 
+    function rollback(id) {
+        blockX = '';
+        blockY = '';
+        blockZ = '';
+        selectedBlock = id;
+        document.getElementById('block-selector-x').disabled = true;
+        document.getElementById('block-selector-y').disabled = true;
+        document.getElementById('block-selector-z').disabled = true;
+        document.getElementById('block-selector').value = id;
+    }
+
 	let playerName = '';
 	let confirmSelection = false;
 	let isButtonDisabled = true;
@@ -432,7 +443,7 @@
 												</CardBody>
 												<CardFooter>
                                                     <!-- <a href=""> -->
-                                                        <Button outline color="primary" style="margin-right: 5px;" on:click={() => {blockX = ''; blockY = ''; blockZ = ''; selectedBlock = item.id}}>
+                                                        <Button outline color="primary" style="margin-right: 5px;" on:click={() => rollback(item.id)}>
                                                             Rollback / ย้อนบล็อกกับคืนมา
                                                         </Button>
                                                     <!-- </a> -->
