@@ -1,11 +1,13 @@
 <script>
     import { onMount } from "svelte";
-    import { apiData, drinkNames } from "./store.js";
+    // import { apiData, drinkNames } from "./store.js";
     import Avatar from "svelte-avatar";
     import { paginate, LightPaginationNav } from "svelte-paginate";
     import js from "jquery";
+
+    export let location;
   
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(location);
     const isId = urlParams.has("id");
     const isX = urlParams.has("x");
     const isY = urlParams.has("y");
@@ -38,7 +40,7 @@
         .then((response) => response.json())
         .then((data) => {
           //console.log(data);
-          apiData.set(data);
+          //apiData.set(data);
           items = data;
         })
         .catch((error) => {
@@ -534,7 +536,7 @@
     </Row>
   
     <Row>
-      <Col xs="auto"
+      <Col xs="auto" class="my-auto"
         ><p>ดู Log ตาม Player</p></Col
       >
       <Col>
@@ -634,7 +636,7 @@
                 <CardTitle>
                   <Row>
                     <Col>ลำดับ {item.id}</Col>
-                    <Col class="test">
+                    <Col class="test d-inline-flex">
                       {#if value.indexOf("#") != -1}
                         {#await getmonsterimage(value.replace("#", "")) then imgurl}
                           <Avatar
@@ -828,4 +830,3 @@
       />
     {/await}
   </Container>
-  
