@@ -696,7 +696,7 @@
               <!--Button>Button</Button-->
             </CardBody>
             <CardFooter>
-              <a href="">
+              <a href="/rollback/?id={item.id}">
                 <Button outline color="primary" style="margin-right: 5px;">
                   Rollback / ย้อนบล็อกกับคืนมา
                 </Button>

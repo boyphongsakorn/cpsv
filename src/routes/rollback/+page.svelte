@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+    import { page } from '$app/stores';
 	// import { apiData, drinkNames } from "./store.js";
 	import Avatar from 'svelte-avatar';
 	import { paginate, LightPaginationNav } from 'svelte-paginate';
@@ -39,6 +40,50 @@
 		Label,
 		Input
 	} from 'sveltestrap';
+
+    export let location;
+    //const urlParams = new URLSearchParams(location);
+    //console.log(urlParams);
+    const isId = $page.url.searchParams.get("id");
+    const isX = $page.url.searchParams.get("x");
+    const isY = $page.url.searchParams.get("y");
+    const isZ = $page.url.searchParams.get("z");
+
+    let blockX = '';
+	let blockY = '';
+	let blockZ = '';
+    let selectedBlock = '';
+
+    onMount(async () => {
+        if (isX && isY && isZ) {
+            blockX = $page.url.searchParams.get("x");
+            blockY = $page.url.searchParams.get("y");
+            blockZ = $page.url.searchParams.get("z");
+            //disable id block-selector
+            document.getElementById('block-selector').disabled = true;
+            // const response = await fetch("https://cpsql.pwisetthon.com/rollback/find/xyz/" + x + "/" + y + "/" + z);
+            // const movies = await response.json();
+            // console.log(movies);
+            //return movies;
+        } else if (isId) {
+            console.log('id');
+            selectedBlock = $page.url.searchParams.get("id");
+            //set value in id block-selector = selectedBlock
+            document.getElementById('block-selector').value = selectedBlock;
+            //disable block-selector-x, block-selector-y, block-selector-z
+            document.getElementById('block-selector-x').disabled = true;
+            document.getElementById('block-selector-y').disabled = true;
+            document.getElementById('block-selector-z').disabled = true;
+            //return movies;
+        } else {
+            //enable every block-selector
+            document.getElementById('block-selector').disabled = false;
+            document.getElementById('block-selector-x').disabled = false;
+            document.getElementById('block-selector-y').disabled = false;
+            document.getElementById('block-selector-z').disabled = false;
+        }
+    });
+
 	let isOpen = false;
 
 	function handleUpdate(event) {
@@ -51,9 +96,9 @@
 		return movies;
 	}
 
-    async function getusername(test) {
-      //let ican = 'no'
-      /*await fetch("http://localhost:3000/user/find/id/"+test)
+	async function getusername(test) {
+		//let ican = 'no'
+		/*await fetch("http://localhost:3000/user/find/id/"+test)
           .then(response => response.json())
           .then(data => {
               //console.log(data);
@@ -65,68 +110,78 @@
               //console.log(error);
               //return 'ไม่รู้';
           });*/
-      //return 'ไม่รู้';
-      //return ican;
-      const response = await fetch(
-        "https://cpsql.pwisetthon.com/user/find/id/" + test
-      );
-      const movies = await response.json();
-      return movies.user;
+		//return 'ไม่รู้';
+		//return ican;
+		const response = await fetch('https://cpsql.pwisetthon.com/user/find/id/' + test);
+		const movies = await response.json();
+		return movies.user;
+	}
+
+	async function getblockname(test) {
+		const response = await fetch('https://cpsql.pwisetthon.com/blockname/find/id/' + test);
+		const movies = await response.json();
+		//remove minecraft: from the string and return the rest
+		return movies.blockid.replace('minecraft:', '');
+		//return movies.blockid;
+	}
+
+	function convertUnixTime(unix_timestamp) {
+		var date = new Date(unix_timestamp * 1000);
+		var hours = date.getHours();
+		var minutes = '0' + date.getMinutes();
+		var seconds = '0' + date.getSeconds();
+		var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+		//convert getMonth() to thai month
+		var month = date.getMonth();
+		var day = date.getDate();
+		var year = date.getFullYear();
+		var thaiMonth = [
+			'มกราคม',
+			'กุมภาพันธ์',
+			'มีนาคม',
+			'เมษายน',
+			'พฤษภาคม',
+			'มิถุนายน',
+			'กรกฎาคม',
+			'สิงหาคม',
+			'กันยายน',
+			'ตุลาคม',
+			'พฤศจิกายน',
+			'ธันวาคม'
+		];
+		var thaiDate = day + ' ' + thaiMonth[month] + ' ' + (year + 543);
+		return thaiDate + ' เวลา ' + formattedTime;
+	}
+
+	async function getblockbycoordinate(x, y, z) {
+		const response = await fetch(
+			'https://cpsql.pwisetthon.com/blog/find/xyz/' +
+				x +
+				'/' +
+				y +
+				'/' +
+				z +
+				'/' +
+				x +
+				'/' +
+				y +
+				'/' +
+				z
+		);
+		const movies = await response.json();
+		return movies;
+	}
+
+    async function getblockbyid(id) {
+        const response = await fetch('https://cpsql.pwisetthon.com/blog/find/block/' + id);
+        const movies = await response.json();
+        return movies;
     }
 
-    async function getblockname(test) {
-      const response = await fetch(
-        "https://cpsql.pwisetthon.com/blockname/find/id/" + test
-      );
-      const movies = await response.json();
-      //remove minecraft: from the string and return the rest
-      return movies.blockid.replace("minecraft:", "");
-      //return movies.blockid;
-    }
-
-    function convertUnixTime(unix_timestamp) {
-      var date = new Date(unix_timestamp * 1000);
-      var hours = date.getHours();
-      var minutes = "0" + date.getMinutes();
-      var seconds = "0" + date.getSeconds();
-      var formattedTime =
-        hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
-      //convert getMonth() to thai month
-      var month = date.getMonth();
-      var day = date.getDate();
-      var year = date.getFullYear();
-      var thaiMonth = [
-        "มกราคม",
-        "กุมภาพันธ์",
-        "มีนาคม",
-        "เมษายน",
-        "พฤษภาคม",
-        "มิถุนายน",
-        "กรกฎาคม",
-        "สิงหาคม",
-        "กันยายน",
-        "ตุลาคม",
-        "พฤศจิกายน",
-        "ธันวาคม",
-      ];
-      var thaiDate = day + " " + thaiMonth[month] + " " + (year + 543);
-      return thaiDate + " เวลา " + formattedTime;
-    }
-
-    let blockX = '';
-    let blockY = '';
-    let blockZ = '';
-
-    async function getblockbycoordinate(x, y, z) {
-      const response = await fetch("https://cpsql.pwisetthon.com/blog/find/xyz/" + x + "/" + y + "/" + z + "/" + x + "/" + y + "/" + z);
-      const movies = await response.json();
-      return movies;
-    }
-
-	let selectedBlock = '';
 	let playerName = '';
 	let confirmSelection = false;
 	let isButtonDisabled = true;
+	let activeIndex = 0;
 
 	const isValidBlockSelector = () => {
 		// TODO: implement validation logic for block selector (e.g., check if it's a valid block ID or X,Y,Z coordinates)
@@ -135,30 +190,40 @@
 
 	const confirmSelectionHandler = (event) => {
 		confirmSelection = event.target.checked;
+        //if player-name is empty, disable button
+        if (playerName.trim() === '') {
+            isButtonDisabled = true;
+        } else {
+            isButtonDisabled = !isValidBlockSelector() || !confirmSelection;
+        }
+		//isButtonDisabled = !isValidBlockSelector() || !confirmSelection;
+	};
+
+    const selectBlockHandler = (event) => {
+		selectedBlock = event.target.value;
 		isButtonDisabled = !isValidBlockSelector() || !confirmSelection;
 	};
 
 	const selectBlockHandlerX = (event) => {
 		selectedBlock = event.target.value;
-        blockX = event.target.value;
-        console.log(blockX);
+		blockX = event.target.value;
+		console.log(blockX);
 		isButtonDisabled = !isValidBlockSelector() || !confirmSelection;
 	};
 
-    const selectBlockHandlerY = (event) => {
+	const selectBlockHandlerY = (event) => {
 		selectedBlock = event.target.value;
-        blockY = event.target.value;
-        console.log(blockY);
+		blockY = event.target.value;
+		console.log(blockY);
 		isButtonDisabled = !isValidBlockSelector() || !confirmSelection;
 	};
 
-    const selectBlockHandlerZ = (event) => {
+	const selectBlockHandlerZ = (event) => {
 		selectedBlock = event.target.value;
-        blockZ = event.target.value;
-        console.log(blockZ);
+		blockZ = event.target.value;
+		console.log(blockZ);
 		isButtonDisabled = !isValidBlockSelector() || !confirmSelection;
 	};
-
 
 	const playerNameHandler = (event) => {
 		playerName = event.target.value;
@@ -223,124 +288,237 @@
             </FormGroup> -->
 			<Row>
 				<Col>
-					<Col>
-						<FormGroup>
-							<Label for="block-selector-x">ใส่ X ของบล็อกที่ต้องการย้อนกลับ:</Label>
-							<Input
-								id="block-selector-x"
-								type="text"
-								placeholder="Enter X coordinate"
-								on:input={selectBlockHandlerX}
-							/>
-						</FormGroup>
-					</Col>
-					<Col>
-						<FormGroup>
-							<Label for="block-selector-y">ใส่ Y ของบล็อกที่ต้องการย้อนกลับ:</Label>
-							<Input
-								id="block-selector-y"
-								type="text"
-								placeholder="Enter Y coordinate"
-								on:input={selectBlockHandlerY}
-							/>
-						</FormGroup>
-					</Col>
-					<Col>
-						<FormGroup>
-							<Label for="block-selector-z">ใส่ Z ของบล็อกที่ต้องการย้อนกลับ:</Label>
-							<Input
-								id="block-selector-z"
-								type="text"
-								placeholder="Enter Z coordinate"
-								on:input={selectBlockHandlerZ}
-							/>
-						</FormGroup>
-					</Col>
+                    <Row>
+                        <Col>
+                            <FormGroup>
+                                <Label for="block-selector-x">ใส่ X ของบล็อกที่ต้องการย้อนกลับ:</Label>
+                                <Input
+                                    id="block-selector-x"
+                                    type="text"
+                                    placeholder="Enter X coordinate"
+                                    on:input={selectBlockHandlerX}
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col>
+                            <FormGroup>
+                                <Label for="block-selector-y">ใส่ Y ของบล็อกที่ต้องการย้อนกลับ:</Label>
+                                <Input
+                                    id="block-selector-y"
+                                    type="text"
+                                    placeholder="Enter Y coordinate"
+                                    on:input={selectBlockHandlerY}
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col>
+                            <FormGroup>
+                                <Label for="block-selector-z">ใส่ Z ของบล็อกที่ต้องการย้อนกลับ:</Label>
+                                <Input
+                                    id="block-selector-z"
+                                    type="text"
+                                    placeholder="Enter Z coordinate"
+                                    on:input={selectBlockHandlerZ}
+                                />
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                    <Col>
+                        <FormGroup>
+                            <Label for="block-selector">หรือใส่ไอดีของระบบ Rollback ที่ต้องการย้อนกลับ:</Label>
+                            <Input
+                                id="block-selector"
+                                type="text"
+                                placeholder="Enter Rollback ID"
+                                on:input={selectBlockHandler}
+                            />
+                        </FormGroup>
+                    </Col>
 				</Col>
 				<Col>
-                    {#if blockX != '' && blockY != '' && blockZ != ''}
-                        <Carousel>
-                            {#await getblockbycoordinate(blockX, blockY, blockZ) then value}
-                                {#each value as item, index}
-                                    <CarouselItem bind:activeIndex itemIndex={index}>
-                                        <Card class="mb-3">
-                                            <CardHeader>
-                                                {#await getusername(item.user) then values}
-                                                    <CardTitle>
-                                                        <Row>
-                                                            <Col>ลำดับ {item.id}</Col>
-                                                            <Col class="test d-inline-flex">
-                                                                <!-- {#if value.indexOf('#') != -1}
-                                                                    {#await getmonsterimage(value.replace('#', '')) then imgurl}
-                                                                        <Avatar
-                                                                            randomBgColor
-                                                                            name={value.replace('#', '')}
-                                                                            src={imgurl}
-                                                                            size="50px"
-                                                                        />
-                                                                    {/await}
-                                                                {:else} -->
+					{#if blockX != '' && blockY != '' && blockZ != ''}
+						<Carousel bind:activeIndex>
+							{#await getblockbycoordinate(blockX, blockY, blockZ) then value}
+								<div class="carousel-inner">
+									{#each value as item, index}
+										<CarouselItem bind:activeIndex itemIndex={index}>
+											<Card class="mb-3">
+												<CardHeader>
+													{#await getusername(item.user) then values}
+														<CardTitle>
+															<Row>
+																<Col>ลำดับ {item.id}</Col>
+																<Col xs="auto" class="test d-inline-flex">
+																	<!-- {#if value.indexOf('#') != -1}
+                                                                            {#await getmonsterimage(value.replace('#', '')) then imgurl}
+                                                                                <Avatar
+                                                                                    randomBgColor
+                                                                                    name={value.replace('#', '')}
+                                                                                    src={imgurl}
+                                                                                    size="50px"
+                                                                                />
+                                                                            {/await}
+                                                                        {:else} -->
+																	<Avatar
+																		randomBgColor
+																		name={values}
+																		src="https://cravatar.eu/avatar/{values}"
+																	/>
+																	<!-- {/if} -->
+																	{#await getblockname(item.type) then value}
+																		<Avatar
+																			randomBgColor
+																			name={value}
+																			src="https://mc.nerothe.com/img/1.19.2/{value}.png"
+																		/>
+																	{/await}
+																</Col>
+															</Row>
+														</CardTitle>
+													{/await}
+												</CardHeader>
+												<CardBody>
+													<!--CardSubtitle>Card subtitle</CardSubtitle-->
+													<CardText>
+														<ul>
+															<!--
+                                                                {#await getusername(drinkName.user) then value}
+                                                                <li>ผู้เล่น {value}</li>
+                                                                {/await}
+                                                                -->
+															<!--li>ไอดี {getusername(drinkName.user).then((value) => {return value})}</li-->
+															<li>วันที่ {convertUnixTime(item.time)}</li>
+															<li>ตำแหน่ง {item.x} {item.y} {item.z}</li>
+															{#await getblockname(item.type) then value}
+																<li>บล็อก {value}</li>
+															{/await}
+															<li>
+																{#if item.action == 0}
+																	ทุบบล็อก
+																{:else if item.action == 1}
+																	วางบล็อก
+																{:else if item.action == 2}
+																	คลิก/ใช้งาน
+																{:else}
+																	อื่นๆ
+																{/if}
+															</li>
+														</ul>
+													</CardText>
+													<!--Button>Button</Button-->
+												</CardBody>
+												<!-- <CardFooter>
+                                                        <a href="">
+                                                            <Button outline color="primary" style="margin-right: 5px;">
+                                                                Rollback / ย้อนบล็อกกับคืนมา
+                                                            </Button>
+                                                        </a>
+                                                    </CardFooter> -->
+											</Card>
+										</CarouselItem>
+									{/each}
+								</div>
+
+								<a href on:click={() => (activeIndex = Math.max(activeIndex - 1, 0))}
+									><CarouselControl direction="prev" /></a
+								>
+								<a href on:click={() => (activeIndex = Math.min(activeIndex + 1, value.length - 1))}
+									><CarouselControl direction="next" /></a
+								>
+							{/await}
+						</Carousel>
+                    {:else if selectedBlock != ''}
+                        <!-- <Carousel bind:activeIndex> -->
+                            {#await getblockbyid(selectedBlock) then value}
+                                <div class="carousel-inner">
+                                    {#each value as item, index}
+                                        <!-- <CarouselItem bind:activeIndex itemIndex={index}> -->
+                                            <Card class="mb-3">
+                                                <CardHeader>
+                                                    {#await getusername(item.user) then values}
+                                                        <CardTitle>
+                                                            <Row>
+                                                                <Col>ลำดับ {item.id}</Col>
+                                                                <Col xs="auto" class="test d-inline-flex">
+                                                                    <!-- {#if value.indexOf('#') != -1}
+                                                                            {#await getmonsterimage(value.replace('#', '')) then imgurl}
+                                                                                <Avatar
+                                                                                    randomBgColor
+                                                                                    name={value.replace('#', '')}
+                                                                                    src={imgurl}
+                                                                                    size="50px"
+                                                                                />
+                                                                            {/await}
+                                                                        {:else} -->
                                                                     <Avatar
                                                                         randomBgColor
-                                                                        name={value}
+                                                                        name={values}
                                                                         src="https://cravatar.eu/avatar/{values}"
                                                                     />
-                                                                <!-- {/if} -->
-                                                                {#await getblockname(item.type) then value}
-                                                                    <Avatar
-                                                                        randomBgColor
-                                                                        name={value}
-                                                                        src="https://mc.nerothe.com/img/1.19.2/{value}.png"
-                                                                    />
+                                                                    <!-- {/if} -->
+                                                                    {#await getblockname(item.type) then value}
+                                                                        <Avatar
+                                                                            randomBgColor
+                                                                            name={value}
+                                                                            src="https://mc.nerothe.com/img/1.19.2/{value}.png"
+                                                                        />
+                                                                    {/await}
+                                                                </Col>
+                                                            </Row>
+                                                        </CardTitle>
+                                                    {/await}
+                                                </CardHeader>
+                                                <CardBody>
+                                                    <!--CardSubtitle>Card subtitle</CardSubtitle-->
+                                                    <CardText>
+                                                        <ul>
+                                                            <!--
+                                                                {#await getusername(drinkName.user) then value}
+                                                                <li>ผู้เล่น {value}</li>
                                                                 {/await}
-                                                            </Col>
-                                                        </Row>
-                                                    </CardTitle>
-                                                {/await}
-                                            </CardHeader>
-                                            <CardBody>
-                                                <!--CardSubtitle>Card subtitle</CardSubtitle-->
-                                                <CardText>
-                                                    <ul>
-                                                        <!--
-                                                        {#await getusername(drinkName.user) then value}
-                                                        <li>ผู้เล่น {value}</li>
-                                                        {/await}
-                                                        -->
-                                                        <!--li>ไอดี {getusername(drinkName.user).then((value) => {return value})}</li-->
-                                                        <li>วันที่ {convertUnixTime(item.time)}</li>
-                                                        <li>ตำแหน่ง {item.x} {item.y} {item.z}</li>
-                                                        {#await getblockname(item.type) then value}
-                                                            <li>บล็อก {value}</li>
-                                                        {/await}
-                                                        <li>
-                                                            {#if item.action == 0}
-                                                                ทุบบล็อก
-                                                            {:else if item.action == 1}
-                                                                วางบล็อก
-                                                            {:else if item.action == 2}
-                                                                คลิก/ใช้งาน
-                                                            {:else}
-                                                                อื่นๆ
-                                                            {/if}
-                                                        </li>
-                                                    </ul>
-                                                </CardText>
-                                                <!--Button>Button</Button-->
-                                            </CardBody>
-                                            <CardFooter>
-                                                <a href="">
-                                                    <Button outline color="primary" style="margin-right: 5px;">
-                                                        Rollback / ย้อนบล็อกกับคืนมา
-                                                    </Button>
-                                                </a>
-                                            </CardFooter>
-                                        </Card>
-                                    </CarouselItem>
-                                {/each}
+                                                                -->
+                                                            <!--li>ไอดี {getusername(drinkName.user).then((value) => {return value})}</li-->
+                                                            <li>วันที่ {convertUnixTime(item.time)}</li>
+                                                            <li>ตำแหน่ง {item.x} {item.y} {item.z}</li>
+                                                            {#await getblockname(item.type) then value}
+                                                                <li>บล็อก {value}</li>
+                                                            {/await}
+                                                            <li>
+                                                                {#if item.action == 0}
+                                                                    ทุบบล็อก
+                                                                {:else if item.action == 1}
+                                                                    วางบล็อก
+                                                                {:else if item.action == 2}
+                                                                    คลิก/ใช้งาน
+                                                                {:else}
+                                                                    อื่นๆ
+                                                                {/if}
+                                                            </li>
+                                                        </ul>
+                                                    </CardText>
+                                                    <!--Button>Button</Button-->
+                                                </CardBody>
+                                                <!-- <CardFooter>
+                                                        <a href="">
+                                                            <Button outline color="primary" style="margin-right: 5px;">
+                                                                Rollback / ย้อนบล็อกกับคืนมา
+                                                            </Button>
+                                                        </a>
+                                                    </CardFooter> -->
+                                            </Card>
+                                        <!-- </CarouselItem> -->
+                                    {/each}
+                                </div>
+
+                                <!-- <a href on:click={() => (activeIndex = Math.max(activeIndex - 1, 0))}
+                                    ><CarouselControl direction="prev" /></a
+                                >
+                                <a href on:click={() => (activeIndex = Math.min(activeIndex + 1, value.length - 1))}
+                                    ><CarouselControl direction="next" /></a
+                                > -->
                             {/await}
-                        </Carousel>
-                    {/if}
+                        <!-- </Carousel> -->
+					{/if}
 				</Col>
 			</Row>
 
