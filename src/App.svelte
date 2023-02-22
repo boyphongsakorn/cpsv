@@ -215,7 +215,8 @@
   }
 
   async function getallusername() {
-    const response = await fetch("https://cpsql.pwisetthon.com/user/find/all");
+    // const response = await fetch("https://cpsql.pwisetthon.com/user/find/all");
+    const response = await fetch("https://cpsql.pwisetthon.com/user/find/withouthashtag");
     const movies = await response.json();
     return movies;
   }
