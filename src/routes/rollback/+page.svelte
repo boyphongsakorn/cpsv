@@ -432,7 +432,7 @@
 												</CardBody>
 												<CardFooter>
                                                     <!-- <a href=""> -->
-                                                        <Button outline color="primary" style="margin-right: 5px;" on:click={() => blockX = ''; blockY = ''; blockZ = ''; selectedBlock = item.id}>
+                                                        <Button outline color="primary" style="margin-right: 5px;" on:click={() => {blockX = ''; blockY = ''; blockZ = ''; selectedBlock = item.id}}>
                                                             Rollback / ย้อนบล็อกกับคืนมา
                                                         </Button>
                                                     <!-- </a> -->
