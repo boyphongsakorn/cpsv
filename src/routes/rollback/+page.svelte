@@ -185,9 +185,13 @@
         blockZ = '';
         selectedBlock = id;
         document.getElementById('block-selector-x').disabled = true;
+        document.getElementById('block-selector-x').value = '';
         document.getElementById('block-selector-y').disabled = true;
+        document.getElementById('block-selector-y').value = '';
         document.getElementById('block-selector-z').disabled = true;
+        document.getElementById('block-selector-z').value = '';
         document.getElementById('block-selector').value = id;
+        document.getElementById('block-selector').disabled = false;
     }
 
 	let playerName = '';
