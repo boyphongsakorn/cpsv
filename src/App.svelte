@@ -693,7 +693,7 @@
             </CardText>
             <!--Button>Button</Button-->
           </CardBody>
-          <!--CardFooter>Footer</CardFooter-->
+          <CardFooter>Footer</CardFooter>
         </Card>
       </Col>
     {/each}
