@@ -201,25 +201,37 @@
 
     const selectBlockHandler = (event) => {
 		selectedBlock = event.target.value;
+        if (selectedBlock.trim() !== '') {
+            //disable block-selector-x, block-selector-y, block-selector-z
+            document.getElementById('block-selector-x').disabled = true;
+            document.getElementById('block-selector-y').disabled = true;
+            document.getElementById('block-selector-z').disabled = true;
+            //return movies;
+        } else {
+            //enable every block-selector
+            document.getElementById('block-selector-x').disabled = false;
+            document.getElementById('block-selector-y').disabled = false;
+            document.getElementById('block-selector-z').disabled = false;
+        }
 		isButtonDisabled = !isValidBlockSelector() || !confirmSelection;
 	};
 
 	const selectBlockHandlerX = (event) => {
-		selectedBlock = event.target.value;
+		//selectedBlock = event.target.value;
 		blockX = event.target.value;
 		console.log(blockX);
 		isButtonDisabled = !isValidBlockSelector() || !confirmSelection;
 	};
 
 	const selectBlockHandlerY = (event) => {
-		selectedBlock = event.target.value;
+		//selectedBlock = event.target.value;
 		blockY = event.target.value;
 		console.log(blockY);
 		isButtonDisabled = !isValidBlockSelector() || !confirmSelection;
 	};
 
 	const selectBlockHandlerZ = (event) => {
-		selectedBlock = event.target.value;
+		//selectedBlock = event.target.value;
 		blockZ = event.target.value;
 		console.log(blockZ);
 		isButtonDisabled = !isValidBlockSelector() || !confirmSelection;
