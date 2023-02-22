@@ -220,6 +220,9 @@
 	const selectBlockHandlerX = (event) => {
 		//selectedBlock = event.target.value;
 		blockX = event.target.value;
+        if( blockX !== '' && blockY !== '' && blockZ !== '' ) {
+            document.getElementById('block-selector').disabled = true;
+        }
 		console.log(blockX);
 		isButtonDisabled = !isValidBlockSelector() || !confirmSelection;
 	};
@@ -227,6 +230,9 @@
 	const selectBlockHandlerY = (event) => {
 		//selectedBlock = event.target.value;
 		blockY = event.target.value;
+        if( blockX !== '' && blockY !== '' && blockZ !== '' ) {
+            document.getElementById('block-selector').disabled = true;
+        }
 		console.log(blockY);
 		isButtonDisabled = !isValidBlockSelector() || !confirmSelection;
 	};
@@ -234,6 +240,9 @@
 	const selectBlockHandlerZ = (event) => {
 		//selectedBlock = event.target.value;
 		blockZ = event.target.value;
+        if( blockX !== '' && blockY !== '' && blockZ !== '' ) {
+            document.getElementById('block-selector').disabled = true;
+        }
 		console.log(blockZ);
 		isButtonDisabled = !isValidBlockSelector() || !confirmSelection;
 	};
@@ -421,13 +430,13 @@
 													</CardText>
 													<!--Button>Button</Button-->
 												</CardBody>
-												<!-- <CardFooter>
-                                                        <a href="">
-                                                            <Button outline color="primary" style="margin-right: 5px;">
-                                                                Rollback / ย้อนบล็อกกับคืนมา
-                                                            </Button>
-                                                        </a>
-                                                    </CardFooter> -->
+												<CardFooter>
+                                                    <!-- <a href=""> -->
+                                                        <Button outline color="primary" style="margin-right: 5px;" on:click={() => blockX = ''; blockY = ''; blockZ = ''; selectedBlock = item.id}>
+                                                            Rollback / ย้อนบล็อกกับคืนมา
+                                                        </Button>
+                                                    <!-- </a> -->
+                                                </CardFooter>
 											</Card>
 										</CarouselItem>
 									{/each}
