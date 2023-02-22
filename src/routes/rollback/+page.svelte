@@ -337,6 +337,7 @@
                                             </CardFooter>
                                         </Card>
                                     </CarouselItem>
+                                {/each}
                             {/await}
                         </Carousel>
                     {/if}
