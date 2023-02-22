@@ -481,7 +481,7 @@
         /></FormGroup
       ></Col
     >
-    <Col xs="auto">
+    <Col class="my-auto" xs="auto">
       <Button
         outline
         color="primary"
