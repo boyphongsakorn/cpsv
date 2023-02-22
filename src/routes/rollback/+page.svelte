@@ -118,7 +118,7 @@
     let blockZ = '';
 
     async function getblockbycoordinate(x, y, z) {
-      const response = await fetch("https://cpsql.pwisetthon.com/blog/find/block/coordinates/" + x + "/" + y + "/" + z);
+      const response = await fetch("https://cpsql.pwisetthon.com/blog/find/xyz/" + x + "/" + y + "/" + z + "/" + x + "/" + y + "/" + z);
       const movies = await response.json();
       return movies;
     }
