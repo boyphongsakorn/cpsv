@@ -59,7 +59,7 @@
 
 <Navbar color="dark" dark expand="md">
     <Container sm style="display: flex;">
-      <NavbarBrand href="/">PWisetthon.com Svelte Beta</NavbarBrand>
+      <NavbarBrand class="text-decoration-none text-white" href="/">PWMC Rollback</NavbarBrand>
       <NavbarToggler on:click={() => (isOpen = !isOpen)} />
       <Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
         <Nav class="ms-auto" navbar>
