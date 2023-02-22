@@ -38,7 +38,8 @@
 		Styles,
 		FormGroup,
 		Label,
-		Input
+		Input,
+        Alert
 	} from 'sveltestrap';
 
     export let location;
@@ -293,6 +294,7 @@
 <Container md>
 	<div class="form-container">
 		<h2 class="form-title">ย้อนกลับบล็อก</h2>
+        <Alert color="info" dismissible>สามารถย้อนกลับบล็อกได้สูงสุด 14 วัน</Alert>
 		<form on:submit={submitHandler}>
 			<!-- <FormGroup>
                 <Label for="block-selector">ใส่ X,Y,Z ของบล็อกที่ต้องการย้อนกลับ:</Label>
