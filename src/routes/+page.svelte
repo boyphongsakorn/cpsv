@@ -266,7 +266,7 @@
         //}
         //fiveten.push(movies[i]);
         //if((i+1)%12 == 0) {
-        if (count % 12 == 0) {
+        if (count % 10 == 0) {
           list.push(fiveten);
           fiveten = [];
         } else if (i == movies.length - 1) {
