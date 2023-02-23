@@ -604,7 +604,7 @@
                       <Button
                         outline
                         color="primary"
-                        on:click={() => wowplayer(item.userid)}
+                        on:click={() => playerchange(item.userid)}
                         style="margin-right: 5px;display: none;"
                         ><Avatar
                           randomBgColor
