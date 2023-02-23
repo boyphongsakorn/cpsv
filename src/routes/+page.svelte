@@ -847,6 +847,7 @@
       </ul-->
   
     <!-- {#await allcount() then value} -->
+    {#if totalItemsvalue > 0}
       <LightPaginationNav
         totalItems={totalItemsvalue}
         pageSize="40"
@@ -855,5 +856,6 @@
         showStepOptions={true}
         on:setPage={(e) => wow(e.detail.page)}
       />
+    {/if}
     <!-- {/await} -->
   </Container>
