@@ -330,7 +330,7 @@
 <Container md>
 	<div class="form-container">
 		<h2 class="form-title">ย้อนกลับบล็อก</h2>
-        <Alert color="info" dismissible>สามารถย้อนกลับบล็อกได้สูงสุด 14 วัน และสามารถย้อนกลับได้เฉพาะบล็อกที่ Player ขุดเองเท่านั้น</Alert>
+        <Alert color="info" dismissible>สามารถย้อนกลับบล็อกได้สูงสุด 14 วัน และสามารถย้อนกลับได้เฉพาะบล็อกที่ Player ขุดเท่านั้น</Alert>
 		<form on:submit={submitHandler}>
 			<!-- <FormGroup>
                 <Label for="block-selector">ใส่ X,Y,Z ของบล็อกที่ต้องการย้อนกลับ:</Label>
@@ -460,7 +460,7 @@
 												<CardFooter>
                                                     <!-- <a href=""> -->
 													{#await getusername(item.user) then values}
-														{#if value.indexOf('#') != -1 || checkUnixTimeif14days(item.time) == false}
+														{#if value.indexOf('#') != -1 || checkUnixTimeif14days(item.time) == true}
 															<Button outline color="danger" style="margin-right: 5px;">
 																ไม่สามารถย้อนกลับไอเทมหรือไอดีนี้ได้
 															</Button>
