@@ -387,7 +387,7 @@
 				</Col>
 				<Col>
 					{#if blockX != '' && blockY != '' && blockZ != ''}
-						<Carousel bind:activeIndex>
+						<Carousel dark bind:activeIndex>
 							{#await getblockbycoordinate(blockX, blockY, blockZ) then value}
 								<div class="carousel-inner">
 									{#each value as item, index}
