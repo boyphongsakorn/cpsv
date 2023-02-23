@@ -160,7 +160,7 @@
   
     async function allcount() {
       let url = "https://cpsql.pwisetthon.com/blog/find/all/count";
-      if (isId) {
+      if ($page.url.searchParams.has("id")) {
         id = $page.url.searchParams.get("id");
         url = "https://cpsql.pwisetthon.com/blog/find/all/count/" + id;
       } else if (isX && isY && isZ) {
