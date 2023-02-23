@@ -154,6 +154,18 @@
 		return thaiDate + ' เวลา ' + formattedTime;
 	}
 
+	function checkUnixTimeif14days(unix_timestamp) {
+		var date = new Date(unix_timestamp * 1000);
+		//if 14 days ago
+		var date14daysago = new Date();
+		date14daysago.setDate(date14daysago.getDate() - 14);
+		if (date < date14daysago) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	async function getblockbycoordinate(x, y, z) {
 		const response = await fetch(
 			'https://cpsql.pwisetthon.com/blog/find/xyz/' +
@@ -447,9 +459,17 @@
 												</CardBody>
 												<CardFooter>
                                                     <!-- <a href=""> -->
-                                                        <Button outline color="primary" style="margin-right: 5px;" on:click={() => rollback(item.id)}>
-                                                            Rollback / ย้อนบล็อกกับคืนมา
-                                                        </Button>
+													{#await getusername(item.user) then values}
+														{#if value.indexOf('#') != -1 || checkUnixTimeif14days(item.time) == false}
+															<Button outline color="danger" style="margin-right: 5px;">
+																ไม่สามารถย้อนกลับไอเทมหรือไอดีนี้ได้
+															</Button>
+                                                        {:else}
+															<Button outline color="primary" style="margin-right: 5px;" on:click={() => rollback(item.id)}>
+																Rollback / ย้อนบล็อกกับคืนมา
+															</Button>
+														{/if}
+													{/await}
                                                     <!-- </a> -->
                                                 </CardFooter>
 											</Card>
