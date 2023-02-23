@@ -53,6 +53,7 @@
   
     let items = [];
     let indexpage = 1;
+    let totalItemsvalue = 0;
     onMount(async () => {
       window.js = js;
       let url = "https://cpsql.pwisetthon.com/blog/find/page/1";
@@ -78,6 +79,7 @@
           //console.log(data);
           //apiData.set(data);
           items = data;
+          allcount();
         })
         .catch((error) => {
           //console.log(error);
@@ -184,7 +186,9 @@
         wow.push(i + 1);
       }
       //return wow;
-      return parseInt(movies);
+      //return parseInt(movies);
+      totalItemsvalue = parseInt(movies);
+      indexpage = 1;
     }
   
     function test(wow) {
@@ -842,14 +846,14 @@
           {/each}
       </ul-->
   
-    {#await allcount() then value}
+    <!-- {#await allcount() then value} -->
       <LightPaginationNav
-        totalItems={value}
+        totalItems={totalItemsvalue}
         pageSize="40"
         currentPage={indexpage}
         limit={6}
         showStepOptions={true}
         on:setPage={(e) => wow(e.detail.page)}
       />
-    {/await}
+    <!-- {/await} -->
   </Container>
