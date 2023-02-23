@@ -42,7 +42,7 @@
         Alert
 	} from 'sveltestrap';
 
-    export let location;
+    // export let location;
     //const urlParams = new URLSearchParams(location);
     //console.log(urlParams);
     const isId = $page.url.searchParams.get("id");

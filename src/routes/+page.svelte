@@ -5,8 +5,43 @@
     import Avatar from "svelte-avatar";
     import { paginate, LightPaginationNav } from "svelte-paginate";
     import js from "jquery";
+    import {
+      Collapse,
+      Navbar,
+      NavbarToggler,
+      NavbarBrand,
+      Nav,
+      NavItem,
+      NavLink,
+      Dropdown,
+      DropdownToggle,
+      DropdownMenu,
+      DropdownItem,
+      Col,
+      Container,
+      Row,
+      Button,
+      Card,
+      CardBody,
+      CardFooter,
+      CardHeader,
+      CardSubtitle,
+      CardText,
+      CardTitle,
+      Tooltip,
+      Pagination,
+      PaginationItem,
+      PaginationLink,
+      Carousel,
+      CarouselControl,
+      CarouselItem,
+      Styles,
+      FormGroup,
+      Label,
+      Input,
+    } from "sveltestrap";
 
-    export let location;
+    // export let location;
   
     //const urlParams = new URLSearchParams(location);
     const isId = $page.url.searchParams.has("id");
@@ -162,42 +197,6 @@
     /*let currentPage = 1
         let pageSize = 40
       $: paginatedItems = paginate({ items, pageSize, currentPage })*/
-  
-    import {
-      Collapse,
-      Navbar,
-      NavbarToggler,
-      NavbarBrand,
-      Nav,
-      NavItem,
-      NavLink,
-      Dropdown,
-      DropdownToggle,
-      DropdownMenu,
-      DropdownItem,
-      Col,
-      Container,
-      Row,
-      Button,
-      Card,
-      CardBody,
-      CardFooter,
-      CardHeader,
-      CardSubtitle,
-      CardText,
-      CardTitle,
-      Tooltip,
-      Pagination,
-      PaginationItem,
-      PaginationLink,
-      Carousel,
-      CarouselControl,
-      CarouselItem,
-      Styles,
-      FormGroup,
-      Label,
-      Input,
-    } from "sveltestrap";
   
     let isOpen = false;
   
@@ -615,7 +614,7 @@
                       <a
                         href="https://mccplog.pwisetthon.com/?id={item.userid}"
                         id="userid{item.userid}"
-                        onclick="playerchange({item.userid})"
+                        on:click={() => playerchange(item.userid)}
                         ><Button outline color="primary" style="margin-right: 5px;"
                           ><Avatar
                             randomBgColor
