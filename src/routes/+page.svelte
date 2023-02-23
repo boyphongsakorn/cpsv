@@ -436,7 +436,7 @@
   
   <Navbar color="dark" dark expand="md">
     <Container sm style="display: flex;">
-      <NavbarBrand href="/">PWMC CoreProtect Log</NavbarBrand>
+      <NavbarBrand href="/">BPMC CoreProtect Log</NavbarBrand>
       <NavbarToggler on:click={() => (isOpen = !isOpen)} />
       <Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
         <Nav class="ms-auto" navbar>
