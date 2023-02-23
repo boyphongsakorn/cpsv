@@ -414,6 +414,18 @@
       var thaiDate = day + " " + thaiMonth[month] + " " + (year + 543);
       return thaiDate + " เวลา " + formattedTime;
     }
+
+    function checkUnixTimeif14days(unix_timestamp) {
+      var date = new Date(unix_timestamp * 1000);
+      //if 14 days ago
+      var date14daysago = new Date();
+      date14daysago.setDate(date14daysago.getDate() - 14);
+      if (date < date14daysago) {
+        return true;
+      } else {
+        return false;
+      }
+	  }
   
     //const placements = ['top', 'right', 'left', 'bottom'];
   
@@ -722,13 +734,22 @@
               </CardText>
               <!--Button>Button</Button-->
             </CardBody>
-            <CardFooter>
-              <a href="/rollback/?id={item.id}">
-                <Button outline color="primary" style="margin-right: 5px;">
-                  Rollback / ย้อนบล็อกกับคืนมา
-                </Button>
-              </a>
-            </CardFooter>
+            {#await getusername(item.user) then value}
+              <CardFooter>
+                <!-- <a href="/rollback/?id={item.id}">
+                  <Button outline color="primary" style="margin-right: 5px;">
+                    Rollback / ย้อนบล็อกกับคืนมา
+                  </Button>
+                </a> -->
+                  {#if value.indexOf('#') == -1 || checkUnixTimeif14days(item.time) == false}
+                    <a href="/rollback/?id={item.id}">
+                      <Button outline color="primary" style="margin-right: 5px;">
+                        Rollback / ย้อนบล็อกกับคืนมา
+                      </Button>
+                    </a>
+                  {/if}
+              </CardFooter>
+            {/await}
           </Card>
         </Col>
       {/each}

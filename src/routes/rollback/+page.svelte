@@ -460,7 +460,7 @@
 												<CardFooter>
                                                     <!-- <a href=""> -->
 													{#await getusername(item.user) then values}
-														{#if value.indexOf('#') != -1 || checkUnixTimeif14days(item.time) == true}
+														{#if values.indexOf('#') != -1 || checkUnixTimeif14days(item.time) == true}
 															<Button outline color="danger" style="margin-right: 5px;">
 																ไม่สามารถย้อนกลับไอเทมหรือไอดีนี้ได้
 															</Button>
