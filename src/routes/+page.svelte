@@ -604,7 +604,7 @@
                       <Button
                         outline
                         color="primary"
-                        on:click={() => playerchange(item.userid)}
+                        on:click={playerchange}
                         ><Avatar
                           randomBgColor
                           initials={item.user}
