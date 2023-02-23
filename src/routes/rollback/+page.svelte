@@ -217,7 +217,7 @@
 
     const selectBlockHandler = (event) => {
 		selectedBlock = event.target.value;
-        if (selectedBlock.trim() !== '') {
+        if (selectedBlock.trim() !== '' && selectedBlock.trim() !== '0') {
             //disable block-selector-x, block-selector-y, block-selector-z
             document.getElementById('block-selector-x').disabled = true;
             document.getElementById('block-selector-y').disabled = true;
