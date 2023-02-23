@@ -118,15 +118,18 @@
 
     async function playerchange(i) {
       let url = "";
+      // let urlcount = "";
       if (isId) {
         id = $page.url.searchParams.get("id");
         url = "https://cpsql.pwisetthon.com/blog/find/user/" + i + "/1";
+        // url = "https://cpsql.pwisetthon.com/blog/find/all/count/" + id;
         fetch(url)
           .then((response) => response.json())
           .then((data) => {
             //console.log(data);
             //apiData.set(data);
             items = data;
+            allcount();
           })
           .catch((error) => {
             //console.log(error);
@@ -614,7 +617,7 @@
                       <a
                         href="https://mccplog.pwisetthon.com/?id={item.userid}"
                         id="userid{item.userid}"
-                        on:click={() => playerchange(1)}
+                        on:click={() => playerchange(parseInt(item.userid))}
                         ><Button outline color="primary" style="margin-right: 5px;"
                           ><Avatar
                             randomBgColor
