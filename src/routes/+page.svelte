@@ -80,6 +80,25 @@
       indexpage = i;
       return movies;
     }
+
+    async function playerchange(i) {
+      let url = "";
+      if (isId) {
+        id = $page.url.searchParams.get("id");
+        url = "https://cpsql.pwisetthon.com/blog/find/user/" + i + "/1";
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            //console.log(data);
+            //apiData.set(data);
+            items = data;
+          })
+          .catch((error) => {
+            //console.log(error);
+            return [];
+          });
+      }
+    }
   
     async function wowplayer(userid) {
       const response = await fetch(
