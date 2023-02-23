@@ -119,8 +119,8 @@
     async function playerchange(i) {
       let url = "";
       // let urlcount = "";
-      if (isId) {
-        id = $page.url.searchParams.get("id");
+      if (i) {
+        id = i
         url = "https://cpsql.pwisetthon.com/blog/find/user/" + i + "/1";
         // url = "https://cpsql.pwisetthon.com/blog/find/all/count/" + id;
         fetch(url)
@@ -617,7 +617,7 @@
                       <a
                         href="https://mccplog.pwisetthon.com/?id={item.userid}"
                         id="userid{item.userid}"
-                        on:click={() => playerchange(parseInt(item.userid))}
+                        on:click={() => playerchange(item.userid)}
                         ><Button outline color="primary" style="margin-right: 5px;"
                           ><Avatar
                             randomBgColor
