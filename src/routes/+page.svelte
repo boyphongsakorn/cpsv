@@ -94,7 +94,7 @@
         i = 1;
       }
       let url = "https://cpsql.pwisetthon.com/blog/find/page/" + i;
-      if (isId) {
+      if ($page.url.searchParams.has("id")) {
         id = $page.url.searchParams.get("id");
         url = "https://cpsql.pwisetthon.com/blog/find/user/" + id + "/" + i;
       } else if (isX && isY && isZ) {
