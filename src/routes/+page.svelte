@@ -1,5 +1,6 @@
 <script>
     import { onMount } from "svelte";
+    import { page } from '$app/stores';
     // import { apiData, drinkNames } from "./store.js";
     import Avatar from "svelte-avatar";
     import { paginate, LightPaginationNav } from "svelte-paginate";
@@ -8,28 +9,28 @@
     export let location;
   
     const urlParams = new URLSearchParams(location);
-    const isId = urlParams.has("id");
-    const isX = urlParams.has("x");
-    const isY = urlParams.has("y");
-    const isZ = urlParams.has("z");
-    const isOffset = urlParams.has("offset");
+    const isId = $page.url.searchParams.has("id");
+    const isX = $page.url.searchParams.has("x");
+    const isY = $page.url.searchParams.has("y");
+    const isZ = $page.url.searchParams.has("z");
+    const isOffset = $page.url.searchParams.has("offset");
     let id = "";
   
     let items = [];
-    let page = 1;
+    let indexpage = 1;
     onMount(async () => {
       window.js = js;
       let url = "https://cpsql.pwisetthon.com/blog/find/page/1";
       if (isId) {
-        id = urlParams.get("id");
+        id = urlParams.get("id") || "";
         url = "https://cpsql.pwisetthon.com/blog/find/user/" + id + "/1";
       } else if (isX && isY && isZ) {
-        let x = urlParams.get("x");
-        let y = urlParams.get("y");
-        let z = urlParams.get("z");
+        let x = urlParams.get("x") || "";
+        let y = urlParams.get("y") || "";
+        let z = urlParams.get("z") || "";
         let offset = 0;
         if (isOffset) {
-          offset = urlParams.get("offset");
+          offset = urlParams.get("offset") || 0;
         }
         let xplus = parseInt(x) + parseInt(offset);
         let yplus = parseInt(y) + parseInt(offset);
@@ -76,7 +77,7 @@
       const movies = await response.json();
       //items=movies;
       items = movies;
-      page = i;
+      indexpage = i;
       return movies;
     }
   
@@ -823,7 +824,7 @@
       <LightPaginationNav
         totalItems={value}
         pageSize="40"
-        currentPage={page}
+        currentPage={indexpage}
         limit={6}
         showStepOptions={true}
         on:setPage={(e) => wow(e.detail.page)}
