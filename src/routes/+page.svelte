@@ -81,7 +81,7 @@
       return movies;
     }
 
-    function playerchange(i) {
+    async function playerchange(i) {
       let url = "";
       if (isId) {
         id = $page.url.searchParams.get("id");
@@ -604,25 +604,26 @@
                       <Button
                         outline
                         color="primary"
-                        on:click={playerchange}
+                        on:click={() => playerchange(item.userid)}
+                        style="margin-right: 5px;display: none;"
                         ><Avatar
                           randomBgColor
                           initials={item.user}
                           src="https://cravatar.eu/avatar/{item.user}"
                         /></Button
                       >
-                      <!-- <a
+                      <a
                         href="https://mccplog.pwisetthon.com/?id={item.userid}"
                         id="userid{item.userid}"
-                        on:click={() => playerchange(item.userid)}
-                        >
-                        <Button outline color="primary" style="margin-right: 5px;"
+                        onclick="playerchange({item.userid})"
+                        ><Button outline color="primary" style="margin-right: 5px;"
                           ><Avatar
                             randomBgColor
                             initials={item.user}
                             src="https://cravatar.eu/avatar/{item.user}"
                           /></Button
-                        ></a> -->
+                        ></a
+                      >
                       <Tooltip target="userid{item.userid}" placement="bottom"
                         >{item.user}</Tooltip
                       >
