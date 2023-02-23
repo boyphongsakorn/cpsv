@@ -735,7 +735,7 @@
               <!--Button>Button</Button-->
             </CardBody>
             {#await getusername(item.user) then value}
-              {#if value.indexOf('#') == -1 || checkUnixTimeif14days(item.time) == true}
+              {#if value.indexOf('#') == -1 || checkUnixTimeif14days(item.time) == false}
                 <CardFooter>
                 <!-- <a href="/rollback/?id={item.id}">
                   <Button outline color="primary" style="margin-right: 5px;">
