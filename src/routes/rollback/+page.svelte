@@ -282,7 +282,7 @@
 
 <Navbar color="dark" dark expand="md">
 	<Container sm style="display: flex;">
-		<NavbarBrand class="text-decoration-none text-white" href="/">PWMC Rollback</NavbarBrand>
+		<NavbarBrand class="text-decoration-none text-white" href="/">PWMC Rollback System</NavbarBrand>
 		<NavbarToggler on:click={() => (isOpen = !isOpen)} />
 		<Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
 			<Nav class="ms-auto" navbar>
@@ -318,7 +318,7 @@
 <Container md>
 	<div class="form-container">
 		<h2 class="form-title">ย้อนกลับบล็อก</h2>
-        <Alert color="info" dismissible>สามารถย้อนกลับบล็อกได้สูงสุด 14 วัน</Alert>
+        <Alert color="info" dismissible>สามารถย้อนกลับบล็อกได้สูงสุด 14 วัน และสามารถย้อนกลับได้เฉพาะบล็อกที่ Player ขุดเองเท่านั้น</Alert>
 		<form on:submit={submitHandler}>
 			<!-- <FormGroup>
                 <Label for="block-selector">ใส่ X,Y,Z ของบล็อกที่ต้องการย้อนกลับ:</Label>
