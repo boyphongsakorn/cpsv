@@ -615,7 +615,7 @@
                       <a
                         
                         id="userid{item.userid}"
-                        on:click={() => playerchange(item.userid)}
+                        on:click={playerchange(item.userid)}
                         ><Button outline color="primary" style="margin-right: 5px;"
                           ><Avatar
                             randomBgColor
