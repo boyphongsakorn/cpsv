@@ -156,8 +156,8 @@
       let y = document.getElementById("y").value;
       let z = document.getElementById("z").value;
       let offset = document.getElementById("plus").value;
-      //change location to https://mccplog.pwisetthon.com/?x=0&y=0&z=0&offset=0
-      window.location.href ="https://mccplog.pwisetthon.com/?x=" + x + "&y=" + y + "&z=" + z + "&offset=" + offset;
+      //change location to https://log.bpminecraft.com/?x=0&y=0&z=0&offset=0
+      window.location.href ="https://log.bpminecraft.com/?x=" + x + "&y=" + y + "&z=" + z + "&offset=" + offset;
     }
   
     async function allcount() {
@@ -602,7 +602,7 @@
                         /></Button
                       >
                       <a
-                        href="https://mccplog.pwisetthon.com/?id={item.userid}"
+                        href="https://log.bpminecraft.com/?id={item.userid}"
                         id="userid{item.userid}"
                       >
                         <Button outline color="primary" style="margin-right: 5px;">
@@ -631,7 +631,7 @@
                         /></Button
                       >
                       <a
-                        href="https://mccplog.pwisetthon.com/?id={item.userid}"
+                        href="https://log.bpminecraft.com/?id={item.userid}"
                         id="userid{item.userid}"
                         on:click={() => playerchange(item.userid)}
                         ><Button outline color="primary" style="margin-right: 5px;"
