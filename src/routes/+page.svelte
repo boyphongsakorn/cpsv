@@ -567,7 +567,7 @@
       >
       <Col>
       {#await getallusernamecarousel() then value}
-        <Carousel dark {value} bind:activeIndex>
+        <Carousel dark bind:activeIndex>
           <div class="carousel-inner">
             {#each value as items, index}
               <CarouselItem bind:activeIndex itemIndex={index}>
