@@ -8,7 +8,7 @@
 
     export let location;
   
-    const urlParams = new URLSearchParams(location);
+    //const urlParams = new URLSearchParams(location);
     const isId = $page.url.searchParams.has("id");
     const isX = $page.url.searchParams.has("x");
     const isY = $page.url.searchParams.has("y");
@@ -22,15 +22,15 @@
       window.js = js;
       let url = "https://cpsql.pwisetthon.com/blog/find/page/1";
       if (isId) {
-        id = urlParams.get("id") || "";
+        id = $page.url.searchParams.get("id");
         url = "https://cpsql.pwisetthon.com/blog/find/user/" + id + "/1";
       } else if (isX && isY && isZ) {
-        let x = urlParams.get("x") || "";
-        let y = urlParams.get("y") || "";
-        let z = urlParams.get("z") || "";
+        let x = $page.url.searchParams.get("x");
+        let y = $page.url.searchParams.get("y");
+        let z = $page.url.searchParams.get("z");
         let offset = 0;
         if (isOffset) {
-          offset = urlParams.get("offset") || 0;
+          offset = $page.url.searchParams.get("offset");
         }
         let xplus = parseInt(x) + parseInt(offset);
         let yplus = parseInt(y) + parseInt(offset);
@@ -58,15 +58,15 @@
       }
       let url = "https://cpsql.pwisetthon.com/blog/find/page/" + i;
       if (isId) {
-        id = urlParams.get("id");
+        id = $page.url.searchParams.get("id");
         url = "https://cpsql.pwisetthon.com/blog/find/user/" + id + "/" + i;
       } else if (isX && isY && isZ) {
-        let x = urlParams.get("x");
-        let y = urlParams.get("y");
-        let z = urlParams.get("z");
+        let x = $page.url.searchParams.get("x");
+        let y = $page.url.searchParams.get("y");
+        let z = $page.url.searchParams.get("z");
         let offset = 0;
         if (isOffset) {
-          offset = urlParams.get("offset");
+          offset = $page.url.searchParams.get("offset");
         }
         let xplus = parseInt(x) + parseInt(offset);
         let yplus = parseInt(y) + parseInt(offset);
@@ -104,15 +104,15 @@
     async function allcount() {
       let url = "https://cpsql.pwisetthon.com/blog/find/all/count";
       if (isId) {
-        id = urlParams.get("id");
+        id = $page.url.searchParams.get("id");
         url = "https://cpsql.pwisetthon.com/blog/find/all/count/" + id;
       } else if (isX && isY && isZ) {
-        let x = urlParams.get("x");
-        let y = urlParams.get("y");
-        let z = urlParams.get("z");
+        let x = $page.url.searchParams.get("x");
+        let y = $page.url.searchParams.get("y");
+        let z = $page.url.searchParams.get("z");
         let offset = 0;
         if (isOffset) {
-          offset = urlParams.get("offset");
+          offset = $page.url.searchParams.get("offset");
         }
         let xplus = parseInt(x) + parseInt(offset);
         let yplus = parseInt(y) + parseInt(offset);
