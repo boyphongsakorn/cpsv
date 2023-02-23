@@ -614,7 +614,7 @@
                       <a
                         href="https://mccplog.pwisetthon.com/?id={item.userid}"
                         id="userid{item.userid}"
-                        on:click={() => playerchange(item.userid)}
+                        on:click={() => playerchange(1)}
                         ><Button outline color="primary" style="margin-right: 5px;"
                           ><Avatar
                             randomBgColor
