@@ -735,20 +735,20 @@
               <!--Button>Button</Button-->
             </CardBody>
             {#await getusername(item.user) then value}
-              <CardFooter>
+              {#if value.indexOf('#') == -1 && checkUnixTimeif14days(item.time) == false}
+                <CardFooter>
                 <!-- <a href="/rollback/?id={item.id}">
                   <Button outline color="primary" style="margin-right: 5px;">
                     Rollback / ย้อนบล็อกกับคืนมา
                   </Button>
                 </a> -->
-                  {#if value.indexOf('#') == -1 || checkUnixTimeif14days(item.time) == false}
-                    <a href="/rollback/?id={item.id}">
-                      <Button outline color="primary" style="margin-right: 5px;">
-                        Rollback / ย้อนบล็อกกับคืนมา
-                      </Button>
-                    </a>
-                  {/if}
-              </CardFooter>
+                  <a href="/rollback/?id={item.id}">
+                    <Button outline color="primary" style="margin-right: 5px;">
+                      Rollback / ย้อนบล็อกกับคืนมา
+                    </Button>
+                  </a>
+                </CardFooter>
+              {/if}
             {/await}
           </Card>
         </Col>
