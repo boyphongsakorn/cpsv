@@ -81,7 +81,7 @@
       return movies;
     }
 
-    async function playerchange(i) {
+    function playerchange(i) {
       let url = "";
       if (isId) {
         id = $page.url.searchParams.get("id");
