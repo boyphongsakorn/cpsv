@@ -213,7 +213,7 @@
   
     async function minecraftserverstatus() {
       const response = await fetch(
-        "https://api.mcsrvstat.us/2/playmc.pwisetthon.com"
+        "https://api.mcsrvstat.us/2/bpminecraft.com"
       );
       const movies = await response.json();
       return movies;
@@ -443,10 +443,10 @@
           <NavItem>
             {#await minecraftserverstatus() then value}
               {#if value.online == true}
-                <NavLink>Server Address : playmc.pwisetthon.com (ออนไลน์)</NavLink
+                <NavLink>Server Address : bpminecraft.com (ออนไลน์)</NavLink
                 >
               {:else}
-                <NavLink>Server Address : playmc.pwisetthon.com (ออฟไลน์)</NavLink
+                <NavLink>Server Address : bpminecraft.com (ออฟไลน์)</NavLink
                 >
               {/if}
             {/await}
