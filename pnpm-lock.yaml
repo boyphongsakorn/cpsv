@@ -2,8 +2,8 @@ lockfileVersion: '6.0'
 
 dependencies:
   jquery:
-    specifier: ^3.6.3
-    version: 3.6.3
+    specifier: ^3.7.0
+    version: 3.7.0
   svelte-avatar:
     specifier: ^1.2.0
     version: 1.2.0
@@ -887,8 +887,8 @@ packages:
     engines: {node: '>=0.12.0'}
     dev: true
 
-  /jquery@3.6.3:
-    resolution: {integrity: sha512-bZ5Sy3YzKo9Fyc8wH2iIQK4JImJ6R0GWI9kL1/k7Z91ZBNgkRXE6U0JfHIizZbort8ZunhSI3jw9I6253ahKfg==}
+  /jquery@3.7.0:
+    resolution: {integrity: sha512-umpJ0/k8X0MvD1ds0P9SfowREz2LenHsQaxSohMZ5OMNEU2r0tf8pdeEFTHMFxWVxKNyU9rTtK3CWzUCTKJUeQ==}
     dev: false
 
   /kleur@4.1.5:
