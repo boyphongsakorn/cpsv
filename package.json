@@ -25,7 +25,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"jquery": "^3.6.3",
+		"jquery": "^3.7.0",
 		"svelte-avatar": "^1.2.0",
 		"sveltestrap": "^5.10.0"
 	}
