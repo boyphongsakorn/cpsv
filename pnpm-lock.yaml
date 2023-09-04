@@ -12,8 +12,8 @@ dependencies:
     specifier: ^1.2.0
     version: 1.2.0
   sveltestrap:
-    specifier: ^5.11.1
-    version: 5.11.1(svelte@3.59.2)
+    specifier: ^5.11.2
+    version: 5.11.2(svelte@3.59.2)
 
 devDependencies:
   '@sveltejs/adapter-auto':
@@ -961,8 +961,8 @@ packages:
     resolution: {integrity: sha512-vzSyuGr3eEoAtT/A6bmajosJZIUWySzY2CzB3w2pgPvnkUjGqlDnsNnA0PMO+mMAhuyMul6C2uuZzY6ELSkzyA==}
     engines: {node: '>= 8'}
 
-  /sveltestrap@5.11.1(svelte@3.59.2):
-    resolution: {integrity: sha512-FIvPIEU1VolqMN1wi2XrC8aehWVbIJEST7zPfPbOUUfPimyx9giN4nA3We5wkXrBUaifXA8CSIwuHFvf3CmYQw==}
+  /sveltestrap@5.11.2(svelte@3.59.2):
+    resolution: {integrity: sha512-fkLqIUh2QHBoom7v6kHI85grLeOqplmvtnTiA5Ck2gchzpVmwXWaWpf8qWhCFxfDuMhJBPlWbJvtSmwpDEowrg==}
     peerDependencies:
       svelte: ^3.53.1
     dependencies:
