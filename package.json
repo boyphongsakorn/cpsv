@@ -27,6 +27,6 @@
 	"dependencies": {
 		"jquery": "^3.7.1",
 		"svelte-avatar": "^1.2.0",
-		"sveltestrap": "^5.11.1"
+		"sveltestrap": "^5.11.2"
 	}
 }
