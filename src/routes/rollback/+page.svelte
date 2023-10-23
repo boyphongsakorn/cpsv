@@ -39,8 +39,11 @@
 		FormGroup,
 		Label,
 		Input,
-        Alert
+        Alert,
+		ButtonGroup
 	} from 'sveltestrap';
+
+	let isblock = true;
 
     // export let location;
     //const urlParams = new URLSearchParams(location);
@@ -222,7 +225,11 @@
         if (playerName.trim() === '') {
             isButtonDisabled = true;
         } else {
-            isButtonDisabled = !isValidBlockSelector() || !confirmSelection;
+			if (isblock == true){
+            	isButtonDisabled = !isValidBlockSelector() || !confirmSelection;
+			} else {
+				isButtonDisabled = !confirmSelection;
+			}
         }
 		//isButtonDisabled = !isValidBlockSelector() || !confirmSelection;
 	};
@@ -276,7 +283,11 @@
 
 	const playerNameHandler = (event) => {
 		playerName = event.target.value;
-		isButtonDisabled = !isValidBlockSelector() || !confirmSelection || playerName.trim() === '';
+		if (isblock) {
+			isButtonDisabled = !isValidBlockSelector() || !confirmSelection || playerName.trim() === '';
+		} else {
+			isButtonDisabled = playerName.trim() === '' || !confirmSelection;
+		}
 	};
 
 	const submitHandler = (event) => {
@@ -288,6 +299,10 @@
 	onMount(() => {
 		isButtonDisabled = !isValidBlockSelector() || !confirmSelection || playerName.trim() === '';
 	});
+
+	function changetype() {
+		isblock = !isblock;
+	}
 </script>
 
 <Styles />
@@ -329,7 +344,14 @@
 
 <Container md>
 	<div class="form-container">
-		<h2 class="form-title">ย้อนกลับบล็อก</h2>
+		<!-- <h2 class="form-title">ย้อนกลับบล็อก</h2> -->
+		<ButtonGroup>
+			<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked on:click={() => isblock = true} />
+  			<label class="btn btn-outline-primary" for="btnradio1">ย้อนกลับบล็อก</label>
+			<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" on:click={() => isblock = false} />
+  			<label class="btn btn-outline-primary" for="btnradio2">ย้อนกลับของในตัว</label>
+		</ButtonGroup>
+		{#if isblock}
         <Alert color="info" dismissible>สามารถย้อนกลับบล็อกได้สูงสุด 14 วัน และสามารถย้อนกลับได้เฉพาะบล็อกที่ Player ขุดเท่านั้น</Alert>
 		<form on:submit={submitHandler}>
 			<!-- <FormGroup>
@@ -585,7 +607,7 @@
 				<Input
 					id="player-name"
 					type="text"
-					placeholder="Your player name"
+					placeholder="ชื่อในเกม"
 					on:input={playerNameHandler}
 				/>
 			</FormGroup>
@@ -597,5 +619,27 @@
 
 			<Button type="submit" color="primary" disabled={isButtonDisabled}>Rollback Block</Button>
 		</form>
+		{:else}
+		<h2>ย้อนกลับของในตัว</h2>
+			<form method="POST">
+				<!-- <input type="text" name="username" placeholder="Username" id="username" class="form-control" /> -->
+				<FormGroup class="input-group">
+					<Label for="player-name">ใส่ชื่อผู้เล่น/ชื่อในเกม:</Label>
+					<Input
+						id="player-name"
+						type="text"
+						placeholder="ชื่อในเกม"
+						name="player-name"
+						on:input={playerNameHandler}
+					/>
+				</FormGroup>
+				<FormGroup class="input-group">
+					<Input id="confirm-block" type="checkbox" on:change={confirmSelectionHandler} />
+					<Label for="confirm-block">I confirm that this is the block I want to rollback.</Label>
+				</FormGroup>
+				<!-- <button type="submit" class="btn btn-primary">ย้อนกลับของในตัว</button> -->
+				<Button type="submit" color="primary" disabled={isButtonDisabled}>Rollback Block</Button>
+			</form>
+		{/if}
 	</div>
 </Container>
