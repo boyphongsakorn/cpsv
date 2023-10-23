@@ -93,7 +93,8 @@
       if (i == undefined) {
         i = 1;
       }
-      let url = "https://cpsql.pwisetthon.com/blog/find/page/" + i;
+      // let url = "https://cpsql.pwisetthon.com/blog/find/page/" + i;
+      let url = "https://cpsql.pwisetthon.com/blog/find/page/" + i + "?allcount=" + totalItemsvalue;
       if ($page.url.searchParams.has("id")) {
         id = $page.url.searchParams.get("id");
         url = "https://cpsql.pwisetthon.com/blog/find/user/" + id + "/" + i;
