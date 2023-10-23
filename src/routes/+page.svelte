@@ -282,9 +282,18 @@
         "https://cpsql.pwisetthon.com/blockname/find/id/" + test
       );
       const movies = await response.json();
-      //remove minecraft: from the string and return the rest
-      return movies.blockid.replace("minecraft:", "");
-      //return movies.blockid;
+      // //remove minecraft: from the string and return the rest
+      // return movies.blockid.replace("minecraft:", "");
+      let urls = "https://mc.nerothe.com/img/1.19.2/" + movies.blockid.replace("minecraft:", "") + ".png";
+      // }
+      const lastchange = await fetch("https://anywhere.pwisetthon.com/" + urls);
+      if (lastchange.status == 404) {
+        let imageurl = await getmonsterimage(movies.blockid.replace("minecraft:", ""));
+        return {name : movies.blockid.replace("minecraft:", ""), url : imageurl};
+        //return movies.blockid;
+      } else {
+        return {name : movies.blockid.replace("minecraft:", ""), url : urls};
+      }
     }
   
     async function getmonsterimage(test) {
@@ -303,7 +312,21 @@
       }
       const response2 = await fetch("https://anywhere.pwisetthon.com/" + urls);
       if (response2.status == 404) {
-        urls = "https://minecraftitemids.com/item/64/" + test + ".png";
+        // urls = "https://minecraftitemids.com/item/64/" + test + ".png";
+        const githubmciconapi = await fetch("https://api.github.com/repos/undrfined/mc-icons/git/trees/master?recursive=1");
+        const githubmciconapidata = await githubmciconapi.json();
+        console.log(githubmciconapidata);
+        console.log(test);
+        //find test in tree array by have a word in path
+        let find = githubmciconapidata.tree.reverse().find(
+          (item) => item.path.toLowerCase().includes(test.toLowerCase())
+        );
+        console.log(find)
+        if( find == undefined ) {
+          urls = "https://minecraftitemids.com/item/64/" + test + ".png";
+        } else {
+          urls = "https://raw.githubusercontent.com/undrfined/mc-icons/master/" + find.path;
+        }
       }
       const response3 = await fetch("https://anywhere.pwisetthon.com/" + urls);
       if (response3.status == 404) {
@@ -328,7 +351,21 @@
         }
         const response5 = await fetch("https://anywhere.pwisetthon.com/" + urls);
         if (response5.status == 404) {
-          urls = "https://minecraftitemids.com/item/64/" + test + ".png";
+          // urls = "https://minecraftitemids.com/item/64/" + test + ".png";
+          const githubmciconapi = await fetch("https://api.github.com/repos/undrfined/mc-icons/git/trees/master?recursive=1");
+          const githubmciconapidata = await githubmciconapi.json();
+          console.log(githubmciconapidata);
+          console.log(test);
+          //find test in tree array by have a word in path
+          let find = githubmciconapidata.tree.reverse().find(
+            (item) => item.path.toLowerCase().includes(test.toLowerCase())
+          );
+          console.log(find)
+          if( find == undefined ) {
+            urls = "https://minecraftitemids.com/item/64/" + test + ".png";
+          } else {
+            urls = "https://raw.githubusercontent.com/undrfined/mc-icons/master/" + find.path;
+          }
         }
         const response6 = await fetch("https://anywhere.pwisetthon.com/" + urls);
         if (response6.status == 404) {
@@ -362,7 +399,21 @@
               "https://anywhere.pwisetthon.com/" + urls
             );
             if (response8.status == 404) {
-              urls = "https://minecraftitemids.com/item/64/" + test + ".png";
+              // urls = "https://minecraftitemids.com/item/64/" + test + ".png";
+              const githubmciconapi = await fetch("https://api.github.com/repos/undrfined/mc-icons/git/trees/master?recursive=1");
+              const githubmciconapidata = await githubmciconapi.json();
+              console.log(githubmciconapidata);
+              console.log(test);
+              //find test in tree array by have a word in path
+              let find = githubmciconapidata.tree.reverse().find(
+                (item) => item.path.toLowerCase().includes(test.toLowerCase())
+              );
+              console.log(find)
+              if( find == undefined ) {
+                urls = "https://minecraftitemids.com/item/64/" + test + ".png";
+              } else {
+                urls = "https://raw.githubusercontent.com/undrfined/mc-icons/master/" + find.path;
+              }
             }
             const response9 = await fetch(
               "https://anywhere.pwisetthon.com/" + urls
@@ -694,10 +745,15 @@
                         />
                       {/if}
                       {#await getblockname(item.type) then value}
-                        <Avatar
+                        <!-- <Avatar
                           randomBgColor
                           name={value}
                           src="https://mc.nerothe.com/img/1.19.2/{value}.png"
+                        /> -->
+                        <Avatar
+                          randomBgColor
+                          name={value?.name ?? ''}
+                          src={value?.url ?? ''}
                         />
                       {/await}
                     </Col>
@@ -718,7 +774,7 @@
                   <li>วันที่ {convertUnixTime(item.time)}</li>
                   <li>ตำแหน่ง {item.x} {item.y} {item.z}</li>
                   {#await getblockname(item.type) then value}
-                    <li>บล็อก {value}</li>
+                    <li>บล็อก {value.name}</li>
                   {/await}
                   <li>
                     {#if item.action == 0}
