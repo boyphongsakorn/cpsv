@@ -9,7 +9,7 @@ specifiers:
   prettier-plugin-svelte: ^2.10.1
   svelte: ^3.59.2
   svelte-avatar: ^1.2.0
-  svelte-check: ^3.6.0
+  svelte-check: ^3.6.2
   svelte-mail: ^0.1.1
   svelte-paginate: ^0.1.0
   sveltestrap: ^5.11.2
@@ -29,7 +29,7 @@ devDependencies:
   prettier: 2.8.8
   prettier-plugin-svelte: 2.10.1_jlgs5vq3kify7hyf3gm4oz2klm
   svelte: 3.59.2
-  svelte-check: 3.6.0_svelte@3.59.2
+  svelte-check: 3.6.2_svelte@3.59.2
   svelte-paginate: 0.1.0
   typescript: 5.3.2
   vite: 4.5.0
@@ -1472,8 +1472,8 @@ packages:
     resolution: {integrity: sha512-4YdjIM9cIFRtLqjrPp3xnsOjsmBeVdbhzyPpuJ5Z+Sv5TM9zo7dC3b4ijPiJiXhMZQytRo4PhnGtzcPMg7MF0w==}
     dev: false
 
-  /svelte-check/3.6.0_svelte@3.59.2:
-    resolution: {integrity: sha512-8VfqhfuRJ1sKW+o8isH2kPi0RhjXH1nNsIbCFGyoUHG+ZxVxHYRKcb+S8eaL/1tyj3VGvWYx3Y5+oCUsJgnzcw==}
+  /svelte-check/3.6.2_svelte@3.59.2:
+    resolution: {integrity: sha512-E6iFh4aUCGJLRz6QZXH3gcN/VFfkzwtruWSRmlKrLWQTiO6VzLsivR6q02WYLGNAGecV3EocqZuCDrC2uttZ0g==}
     hasBin: true
     peerDependencies:
       svelte: ^3.55.0 || ^4.0.0-next.0 || ^4.0.0 || ^5.0.0-next.0
