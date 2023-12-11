@@ -13,7 +13,7 @@ specifiers:
   svelte-mail: ^0.1.1
   svelte-paginate: ^0.1.0
   sveltestrap: ^5.11.2
-  typescript: ^5.3.2
+  typescript: ^5.3.3
   vite: ^4.5.0
 
 dependencies:
@@ -31,7 +31,7 @@ devDependencies:
   svelte: 3.59.2
   svelte-check: 3.6.2_svelte@3.59.2
   svelte-paginate: 0.1.0
-  typescript: 5.3.2
+  typescript: 5.3.3
   vite: 4.5.0
 
 packages:
@@ -1485,8 +1485,8 @@ packages:
       picocolors: 1.0.0
       sade: 1.8.1
       svelte: 3.59.2
-      svelte-preprocess: 5.1.0_4slsmcrbcbrwrhdnwxjyeffwna
-      typescript: 5.3.2
+      svelte-preprocess: 5.1.0_rkxzg63ujv2l6w2pwshs7zbe7q
+      typescript: 5.3.3
     transitivePeerDependencies:
       - '@babel/core'
       - coffeescript
@@ -1519,7 +1519,7 @@ packages:
     resolution: {integrity: sha512-SHD9YWj3S+qu7gTeaOox9ZA2S+iiNOp4VKnoGKvF6vm2bzp9gMUihwYunDoYXl0z6OLvZ1MpaHt27/sNx/t/UA==}
     dev: true
 
-  /svelte-preprocess/5.1.0_4slsmcrbcbrwrhdnwxjyeffwna:
+  /svelte-preprocess/5.1.0_rkxzg63ujv2l6w2pwshs7zbe7q:
     resolution: {integrity: sha512-EkErPiDzHAc0k2MF5m6vBNmRUh338h2myhinUw/xaqsLs7/ZvsgREiLGj03VrSzbY/TB5ZXgBOsKraFee5yceA==}
     engines: {node: '>= 14.10.0'}
     requiresBuild: true
@@ -1563,7 +1563,7 @@ packages:
       sorcery: 0.11.0
       strip-indent: 3.0.0
       svelte: 3.59.2
-      typescript: 5.3.2
+      typescript: 5.3.3
     dev: true
 
   /svelte/3.59.2:
@@ -1616,8 +1616,8 @@ packages:
     resolution: {integrity: sha512-KXXFFdAbFXY4geFIwoyNK+f5Z1b7swfXABfL7HXCmoIWMKU3dmS26672A4EeQtDzLKy7SXmfBu51JolvEKwtGA==}
     dev: false
 
-  /typescript/5.3.2:
-    resolution: {integrity: sha512-6l+RyNy7oAHDfxC4FzSJcz9vnjTKxrLpDG5M2Vu4SHRVNg6xzqZp6LYSR9zjqQTu8DU/f5xwxUdADOkbrIX2gQ==}
+  /typescript/5.3.3:
+    resolution: {integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: true
