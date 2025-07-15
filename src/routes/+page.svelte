@@ -286,7 +286,7 @@
       const movies = await response.json();
       // //remove minecraft: from the string and return the rest
       // return movies.blockid.replace("minecraft:", "");
-      let urls = "https://mc.nerothe.com/img/1.19.2/" + movies.blockid.replace("minecraft:", "") + ".png";
+      let urls = "https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/" + movies.blockid.replace("minecraft:", "") + ".png";
       // }
       const lastchange = await fetch("https://anywhere.pwisetthon.com/" + urls);
       if (lastchange.status == 404) {
@@ -332,7 +332,7 @@
       }
       const response3 = await fetch("https://anywhere.pwisetthon.com/" + urls);
       if (response3.status == 404) {
-        urls = "https://mc.nerothe.com/img/1.19.2/" + test + ".png";
+        urls = "https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/" + test + ".png";
       }
       const lastchange = await fetch("https://anywhere.pwisetthon.com/" + urls);
       if (lastchange.status == 404) {
@@ -371,7 +371,7 @@
         }
         const response6 = await fetch("https://anywhere.pwisetthon.com/" + urls);
         if (response6.status == 404) {
-          urls = "https://mc.nerothe.com/img/1.19.2/" + test + ".png";
+          urls = "https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/" + test + ".png";
         }
         const secondlastchange = await fetch(
           "https://anywhere.pwisetthon.com/" + urls
@@ -421,7 +421,7 @@
               "https://anywhere.pwisetthon.com/" + urls
             );
             if (response9.status == 404) {
-              urls = "https://mc.nerothe.com/img/1.19.2/" + test + ".png";
+              urls = "https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/" + test + ".png";
             }
             const lasttest = await fetch(
               "https://anywhere.pwisetthon.com/" + urls
@@ -750,7 +750,7 @@
                         <!-- <Avatar
                           randomBgColor
                           name={value}
-                          src="https://mc.nerothe.com/img/1.19.2/{value}.png"
+                          src="https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/{value}.png"
                         /> -->
                         <Avatar
                           randomBgColor
