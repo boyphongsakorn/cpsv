@@ -30,5 +30,5 @@
 		"svelte-mail": "^0.1.1",
 		"sveltestrap": "^5.11.3"
 	},
-	"packageManager": "pnpm@7.16.0"
+	"packageManager": "pnpm@10.12.4"
 }
