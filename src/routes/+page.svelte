@@ -633,7 +633,7 @@
       >
       <Col>
       {#await getallusernamecarousel() then value}
-        <Carousel dark bind:activeIndex>
+        <Carousel dark bind:activeIndex items={value}>
           <div class="carousel-inner">
             {#each value as items, index}
               <CarouselItem bind:activeIndex itemIndex={index}>
@@ -706,13 +706,13 @@
             {/each}
           </div>
   
-          <a href on:click={() => (activeIndex = Math.max(activeIndex - 1, 0))}
+          <a href on:click={() => (activeIndex = activeIndex === 0 ? value.length - 1 : activeIndex - 1)}
             ><CarouselControl direction="prev" /></a
           >
           <a
             href
             on:click={() =>
-              (activeIndex = Math.min(activeIndex + 1, value.length - 1))}
+              (activeIndex = activeIndex === value.length - 1 ? 0 : activeIndex + 1)}
             ><CarouselControl direction="next" /></a
           >
         </Carousel>
