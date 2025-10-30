@@ -409,8 +409,8 @@
 				</Col>
 				<Col>
 					{#if blockX != '' && blockY != '' && blockZ != ''}
-						<Carousel dark bind:activeIndex>
-							{#await getblockbycoordinate(blockX, blockY, blockZ) then value}
+						{#await getblockbycoordinate(blockX, blockY, blockZ) then value}
+							<Carousel dark bind:activeIndex items={value}>
 								<div class="carousel-inner">
 									{#each value as item, index}
 										<CarouselItem bind:activeIndex itemIndex={index}>
@@ -505,8 +505,8 @@
 								<a href on:click={() => (activeIndex = activeIndex === value.length - 1 ? 0 : activeIndex + 1)}
 									><CarouselControl direction="next" /></a
 								>
+							</Carousel>
 							{/await}
-						</Carousel>
                     {:else if selectedBlock != ''}
                         <!-- <Carousel bind:activeIndex> -->
                             {#await getblockbyid(selectedBlock) then value}
