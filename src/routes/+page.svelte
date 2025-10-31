@@ -365,7 +365,9 @@
 			return urlCache[cacheKey];
 		}
 
-		let urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + test + '-face.jpg';
+		// Preserve original test value to avoid cache key issues
+		let currentTest = test;
+		let urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.jpg';
 
 		// Check if this URL is cached as valid
 		let urlCacheKey = `url_${urls}`;
@@ -374,30 +376,41 @@
 			//const movies = await response.json();
 			//if response is 404 then return png url
 			if (response.status == 404) {
-				urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + test + '-face.png';
+				urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.png';
 				urlCacheKey = `url_${urls}`;
 			} else {
 				urlCache[urlCacheKey] = true;
 			}
 		}
 
+		// Helper function to get GitHub mc-icons data with caching
+		const getGithubMcIcons = async () => {
+			const githubCacheKey = 'github_mc_icons_tree';
+			if (urlCache[githubCacheKey]) {
+				return urlCache[githubCacheKey];
+			}
+			const githubmciconapi = await fetch(
+				'https://api.github.com/repos/undrfined/mc-icons/git/trees/master?recursive=1'
+			);
+			const githubmciconapidata = await githubmciconapi.json();
+			urlCache[githubCacheKey] = githubmciconapidata;
+			return githubmciconapidata;
+		};
+
 		if (urlCache[urlCacheKey] !== true) {
 			const response2 = await fetch('https://anywhere.pwisetthon.com/' + urls);
 			if (response2.status == 404) {
-				// urls = "https://minecraftitemids.com/item/64/" + test + ".png";
-				const githubmciconapi = await fetch(
-					'https://api.github.com/repos/undrfined/mc-icons/git/trees/master?recursive=1'
-				);
-				const githubmciconapidata = await githubmciconapi.json();
+				// urls = "https://minecraftitemids.com/item/64/" + currentTest + ".png";
+				const githubmciconapidata = await getGithubMcIcons();
 				console.log(githubmciconapidata);
-				console.log(test);
-				//find test in tree array by have a word in path
+				console.log(currentTest);
+				//find currentTest in tree array by have a word in path
 				let find = githubmciconapidata.tree
 					.reverse()
-					.find((item) => item.path.toLowerCase().includes(test.toLowerCase()));
+					.find((item) => item.path.toLowerCase().includes(currentTest.toLowerCase()));
 				console.log(find);
 				if (find == undefined) {
-					urls = 'https://minecraftitemids.com/item/64/' + test + '.png';
+					urls = 'https://minecraftitemids.com/item/64/' + currentTest + '.png';
 				} else {
 					urls = 'https://raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
 				}
@@ -412,7 +425,7 @@
 			if (response3.status == 404) {
 				urls =
 					'https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
-					test +
+					currentTest +
 					'.png';
 				urlCacheKey = `url_${urls}`;
 			} else {
@@ -424,8 +437,8 @@
 			const lastchange = await fetch('https://anywhere.pwisetthon.com/' + urls);
 			if (lastchange.status == 404) {
 				//change _ to -
-				test = test.replace(/_/g, '-');
-				urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + test + '-face.jpg';
+				currentTest = currentTest.replace(/_/g, '-');
+				urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.jpg';
 				urlCacheKey = `url_${urls}`;
 
 				if (urlCache[urlCacheKey] !== true) {
@@ -433,7 +446,8 @@
 					//const movies = await response.json();
 					//if response is 404 then return png url
 					if (response4.status == 404) {
-						urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + test + '-face.png';
+						urls =
+							'https://minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.png';
 						urlCacheKey = `url_${urls}`;
 					} else {
 						urlCache[urlCacheKey] = true;
@@ -443,20 +457,17 @@
 				if (urlCache[urlCacheKey] !== true) {
 					const response5 = await fetch('https://anywhere.pwisetthon.com/' + urls);
 					if (response5.status == 404) {
-						// urls = "https://minecraftitemids.com/item/64/" + test + ".png";
-						const githubmciconapi = await fetch(
-							'https://api.github.com/repos/undrfined/mc-icons/git/trees/master?recursive=1'
-						);
-						const githubmciconapidata = await githubmciconapi.json();
+						// urls = "https://minecraftitemids.com/item/64/" + currentTest + ".png";
+						const githubmciconapidata = await getGithubMcIcons();
 						console.log(githubmciconapidata);
-						console.log(test);
-						//find test in tree array by have a word in path
+						console.log(currentTest);
+						//find currentTest in tree array by have a word in path
 						let find = githubmciconapidata.tree
 							.reverse()
-							.find((item) => item.path.toLowerCase().includes(test.toLowerCase()));
+							.find((item) => item.path.toLowerCase().includes(currentTest.toLowerCase()));
 						console.log(find);
 						if (find == undefined) {
-							urls = 'https://minecraftitemids.com/item/64/' + test + '.png';
+							urls = 'https://minecraftitemids.com/item/64/' + currentTest + '.png';
 						} else {
 							urls = 'https://raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
 						}
@@ -471,7 +482,7 @@
 					if (response6.status == 404) {
 						urls =
 							'https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
-							test +
+							currentTest +
 							'.png';
 						urlCacheKey = `url_${urls}`;
 					} else {
@@ -483,11 +494,11 @@
 					const secondlastchange = await fetch('https://anywhere.pwisetthon.com/' + urls);
 					if (secondlastchange.status == 404) {
 						//split string by -
-						let split = test.split('-');
+						let split = currentTest.split('-');
 						//loop
 						for (let i = 0; i < split.length; i++) {
-							test = split[i];
-							urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + test + '-face.jpg';
+							let loopTest = split[i];
+							urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + loopTest + '-face.jpg';
 							urlCacheKey = `url_${urls}`;
 
 							if (urlCache[urlCacheKey] !== true) {
@@ -495,7 +506,8 @@
 								//const movies = await response.json();
 								//if response is 404 then return png url
 								if (response7.status == 404) {
-									urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + test + '-face.png';
+									urls =
+										'https://minecraftfaces.com/wp-content/bigfaces/big-' + loopTest + '-face.png';
 									urlCacheKey = `url_${urls}`;
 								} else {
 									urlCache[urlCacheKey] = true;
@@ -505,20 +517,17 @@
 							if (urlCache[urlCacheKey] !== true) {
 								const response8 = await fetch('https://anywhere.pwisetthon.com/' + urls);
 								if (response8.status == 404) {
-									// urls = "https://minecraftitemids.com/item/64/" + test + ".png";
-									const githubmciconapi = await fetch(
-										'https://api.github.com/repos/undrfined/mc-icons/git/trees/master?recursive=1'
-									);
-									const githubmciconapidata = await githubmciconapi.json();
+									// urls = "https://minecraftitemids.com/item/64/" + loopTest + ".png";
+									const githubmciconapidata = await getGithubMcIcons();
 									console.log(githubmciconapidata);
-									console.log(test);
-									//find test in tree array by have a word in path
+									console.log(loopTest);
+									//find loopTest in tree array by have a word in path
 									let find = githubmciconapidata.tree
 										.reverse()
-										.find((item) => item.path.toLowerCase().includes(test.toLowerCase()));
+										.find((item) => item.path.toLowerCase().includes(loopTest.toLowerCase()));
 									console.log(find);
 									if (find == undefined) {
-										urls = 'https://minecraftitemids.com/item/64/' + test + '.png';
+										urls = 'https://minecraftitemids.com/item/64/' + loopTest + '.png';
 									} else {
 										urls =
 											'https://raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
@@ -534,7 +543,7 @@
 								if (response9.status == 404) {
 									urls =
 										'https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
-										test +
+										loopTest +
 										'.png';
 									urlCacheKey = `url_${urls}`;
 								} else {
