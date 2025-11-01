@@ -679,7 +679,7 @@
 		<CardBody>
 			<TabContent>
 				<TabPane tabId="xyz" tab="ดู Log โดยใช้ X,Y,Z" active>
-					<Row class="align-items-end mt-3">
+					<Row class="align-items-end mt-3 justify-content-center">
 						<Col md="auto" sm="auto" xs="auto">
 							<FormGroup floating label="X" style="margin-bottom: 0px !important;">
 								<Input type="number" name="number" id="x" placeholder="0" bsSize="sm" />
@@ -702,8 +702,11 @@
 						</Col>
 						<Col md="auto" sm="auto" xs="auto" style="width: 20%;">
 							<FormGroup floating label=" " style="margin-bottom: 0px !important;">
-								<Button color="primary" on:click={() => wowblock()} size="sm" style="width: 100%;"
-									>ค้นหา</Button
+								<Button
+									color="primary"
+									on:click={() => wowblock()}
+									size="lg"
+									style="width: 100%; height: 100%;">ค้นหา</Button
 								>
 							</FormGroup>
 						</Col>
