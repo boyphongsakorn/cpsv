@@ -676,30 +676,28 @@
 			<TabContent>
 				<TabPane tabId="xyz" tab="ดู Log โดยใช้ X,Y,Z" active>
 					<Row class="align-items-end mt-3">
-						<Col md="2" sm="6" xs="6">
+						<Col md="auto" sm="3" xs="6">
 							<FormGroup floating label="X">
-								<Input type="number" name="number" id="x" placeholder="0" />
+								<Input type="number" name="number" id="x" placeholder="0" bsSize="sm" />
 							</FormGroup>
 						</Col>
-						<Col md="2" sm="6" xs="6">
+						<Col md="auto" sm="3" xs="6">
 							<FormGroup floating label="Y">
-								<Input type="number" name="number" id="y" placeholder="0" />
+								<Input type="number" name="number" id="y" placeholder="0" bsSize="sm" />
 							</FormGroup>
 						</Col>
-						<Col md="2" sm="6" xs="6">
+						<Col md="auto" sm="3" xs="6">
 							<FormGroup floating label="Z">
-								<Input type="number" name="number" id="z" placeholder="0" />
+								<Input type="number" name="number" id="z" placeholder="0" bsSize="sm" />
 							</FormGroup>
 						</Col>
-						<Col md="2" sm="6" xs="6">
+						<Col md="auto" sm="3" xs="6">
 							<FormGroup floating label="บวก/ลบ Offset">
-								<Input type="number" name="number" id="plus" placeholder="0" />
+								<Input type="number" name="number" id="plus" placeholder="0" bsSize="sm" />
 							</FormGroup>
 						</Col>
 						<Col md="auto" sm="12" xs="12" class="mt-2 mt-md-0">
-							<Button color="primary" on:click={() => wowblock()} class="w-100 w-md-auto"
-								>ค้นหา</Button
-							>
+							<Button color="primary" on:click={() => wowblock()} size="sm">ค้นหา</Button>
 						</Col>
 					</Row>
 				</TabPane>
@@ -710,7 +708,7 @@
 								<div class="carousel-inner">
 									{#each value as items, index}
 										<CarouselItem bind:activeIndex itemIndex={index}>
-											<div class="d-flex justify-content-center flex-wrap py-3">
+											<div class="d-flex justify-content-center flex-wrap">
 												{#each items as item}
 													{#if item.user.indexOf('#') != -1}
 														<!-- remove # from item.user -->
