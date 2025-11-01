@@ -700,15 +700,11 @@
 								<Input type="number" name="number" id="plus" placeholder="0" bsSize="sm" />
 							</FormGroup>
 						</Col>
-						<Col md="auto" sm="auto" xs="auto">
+						<Col md="auto" sm="auto" xs="auto" style="width: 20%;">
 							<FormGroup floating label=" " style="margin-bottom: 0px !important;">
-								<Input
-									type="button"
-									value="ค้นหา"
-									on:click={() => wowblock()}
-									bsSize="sm"
-									color="primary"
-								/>
+								<Button color="primary" on:click={() => wowblock()} size="sm" style="width: 100%;"
+									>ค้นหา</Button
+								>
 							</FormGroup>
 						</Col>
 					</Row>
