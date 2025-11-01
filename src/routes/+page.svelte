@@ -701,7 +701,11 @@
 							</FormGroup>
 						</Col>
 						<Col md="auto" sm="12" xs="12" class="mt-2 mt-md-0">
-							<Button color="primary" on:click={() => wowblock()} size="sm">ค้นหา</Button>
+							<FormGroup style="margin-bottom: 0px !important;">
+								<Button color="primary" on:click={() => wowblock()} size="sm" class="w-100"
+									>ค้นหา</Button
+								>
+							</FormGroup>
 						</Col>
 					</Row>
 				</TabPane>
