@@ -669,32 +669,36 @@
 <Container md>
 	<center><h1>ค้นหา Log การทุบหรือวางบล็อก</h1></center>
 
-	<Row>
-		<Col class="my-auto" xs="auto"><p>ดู Log โดยใช้ X,Y,Z</p></Col>
-		<Col
-			><FormGroup floating label="X">
-				<Input type="number" name="number" id="x" placeholder="number placeholder" /></FormGroup
-			></Col
-		>
-		<Col
-			><FormGroup floating label="Y">
-				<Input type="number" name="number" id="y" placeholder="number placeholder" /></FormGroup
-			></Col
-		>
-		<Col
-			><FormGroup floating label="Z">
-				<Input type="number" name="number" id="z" placeholder="number placeholder" /></FormGroup
-			></Col
-		>
-		<Col
-			><FormGroup floating label="บวก/ลบ">
-				<Input type="number" name="number" id="plus" placeholder="number placeholder" /></FormGroup
-			></Col
-		>
-		<Col class="my-auto" xs="auto">
-			<Button outline color="primary" on:click={() => wowblock()}>ค้นหา</Button>
-		</Col>
-	</Row>
+	<Card class="mb-4">
+		<CardBody>
+			<CardTitle tag="h5">ดู Log โดยใช้ X,Y,Z</CardTitle>
+			<Row class="align-items-end">
+				<Col md="2" sm="6" xs="6">
+					<FormGroup floating label="X">
+						<Input type="number" name="number" id="x" placeholder="0" />
+					</FormGroup>
+				</Col>
+				<Col md="2" sm="6" xs="6">
+					<FormGroup floating label="Y">
+						<Input type="number" name="number" id="y" placeholder="0" />
+					</FormGroup>
+				</Col>
+				<Col md="2" sm="6" xs="6">
+					<FormGroup floating label="Z">
+						<Input type="number" name="number" id="z" placeholder="0" />
+					</FormGroup>
+				</Col>
+				<Col md="2" sm="6" xs="6">
+					<FormGroup floating label="บวก/ลบ Offset">
+						<Input type="number" name="number" id="plus" placeholder="0" />
+					</FormGroup>
+				</Col>
+				<Col md="auto" sm="12" xs="12" class="mt-2 mt-md-0">
+					<Button color="primary" on:click={() => wowblock()} class="w-100 w-md-auto">ค้นหา</Button>
+				</Col>
+			</Row>
+		</CardBody>
+	</Card>
 
 	<Row>
 		<Col xs="2" style="display: none;margin: auto;margin-left: 0;margin-right: 0;"
@@ -739,15 +743,15 @@
 		</Col>
 	</Row>
 
-	<Row>
-		<Col xs="auto" class="my-auto"><p>ดู Log ตาม Player</p></Col>
-		<Col>
+	<Card class="mb-4">
+		<CardBody>
+			<CardTitle tag="h5">ดู Log ตาม Player</CardTitle>
 			{#await getallusernamecarousel() then value}
 				<Carousel dark bind:activeIndex items={value}>
 					<div class="carousel-inner">
 						{#each value as items, index}
 							<CarouselItem bind:activeIndex itemIndex={index}>
-								<center>
+								<div class="d-flex justify-content-center flex-wrap py-3">
 									{#each items as item}
 										{#if item.user.indexOf('#') != -1}
 											<!-- remove # from item.user -->
@@ -768,8 +772,9 @@
 											<a
 												href="https://log.bpminecraft.com/?id={item.userid}"
 												id="userid{item.userid}"
+												class="m-1"
 											>
-												<Button outline color="primary" style="margin-right: 5px;">
+												<Button outline color="primary">
 													{#await getmonsterimage(item.user.replace('#', '')) then imgurl}
 														<Avatar
 															randomBgColor
@@ -798,7 +803,8 @@
 												href="https://log.bpminecraft.com/?id={item.userid}"
 												id="userid{item.userid}"
 												on:click={() => playerchange(item.userid)}
-												><Button outline color="primary" style="margin-right: 5px;"
+												class="m-1"
+												><Button outline color="primary"
 													><Avatar
 														randomBgColor
 														initials={item.user}
@@ -809,7 +815,7 @@
 											<Tooltip target="userid{item.userid}" placement="bottom">{item.user}</Tooltip>
 										{/if}
 									{/each}
-								</center>
+								</div>
 							</CarouselItem>
 						{/each}
 					</div>
@@ -826,38 +832,45 @@
 					>
 				</Carousel>
 			{/await}
-		</Col>
-	</Row>
+		</CardBody>
+	</Card>
 
-	<Row>
+	<Row class="g-3">
 		{#each items as item}
-			<Col xs="4" sm="3">
-				<Card class="mb-3">
+			<Col xs="12" sm="6" md="4" lg="3">
+				<Card class="mb-3 h-100">
 					<CardHeader>
 						{#await getusername(item.user) then value}
 							<CardTitle>
-								<Row>
-									<Col>ลำดับ {item.id}</Col>
-									<Col class="test d-inline-flex">
+								<Row class="align-items-center">
+									<Col xs="auto">
+										<small class="text-muted">ลำดับ {item.id}</small>
+									</Col>
+									<Col class="d-flex justify-content-end gap-1">
 										{#if value.indexOf('#') != -1}
 											{#await getmonsterimage(value.replace('#', '')) then imgurl}
 												<Avatar
 													randomBgColor
 													name={value.replace('#', '')}
 													src={imgurl}
-													size="50px"
+													size="40px"
 												/>
 											{/await}
 										{:else}
-											<Avatar randomBgColor name={value} src="https://cravatar.eu/avatar/{value}" />
+											<Avatar
+												randomBgColor
+												name={value}
+												src="https://cravatar.eu/avatar/{value}"
+												size="40px"
+											/>
 										{/if}
 										{#await getblockname(item.type) then value}
-											<!-- <Avatar
-                          randomBgColor
-                          name={value}
-                          src="https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/{value}.png"
-                        /> -->
-											<Avatar randomBgColor name={value?.name ?? ''} src={value?.url ?? ''} />
+											<Avatar
+												randomBgColor
+												name={value?.name ?? ''}
+												src={value?.url ?? ''}
+												size="40px"
+											/>
 										{/await}
 									</Col>
 								</Row>
@@ -867,28 +880,40 @@
 					<CardBody>
 						<!--CardSubtitle>Card subtitle</CardSubtitle-->
 						<CardText>
-							<ul>
+							<ul class="list-unstyled mb-0">
 								<!--
                           {#await getusername(drinkName.user) then value}
                           <li>ผู้เล่น {value}</li>
                           {/await}
                           -->
 								<!--li>ไอดี {getusername(drinkName.user).then((value) => {return value})}</li-->
-								<li>วันที่ {convertUnixTime(item.time)}</li>
-								<li>ตำแหน่ง {item.x} {item.y} {item.z}</li>
+								<li class="mb-1">
+									<small class="text-muted">วันที่:</small><br />
+									<small>{convertUnixTime(item.time)}</small>
+								</li>
+								<li class="mb-1">
+									<small class="text-muted">ตำแหน่ง:</small><br />
+									<small>{item.x}, {item.y}, {item.z}</small>
+								</li>
 								{#await getblockname(item.type) then value}
-									<li>บล็อก {value.name}</li>
+									<li class="mb-1">
+										<small class="text-muted">บล็อก:</small><br />
+										<small>{value.name}</small>
+									</li>
 								{/await}
-								<li>
-									{#if item.action == 0}
-										ทุบบล็อก
-									{:else if item.action == 1}
-										วางบล็อก
-									{:else if item.action == 2}
-										คลิก/ใช้งาน
-									{:else}
-										อื่นๆ
-									{/if}
+								<li class="mb-1">
+									<small class="text-muted">การกระทำ:</small><br />
+									<small>
+										{#if item.action == 0}
+											<span class="text-danger">ทุบบล็อก</span>
+										{:else if item.action == 1}
+											<span class="text-success">วางบล็อก</span>
+										{:else if item.action == 2}
+											<span class="text-info">คลิก/ใช้งาน</span>
+										{:else}
+											อื่นๆ
+										{/if}
+									</small>
 								</li>
 							</ul>
 						</CardText>
@@ -903,7 +928,7 @@
                   </Button>
                 </a> -->
 								<a href="/rollback/?id={item.id}">
-									<Button outline color="primary" style="margin-right: 5px;">
+									<Button outline color="primary" size="sm" class="w-100">
 										Rollback / ย้อนบล็อกกับคืนมา
 									</Button>
 								</a>
