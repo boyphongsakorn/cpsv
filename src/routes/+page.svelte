@@ -60,8 +60,9 @@
 	// URL cache to avoid duplicate fetches
 	// Maps input parameters to successful URLs
 	let urlCache = {};
-	// Error array to track URLs that have failed (404 or other errors)
-	let errorUrls = [];
+	// Error set to track URLs that have failed (404 or other errors)
+	// Using Set for O(1) lookup performance
+	let errorUrls = new Set();
 	onMount(async () => {
 		window.js = js;
 		let url = 'https://cpsql.pwisetthon.com/blog/find/page/1';
@@ -350,8 +351,8 @@
 		}
 
 		// }
-		// Check if URL is in error array
-		if (errorUrls.includes(urls)) {
+		// Check if URL is in error set
+		if (errorUrls.has(urls)) {
 			let imageurl = await getmonsterimage(movies.blockid.replace('minecraft:', ''));
 			const result = { name: movies.blockid.replace('minecraft:', ''), url: imageurl };
 			urlCache[cacheKey] = result;
@@ -360,10 +361,8 @@
 
 		const lastchange = await fetch('https://anywhere.pwisetthon.com/' + urls);
 		if (lastchange.status == 404) {
-			// Add to error array
-			if (!errorUrls.includes(urls)) {
-				errorUrls.push(urls);
-			}
+			// Add to error set
+			errorUrls.add(urls);
 			let imageurl = await getmonsterimage(movies.blockid.replace('minecraft:', ''));
 			const result = { name: movies.blockid.replace('minecraft:', ''), url: imageurl };
 			urlCache[cacheKey] = result;
@@ -391,15 +390,13 @@
 
 		// Check if this URL is cached as valid
 		let urlCacheKey = `url_${urls}`;
-		if (urlCache[urlCacheKey] !== true && !errorUrls.includes(urls)) {
+		if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 			const response = await fetch('https://anywhere.pwisetthon.com/' + urls);
 			//const movies = await response.json();
 			//if response is 404 then return png url
 			if (response.status == 404) {
-				// Add to error array
-				if (!errorUrls.includes(urls)) {
-					errorUrls.push(urls);
-				}
+				// Add to error set
+				errorUrls.add(urls);
 				urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.png';
 				urlCacheKey = `url_${urls}`;
 			} else {
@@ -421,13 +418,11 @@
 			return githubmciconapidata;
 		};
 
-		if (urlCache[urlCacheKey] !== true && !errorUrls.includes(urls)) {
+		if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 			const response2 = await fetch('https://anywhere.pwisetthon.com/' + urls);
 			if (response2.status == 404) {
-				// Add to error array
-				if (!errorUrls.includes(urls)) {
-					errorUrls.push(urls);
-				}
+				// Add to error set
+				errorUrls.add(urls);
 				// urls = "https://minecraftitemids.com/item/64/" + currentTest + ".png";
 				const githubmciconapidata = await getGithubMcIcons();
 				console.log(githubmciconapidata);
@@ -448,13 +443,11 @@
 			}
 		}
 
-		if (urlCache[urlCacheKey] !== true && !errorUrls.includes(urls)) {
+		if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 			const response3 = await fetch('https://anywhere.pwisetthon.com/' + urls);
 			if (response3.status == 404) {
-				// Add to error array
-				if (!errorUrls.includes(urls)) {
-					errorUrls.push(urls);
-				}
+				// Add to error set
+				errorUrls.add(urls);
 				urls =
 					'https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
 					currentTest +
@@ -465,27 +458,23 @@
 			}
 		}
 
-		if (urlCache[urlCacheKey] !== true && !errorUrls.includes(urls)) {
+		if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 			const lastchange = await fetch('https://anywhere.pwisetthon.com/' + urls);
 			if (lastchange.status == 404) {
-				// Add to error array
-				if (!errorUrls.includes(urls)) {
-					errorUrls.push(urls);
-				}
+				// Add to error set
+				errorUrls.add(urls);
 				//change _ to -
 				currentTest = currentTest.replace(/_/g, '-');
 				urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.jpg';
 				urlCacheKey = `url_${urls}`;
 
-				if (urlCache[urlCacheKey] !== true && !errorUrls.includes(urls)) {
+				if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 					const response4 = await fetch('https://anywhere.pwisetthon.com/' + urls);
 					//const movies = await response.json();
 					//if response is 404 then return png url
 					if (response4.status == 404) {
-						// Add to error array
-						if (!errorUrls.includes(urls)) {
-							errorUrls.push(urls);
-						}
+						// Add to error set
+						errorUrls.add(urls);
 						urls =
 							'https://minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.png';
 						urlCacheKey = `url_${urls}`;
@@ -494,13 +483,11 @@
 					}
 				}
 
-				if (urlCache[urlCacheKey] !== true && !errorUrls.includes(urls)) {
+				if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 					const response5 = await fetch('https://anywhere.pwisetthon.com/' + urls);
 					if (response5.status == 404) {
-						// Add to error array
-						if (!errorUrls.includes(urls)) {
-							errorUrls.push(urls);
-						}
+						// Add to error set
+						errorUrls.add(urls);
 						// urls = "https://minecraftitemids.com/item/64/" + currentTest + ".png";
 						const githubmciconapidata = await getGithubMcIcons();
 						console.log(githubmciconapidata);
@@ -521,13 +508,11 @@
 					}
 				}
 
-				if (urlCache[urlCacheKey] !== true && !errorUrls.includes(urls)) {
+				if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 					const response6 = await fetch('https://anywhere.pwisetthon.com/' + urls);
 					if (response6.status == 404) {
-						// Add to error array
-						if (!errorUrls.includes(urls)) {
-							errorUrls.push(urls);
-						}
+						// Add to error set
+						errorUrls.add(urls);
 						urls =
 							'https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
 							currentTest +
@@ -538,13 +523,11 @@
 					}
 				}
 
-				if (urlCache[urlCacheKey] !== true && !errorUrls.includes(urls)) {
+				if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 					const secondlastchange = await fetch('https://anywhere.pwisetthon.com/' + urls);
 					if (secondlastchange.status == 404) {
-						// Add to error array
-						if (!errorUrls.includes(urls)) {
-							errorUrls.push(urls);
-						}
+						// Add to error set
+						errorUrls.add(urls);
 						//split string by -
 						let split = currentTest.split('-');
 						//loop
@@ -553,15 +536,13 @@
 							urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + loopTest + '-face.jpg';
 							urlCacheKey = `url_${urls}`;
 
-							if (urlCache[urlCacheKey] !== true && !errorUrls.includes(urls)) {
+							if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 								const response7 = await fetch('https://anywhere.pwisetthon.com/' + urls);
 								//const movies = await response.json();
 								//if response is 404 then return png url
 								if (response7.status == 404) {
-									// Add to error array
-									if (!errorUrls.includes(urls)) {
-										errorUrls.push(urls);
-									}
+									// Add to error set
+									errorUrls.add(urls);
 									urls =
 										'https://minecraftfaces.com/wp-content/bigfaces/big-' + loopTest + '-face.png';
 									urlCacheKey = `url_${urls}`;
@@ -570,13 +551,11 @@
 								}
 							}
 
-							if (urlCache[urlCacheKey] !== true && !errorUrls.includes(urls)) {
+							if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 								const response8 = await fetch('https://anywhere.pwisetthon.com/' + urls);
 								if (response8.status == 404) {
-									// Add to error array
-									if (!errorUrls.includes(urls)) {
-										errorUrls.push(urls);
-									}
+									// Add to error set
+									errorUrls.add(urls);
 									// urls = "https://minecraftitemids.com/item/64/" + loopTest + ".png";
 									const githubmciconapidata = await getGithubMcIcons();
 									console.log(githubmciconapidata);
@@ -598,13 +577,11 @@
 								}
 							}
 
-							if (urlCache[urlCacheKey] !== true && !errorUrls.includes(urls)) {
+							if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 								const response9 = await fetch('https://anywhere.pwisetthon.com/' + urls);
 								if (response9.status == 404) {
-									// Add to error array
-									if (!errorUrls.includes(urls)) {
-										errorUrls.push(urls);
-									}
+									// Add to error set
+									errorUrls.add(urls);
 									urls =
 										'https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
 										loopTest +
@@ -615,17 +592,15 @@
 								}
 							}
 
-							if (urlCache[urlCacheKey] !== true && !errorUrls.includes(urls)) {
+							if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 								const lasttest = await fetch('https://anywhere.pwisetthon.com/' + urls);
 								if (lasttest.status != 404) {
 									urlCache[urlCacheKey] = true;
 									//end loop
 									break;
 								} else {
-									// Add to error array
-									if (!errorUrls.includes(urls)) {
-										errorUrls.push(urls);
-									}
+									// Add to error set
+									errorUrls.add(urls);
 								}
 							} else {
 								break;
