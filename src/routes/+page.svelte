@@ -680,27 +680,27 @@
 			<TabContent>
 				<TabPane tabId="xyz" tab="ดู Log โดยใช้ X,Y,Z" active>
 					<Row class="align-items-end mt-3">
-						<Col md="auto" sm="3" xs="6">
+						<Col md="auto" sm="auto" xs="auto">
 							<FormGroup floating label="X" style="margin-bottom: 0px !important;">
 								<Input type="number" name="number" id="x" placeholder="0" bsSize="sm" />
 							</FormGroup>
 						</Col>
-						<Col md="auto" sm="3" xs="6">
+						<Col md="auto" sm="auto" xs="auto">
 							<FormGroup floating label="Y" style="margin-bottom: 0px !important;">
 								<Input type="number" name="number" id="y" placeholder="0" bsSize="sm" />
 							</FormGroup>
 						</Col>
-						<Col md="auto" sm="3" xs="6">
+						<Col md="auto" sm="auto" xs="auto">
 							<FormGroup floating label="Z" style="margin-bottom: 0px !important;">
 								<Input type="number" name="number" id="z" placeholder="0" bsSize="sm" />
 							</FormGroup>
 						</Col>
-						<Col md="auto" sm="3" xs="6">
+						<Col md="auto" sm="auto" xs="auto">
 							<FormGroup floating label="บวก/ลบ Offset" style="margin-bottom: 0px !important;">
 								<Input type="number" name="number" id="plus" placeholder="0" bsSize="sm" />
 							</FormGroup>
 						</Col>
-						<Col md="auto" sm="12" xs="12" class="mt-2 mt-md-0">
+						<Col md="auto" sm="auto" xs="auto">
 							<FormGroup floating label=" " style="margin-bottom: 0px !important;">
 								<Input
 									type="button"
