@@ -881,29 +881,23 @@
 						<!--CardSubtitle>Card subtitle</CardSubtitle-->
 						<CardText>
 							<ul class="list-unstyled mb-0">
-								<!--
-                          {#await getusername(drinkName.user) then value}
-                          <li>ผู้เล่น {value}</li>
-                          {/await}
-                          -->
-								<!--li>ไอดี {getusername(drinkName.user).then((value) => {return value})}</li-->
-								<li class="mb-1">
-									<small class="text-muted">วันที่:</small><br />
-									<small>{convertUnixTime(item.time)}</small>
+								<li class="mb-2">
+									<div class="text-muted small">วันที่</div>
+									<div class="small">{convertUnixTime(item.time)}</div>
 								</li>
-								<li class="mb-1">
-									<small class="text-muted">ตำแหน่ง:</small><br />
-									<small>{item.x}, {item.y}, {item.z}</small>
+								<li class="mb-2">
+									<div class="text-muted small">ตำแหน่ง</div>
+									<div class="small">{item.x}, {item.y}, {item.z}</div>
 								</li>
 								{#await getblockname(item.type) then value}
-									<li class="mb-1">
-										<small class="text-muted">บล็อก:</small><br />
-										<small>{value.name}</small>
+									<li class="mb-2">
+										<div class="text-muted small">บล็อก</div>
+										<div class="small">{value.name}</div>
 									</li>
 								{/await}
-								<li class="mb-1">
-									<small class="text-muted">การกระทำ:</small><br />
-									<small>
+								<li class="mb-2">
+									<div class="text-muted small">การกระทำ</div>
+									<div class="small">
 										{#if item.action == 0}
 											<span class="text-danger">ทุบบล็อก</span>
 										{:else if item.action == 1}
@@ -913,7 +907,7 @@
 										{:else}
 											อื่นๆ
 										{/if}
-									</small>
+									</div>
 								</li>
 							</ul>
 						</CardText>
