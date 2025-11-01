@@ -38,7 +38,9 @@
 		Styles,
 		FormGroup,
 		Label,
-		Input
+		Input,
+		TabContent,
+		TabPane
 	} from 'sveltestrap';
 
 	// export let location;
@@ -671,167 +673,131 @@
 
 	<Card class="mb-4">
 		<CardBody>
-			<CardTitle tag="h5">ดู Log โดยใช้ X,Y,Z</CardTitle>
-			<Row class="align-items-end">
-				<Col md="2" sm="6" xs="6">
-					<FormGroup floating label="X">
-						<Input type="number" name="number" id="x" placeholder="0" />
-					</FormGroup>
-				</Col>
-				<Col md="2" sm="6" xs="6">
-					<FormGroup floating label="Y">
-						<Input type="number" name="number" id="y" placeholder="0" />
-					</FormGroup>
-				</Col>
-				<Col md="2" sm="6" xs="6">
-					<FormGroup floating label="Z">
-						<Input type="number" name="number" id="z" placeholder="0" />
-					</FormGroup>
-				</Col>
-				<Col md="2" sm="6" xs="6">
-					<FormGroup floating label="บวก/ลบ Offset">
-						<Input type="number" name="number" id="plus" placeholder="0" />
-					</FormGroup>
-				</Col>
-				<Col md="auto" sm="12" xs="12" class="mt-2 mt-md-0">
-					<Button color="primary" on:click={() => wowblock()} class="w-100 w-md-auto">ค้นหา</Button>
-				</Col>
-			</Row>
-		</CardBody>
-	</Card>
-
-	<Row>
-		<Col xs="2" style="display: none;margin: auto;margin-left: 0;margin-right: 0;"
-			><p>ดู Log ตาม Player</p></Col
-		>
-		<Col xs="auto" style="display: none;margin-bottom: 5px">
-			{#await getallusername() then value}
-				{#each value as item}
-					<!-- if have # character on item.user  -->
-					{#if item.user.indexOf('#') != -1}
-						<!-- remove # from item.user -->
-						<Button
-							outline
-							color="primary"
-							on:click={() => wowplayer(item.userid)}
-							style="margin-right: 5px"
-							><Avatar
-								randomBgColor
-								initials={item.user.replace('#', '')}
-								src="https://minecraftfaces.com/wp-content/bigfaces/big-{item.user.replace(
-									'#',
-									''
-								)}-face.png"
-							/></Button
-						>
-					{:else}
-						<Button
-							outline
-							color="primary"
-							on:click={() => wowplayer(item.userid)}
-							style="margin-right: 5px"
-							><Avatar
-								randomBgColor
-								initials={item.user}
-								src="https://cravatar.eu/avatar/{item.user}"
-							/></Button
-						>
-					{/if}
-					<!--Avatar randomBgColor initials="{item.user}" src="https://cravatar.eu/avatar/{item.user}"/-->
-				{/each}
-			{/await}
-		</Col>
-	</Row>
-
-	<Card class="mb-4">
-		<CardBody>
-			<CardTitle tag="h5">ดู Log ตาม Player</CardTitle>
-			{#await getallusernamecarousel() then value}
-				<Carousel dark bind:activeIndex items={value}>
-					<div class="carousel-inner">
-						{#each value as items, index}
-							<CarouselItem bind:activeIndex itemIndex={index}>
-								<div class="d-flex justify-content-center flex-wrap py-3">
-									{#each items as item}
-										{#if item.user.indexOf('#') != -1}
-											<!-- remove # from item.user -->
-											<Button
-												outline
-												color="primary"
-												on:click={() => wowplayer(item.userid)}
-												style="margin-right: 5px;display: none;"
-												><Avatar
-													randomBgColor
-													initials={item.user.replace('#', '')}
-													src="https://minecraftfaces.com/wp-content/bigfaces/big-{item.user.replace(
-														'#',
-														''
-													)}-face.png"
-												/></Button
-											>
-											<a
-												href="https://log.bpminecraft.com/?id={item.userid}"
-												id="userid{item.userid}"
-												class="m-1"
-											>
-												<Button outline color="primary">
-													{#await getmonsterimage(item.user.replace('#', '')) then imgurl}
-														<Avatar
-															randomBgColor
-															initials={item.user.replace('#', '')}
-															src={imgurl}
-														/>
-													{/await}
-												</Button>
-											</a>
-											<Tooltip target="userid{item.userid}" placement="bottom"
-												>{item.user.replace('#', '')}</Tooltip
-											>
-										{:else}
-											<Button
-												outline
-												color="primary"
-												on:click={() => playerchange(item.userid)}
-												style="margin-right: 5px;display: none;"
-												><Avatar
-													randomBgColor
-													initials={item.user}
-													src="https://cravatar.eu/avatar/{item.user}"
-												/></Button
-											>
-											<a
-												href="https://log.bpminecraft.com/?id={item.userid}"
-												id="userid{item.userid}"
-												on:click={() => playerchange(item.userid)}
-												class="m-1"
-												><Button outline color="primary"
-													><Avatar
-														randomBgColor
-														initials={item.user}
-														src="https://cravatar.eu/avatar/{item.user}"
-													/></Button
-												></a
-											>
-											<Tooltip target="userid{item.userid}" placement="bottom">{item.user}</Tooltip>
-										{/if}
+			<TabContent>
+				<TabPane tabId="xyz" tab="ดู Log โดยใช้ X,Y,Z" active>
+					<Row class="align-items-end mt-3">
+						<Col md="2" sm="6" xs="6">
+							<FormGroup floating label="X">
+								<Input type="number" name="number" id="x" placeholder="0" />
+							</FormGroup>
+						</Col>
+						<Col md="2" sm="6" xs="6">
+							<FormGroup floating label="Y">
+								<Input type="number" name="number" id="y" placeholder="0" />
+							</FormGroup>
+						</Col>
+						<Col md="2" sm="6" xs="6">
+							<FormGroup floating label="Z">
+								<Input type="number" name="number" id="z" placeholder="0" />
+							</FormGroup>
+						</Col>
+						<Col md="2" sm="6" xs="6">
+							<FormGroup floating label="บวก/ลบ Offset">
+								<Input type="number" name="number" id="plus" placeholder="0" />
+							</FormGroup>
+						</Col>
+						<Col md="auto" sm="12" xs="12" class="mt-2 mt-md-0">
+							<Button color="primary" on:click={() => wowblock()} class="w-100 w-md-auto"
+								>ค้นหา</Button
+							>
+						</Col>
+					</Row>
+				</TabPane>
+				<TabPane tabId="player" tab="ดู Log ตาม Player">
+					<div class="mt-3">
+						{#await getallusernamecarousel() then value}
+							<Carousel dark bind:activeIndex items={value}>
+								<div class="carousel-inner">
+									{#each value as items, index}
+										<CarouselItem bind:activeIndex itemIndex={index}>
+											<div class="d-flex justify-content-center flex-wrap py-3">
+												{#each items as item}
+													{#if item.user.indexOf('#') != -1}
+														<!-- remove # from item.user -->
+														<Button
+															outline
+															color="primary"
+															on:click={() => wowplayer(item.userid)}
+															style="margin-right: 5px;display: none;"
+															><Avatar
+																randomBgColor
+																initials={item.user.replace('#', '')}
+																src="https://minecraftfaces.com/wp-content/bigfaces/big-{item.user.replace(
+																	'#',
+																	''
+																)}-face.png"
+															/></Button
+														>
+														<a
+															href="https://log.bpminecraft.com/?id={item.userid}"
+															id="userid{item.userid}"
+															class="m-1"
+														>
+															<Button outline color="primary">
+																{#await getmonsterimage(item.user.replace('#', '')) then imgurl}
+																	<Avatar
+																		randomBgColor
+																		initials={item.user.replace('#', '')}
+																		src={imgurl}
+																	/>
+																{/await}
+															</Button>
+														</a>
+														<Tooltip target="userid{item.userid}" placement="bottom"
+															>{item.user.replace('#', '')}</Tooltip
+														>
+													{:else}
+														<Button
+															outline
+															color="primary"
+															on:click={() => playerchange(item.userid)}
+															style="margin-right: 5px;display: none;"
+															><Avatar
+																randomBgColor
+																initials={item.user}
+																src="https://cravatar.eu/avatar/{item.user}"
+															/></Button
+														>
+														<a
+															href="https://log.bpminecraft.com/?id={item.userid}"
+															id="userid{item.userid}"
+															on:click={() => playerchange(item.userid)}
+															class="m-1"
+															><Button outline color="primary"
+																><Avatar
+																	randomBgColor
+																	initials={item.user}
+																	src="https://cravatar.eu/avatar/{item.user}"
+																/></Button
+															></a
+														>
+														<Tooltip target="userid{item.userid}" placement="bottom"
+															>{item.user}</Tooltip
+														>
+													{/if}
+												{/each}
+											</div>
+										</CarouselItem>
 									{/each}
 								</div>
-							</CarouselItem>
-						{/each}
-					</div>
 
-					<a
-						href
-						on:click={() => (activeIndex = activeIndex === 0 ? value.length - 1 : activeIndex - 1)}
-						><CarouselControl direction="prev" /></a
-					>
-					<a
-						href
-						on:click={() => (activeIndex = activeIndex === value.length - 1 ? 0 : activeIndex + 1)}
-						><CarouselControl direction="next" /></a
-					>
-				</Carousel>
-			{/await}
+								<a
+									href
+									on:click={() =>
+										(activeIndex = activeIndex === 0 ? value.length - 1 : activeIndex - 1)}
+									><CarouselControl direction="prev" /></a
+								>
+								<a
+									href
+									on:click={() =>
+										(activeIndex = activeIndex === value.length - 1 ? 0 : activeIndex + 1)}
+									><CarouselControl direction="next" /></a
+								>
+							</Carousel>
+						{/await}
+					</div>
+				</TabPane>
+			</TabContent>
 		</CardBody>
 	</Card>
 
