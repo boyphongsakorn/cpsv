@@ -190,6 +190,10 @@
 		let y = document.getElementById('y').value;
 		let z = document.getElementById('z').value;
 		let offset = document.getElementById('plus').value;
+		// Set default to 0 if offset is empty or not set
+		if (!offset || !offset.trim()) {
+			offset = '0';
+		}
 		//change location to https://log.bpminecraft.com/?x=0&y=0&z=0&offset=0
 		window.location.href =
 			'https://log.bpminecraft.com/?x=' + x + '&y=' + y + '&z=' + z + '&offset=' + offset;
@@ -675,29 +679,36 @@
 		<CardBody>
 			<TabContent>
 				<TabPane tabId="xyz" tab="ดู Log โดยใช้ X,Y,Z" active>
-					<Row class="align-items-end mt-3">
-						<Col md="auto" sm="3" xs="6">
+					<Row class="align-items-end mt-3 justify-content-center">
+						<Col md="auto" sm="auto" xs="auto">
 							<FormGroup floating label="X" style="margin-bottom: 0px !important;">
 								<Input type="number" name="number" id="x" placeholder="0" bsSize="sm" />
 							</FormGroup>
 						</Col>
-						<Col md="auto" sm="3" xs="6">
+						<Col md="auto" sm="auto" xs="auto">
 							<FormGroup floating label="Y" style="margin-bottom: 0px !important;">
 								<Input type="number" name="number" id="y" placeholder="0" bsSize="sm" />
 							</FormGroup>
 						</Col>
-						<Col md="auto" sm="3" xs="6">
+						<Col md="auto" sm="auto" xs="auto">
 							<FormGroup floating label="Z" style="margin-bottom: 0px !important;">
 								<Input type="number" name="number" id="z" placeholder="0" bsSize="sm" />
 							</FormGroup>
 						</Col>
-						<Col md="auto" sm="3" xs="6">
+						<Col md="auto" sm="auto" xs="auto">
 							<FormGroup floating label="บวก/ลบ Offset" style="margin-bottom: 0px !important;">
 								<Input type="number" name="number" id="plus" placeholder="0" bsSize="sm" />
 							</FormGroup>
 						</Col>
-						<Col md="auto" sm="12" xs="12" class="mt-2 mt-md-0">
-							<Button color="primary" on:click={() => wowblock()} class="h-100">ค้นหา</Button>
+						<Col md="auto" sm="auto" xs="auto" style="width: 20%;">
+							<FormGroup floating label=" " style="margin-bottom: 0px !important;">
+								<Button
+									color="primary"
+									on:click={() => wowblock()}
+									size="lg"
+									style="width: 100%; height: 100%;">ค้นหา</Button
+								>
+							</FormGroup>
 						</Col>
 					</Row>
 				</TabPane>
