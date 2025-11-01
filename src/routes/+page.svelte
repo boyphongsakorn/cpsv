@@ -404,6 +404,10 @@
 			} else {
 				urlCache[urlCacheKey] = true;
 			}
+		} else if (errorUrls.has(urls)) {
+			// URL is in error set, skip to next fallback
+			urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.png';
+			urlCacheKey = `url_${urls}`;
 		}
 
 		// Helper function to get GitHub mc-icons data with caching
@@ -443,6 +447,18 @@
 			} else {
 				urlCache[urlCacheKey] = true;
 			}
+		} else if (errorUrls.has(urls)) {
+			// URL is in error set, skip to next fallback
+			const githubmciconapidata = await getGithubMcIcons();
+			let find = githubmciconapidata.tree
+				.reverse()
+				.find((item) => item.path.toLowerCase().includes(currentTest.toLowerCase()));
+			if (find == undefined) {
+				urls = 'https://minecraftitemids.com/item/64/' + currentTest + '.png';
+			} else {
+				urls = 'https://raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
+			}
+			urlCacheKey = `url_${urls}`;
 		}
 
 		if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
@@ -458,6 +474,13 @@
 			} else {
 				urlCache[urlCacheKey] = true;
 			}
+		} else if (errorUrls.has(urls)) {
+			// URL is in error set, skip to next fallback
+			urls =
+				'https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
+				currentTest +
+				'.png';
+			urlCacheKey = `url_${urls}`;
 		}
 
 		if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
@@ -483,6 +506,10 @@
 					} else {
 						urlCache[urlCacheKey] = true;
 					}
+				} else if (errorUrls.has(urls)) {
+					// URL is in error set, skip to next fallback
+					urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.png';
+					urlCacheKey = `url_${urls}`;
 				}
 
 				if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
@@ -508,6 +535,18 @@
 					} else {
 						urlCache[urlCacheKey] = true;
 					}
+				} else if (errorUrls.has(urls)) {
+					// URL is in error set, skip to next fallback
+					const githubmciconapidata = await getGithubMcIcons();
+					let find = githubmciconapidata.tree
+						.reverse()
+						.find((item) => item.path.toLowerCase().includes(currentTest.toLowerCase()));
+					if (find == undefined) {
+						urls = 'https://minecraftitemids.com/item/64/' + currentTest + '.png';
+					} else {
+						urls = 'https://raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
+					}
+					urlCacheKey = `url_${urls}`;
 				}
 
 				if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
@@ -523,6 +562,13 @@
 					} else {
 						urlCache[urlCacheKey] = true;
 					}
+				} else if (errorUrls.has(urls)) {
+					// URL is in error set, skip to next fallback
+					urls =
+						'https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
+						currentTest +
+						'.png';
+					urlCacheKey = `url_${urls}`;
 				}
 
 				if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
@@ -551,6 +597,11 @@
 								} else {
 									urlCache[urlCacheKey] = true;
 								}
+							} else if (errorUrls.has(urls)) {
+								// URL is in error set, skip to next fallback
+								urls =
+									'https://minecraftfaces.com/wp-content/bigfaces/big-' + loopTest + '-face.png';
+								urlCacheKey = `url_${urls}`;
 							}
 
 							if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
@@ -577,6 +628,18 @@
 								} else {
 									urlCache[urlCacheKey] = true;
 								}
+							} else if (errorUrls.has(urls)) {
+								// URL is in error set, skip to next fallback
+								const githubmciconapidata = await getGithubMcIcons();
+								let find = githubmciconapidata.tree
+									.reverse()
+									.find((item) => item.path.toLowerCase().includes(loopTest.toLowerCase()));
+								if (find == undefined) {
+									urls = 'https://minecraftitemids.com/item/64/' + loopTest + '.png';
+								} else {
+									urls = 'https://raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
+								}
+								urlCacheKey = `url_${urls}`;
 							}
 
 							if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
@@ -592,6 +655,13 @@
 								} else {
 									urlCache[urlCacheKey] = true;
 								}
+							} else if (errorUrls.has(urls)) {
+								// URL is in error set, skip to next fallback
+								urls =
+									'https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
+									loopTest +
+									'.png';
+								urlCacheKey = `url_${urls}`;
 							}
 
 							if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
@@ -611,10 +681,32 @@
 					} else {
 						urlCache[urlCacheKey] = true;
 					}
+				} else if (errorUrls.has(urls)) {
+					// URL is in error set, skip to next fallback (loop through split parts)
+					currentTest = currentTest.replace(/_/g, '-');
+					let split = currentTest.split('-');
+					for (let i = 0; i < split.length; i++) {
+						let loopTest = split[i];
+						urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + loopTest + '-face.jpg';
+						urlCacheKey = `url_${urls}`;
+						if (!errorUrls.has(urls)) {
+							break;
+						}
+						urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + loopTest + '-face.png';
+						urlCacheKey = `url_${urls}`;
+						if (!errorUrls.has(urls)) {
+							break;
+						}
+					}
 				}
 			} else {
 				urlCache[urlCacheKey] = true;
 			}
+		} else if (errorUrls.has(urls)) {
+			// URL is in error set, skip to next fallback
+			currentTest = currentTest.replace(/_/g, '-');
+			urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.jpg';
+			urlCacheKey = `url_${urls}`;
 		}
 
 		urls = 'https://img.gs/fhcphvsghs/64x64,crop/' + urls;
