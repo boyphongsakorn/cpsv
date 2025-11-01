@@ -190,6 +190,10 @@
 		let y = document.getElementById('y').value;
 		let z = document.getElementById('z').value;
 		let offset = document.getElementById('plus').value;
+		// Set default to 0 if offset is empty or not set
+		if (!offset || offset.trim() === '') {
+			offset = '0';
+		}
 		//change location to https://log.bpminecraft.com/?x=0&y=0&z=0&offset=0
 		window.location.href =
 			'https://log.bpminecraft.com/?x=' + x + '&y=' + y + '&z=' + z + '&offset=' + offset;
