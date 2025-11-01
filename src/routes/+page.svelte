@@ -702,9 +702,13 @@
 						</Col>
 						<Col md="auto" sm="12" xs="12" class="mt-2 mt-md-0">
 							<FormGroup floating label=" " style="margin-bottom: 0px !important;">
-								<Button color="primary" on:click={() => wowblock()} size="sm" class="w-100"
-									>ค้นหา</Button
-								>
+								<Input
+									type="button"
+									value="ค้นหา"
+									on:click={() => wowblock()}
+									bsSize="sm"
+									color="primary"
+								/>
 							</FormGroup>
 						</Col>
 					</Row>
