@@ -677,22 +677,22 @@
 				<TabPane tabId="xyz" tab="ดู Log โดยใช้ X,Y,Z" active>
 					<Row class="align-items-end mt-3">
 						<Col md="auto" sm="3" xs="6">
-							<FormGroup floating label="X" spacing="mb-0">
+							<FormGroup floating label="X" style="margin-bottom: 0px;">
 								<Input type="number" name="number" id="x" placeholder="0" bsSize="sm" />
 							</FormGroup>
 						</Col>
 						<Col md="auto" sm="3" xs="6">
-							<FormGroup floating label="Y" spacing="mb-0">
+							<FormGroup floating label="Y" style="margin-bottom: 0px;">
 								<Input type="number" name="number" id="y" placeholder="0" bsSize="sm" />
 							</FormGroup>
 						</Col>
 						<Col md="auto" sm="3" xs="6">
-							<FormGroup floating label="Z" spacing="mb-0">
+							<FormGroup floating label="Z" style="margin-bottom: 0px;">
 								<Input type="number" name="number" id="z" placeholder="0" bsSize="sm" />
 							</FormGroup>
 						</Col>
 						<Col md="auto" sm="3" xs="6">
-							<FormGroup floating label="บวก/ลบ Offset" spacing="mb-0">
+							<FormGroup floating label="บวก/ลบ Offset" style="margin-bottom: 0px;">
 								<Input type="number" name="number" id="plus" placeholder="0" bsSize="sm" />
 							</FormGroup>
 						</Col>
