@@ -353,8 +353,9 @@
 		// }
 		// Check if URL is in error set
 		if (errorUrls.has(urls)) {
-			let imageurl = await getmonsterimage(movies.blockid.replace('minecraft:', ''));
-			const result = { name: movies.blockid.replace('minecraft:', ''), url: imageurl };
+			// Set URL to fallback image
+			urls = await getmonsterimage(movies.blockid.replace('minecraft:', ''));
+			const result = { name: movies.blockid.replace('minecraft:', ''), url: urls };
 			urlCache[cacheKey] = result;
 			return result;
 		}
@@ -363,8 +364,9 @@
 		if (lastchange.status == 404) {
 			// Add to error set
 			errorUrls.add(urls);
-			let imageurl = await getmonsterimage(movies.blockid.replace('minecraft:', ''));
-			const result = { name: movies.blockid.replace('minecraft:', ''), url: imageurl };
+			// Set URL to fallback image
+			urls = await getmonsterimage(movies.blockid.replace('minecraft:', ''));
+			const result = { name: movies.blockid.replace('minecraft:', ''), url: urls };
 			urlCache[cacheKey] = result;
 			return result;
 			//return movies.blockid;
