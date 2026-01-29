@@ -338,14 +338,14 @@
 		// //remove minecraft: from the string and return the rest
 		// return movies.blockid.replace("minecraft:", "");
 		let urls =
-			'img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
+			'mc.nerothe.com/img/1.21.6/minecraft_' +
 			movies.blockid.replace('minecraft:', '') +
 			'.png';
 
 		// Check if this specific URL is already in cache
 		const urlCacheKey = `url_${urls}`;
 		if (urlCache[urlCacheKey] === true) {
-			const result = { name: movies.blockid.replace('minecraft:', ''), url: urls };
+			const result = { name: movies.blockid.replace('minecraft:', ''), url: 'https://' + urls };
 			urlCache[cacheKey] = result;
 			return result;
 		}
@@ -355,7 +355,7 @@
 		if (errorUrls.has(urls)) {
 			// Set URL to fallback image
 			urls = await getmonsterimage(movies.blockid.replace('minecraft:', ''));
-			const result = { name: movies.blockid.replace('minecraft:', ''), url: urls };
+			const result = { name: movies.blockid.replace('minecraft:', ''), url: 'https://' + urls };
 			urlCache[cacheKey] = result;
 			return result;
 		}
@@ -366,14 +366,14 @@
 			errorUrls.add(urls);
 			// Set URL to fallback image
 			urls = await getmonsterimage(movies.blockid.replace('minecraft:', ''));
-			const result = { name: movies.blockid.replace('minecraft:', ''), url: urls };
+			const result = { name: movies.blockid.replace('minecraft:', ''), url: 'https://' + urls };
 			urlCache[cacheKey] = result;
 			return result;
 			//return movies.blockid;
 		} else {
 			// Add successful URL to cache
 			urlCache[urlCacheKey] = true;
-			const result = { name: movies.blockid.replace('minecraft:', ''), url: urls };
+			const result = { name: movies.blockid.replace('minecraft:', ''), url: 'https://' + urls };
 			urlCache[cacheKey] = result;
 			return result;
 		}
@@ -467,7 +467,7 @@
 				// Add to error set
 				errorUrls.add(urls);
 				urls =
-					'img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
+					'mc.nerothe.com/img/1.21.6/minecraft_' +
 					currentTest +
 					'.png';
 				urlCacheKey = `url_${urls}`;
@@ -477,7 +477,7 @@
 		} else if (errorUrls.has(urls)) {
 			// URL is in error set, skip to next fallback
 			urls =
-				'img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
+				'mc.nerothe.com/img/1.21.6/minecraft_' +
 				currentTest +
 				'.png';
 			urlCacheKey = `url_${urls}`;
@@ -555,7 +555,7 @@
 						// Add to error set
 						errorUrls.add(urls);
 						urls =
-							'img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
+							'mc.nerothe.com/img/1.21.6/minecraft_' +
 							currentTest +
 							'.png';
 						urlCacheKey = `url_${urls}`;
@@ -565,7 +565,7 @@
 				} else if (errorUrls.has(urls)) {
 					// URL is in error set, skip to next fallback
 					urls =
-						'img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
+						'mc.nerothe.com/img/1.21.6/minecraft_' +
 						currentTest +
 						'.png';
 					urlCacheKey = `url_${urls}`;
@@ -648,7 +648,7 @@
 									// Add to error set
 									errorUrls.add(urls);
 									urls =
-										'img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
+										'mc.nerothe.com/img/1.21.6/minecraft_' +
 										loopTest +
 										'.png';
 									urlCacheKey = `url_${urls}`;
@@ -658,7 +658,7 @@
 							} else if (errorUrls.has(urls)) {
 								// URL is in error set, skip to next fallback
 								urls =
-									'img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
+									'mc.nerothe.com/img/1.21.6/minecraft_' +
 									loopTest +
 									'.png';
 								urlCacheKey = `url_${urls}`;
@@ -712,7 +712,7 @@
 		urls = 'img.gs/fhcphvsghs/64x64,crop/' + urls;
 		// Cache the final result
 		urlCache[cacheKey] = urls;
-		return urls;
+		return 'https://' + urls;
 	}
 
 	//let promise = getusername();
@@ -876,10 +876,11 @@
 														>
 															<Button outline color="primary">
 																{#await getmonsterimage(item.user.replace('#', '')) then imgurl}
+																	{imgurl}
 																	<Avatar
 																		randomBgColor
 																		initials={item.user.replace('#', '')}
-																		src={'https://' + imgurl}
+																		src={imgurl}
 																	/>
 																{/await}
 															</Button>
@@ -956,10 +957,11 @@
 									<Col class="d-flex justify-content-end gap-1">
 										{#if value.indexOf('#') != -1}
 											{#await getmonsterimage(value.replace('#', '')) then imgurl}
+												{imgurl}
 												<Avatar
 													randomBgColor
 													name={value.replace('#', '')}
-													src={'https://' + imgurl}
+													src={imgurl}
 													size="40px"
 												/>
 											{/await}
@@ -972,10 +974,11 @@
 											/>
 										{/if}
 										{#await getblockname(item.type) then value}
+										{value?.url ?? ''}
 											<Avatar
 												randomBgColor
 												name={value?.name ?? ''}
-												src={value?.url ? 'https://' + value?.url : ''}
+												src={value?.url ?? ''}
 												size="40px"
 											/>
 										{/await}
