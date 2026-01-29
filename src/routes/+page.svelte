@@ -342,39 +342,44 @@
 			movies.blockid.replace('minecraft:', '') +
 			'.png';
 
-		// Check if this specific URL is already in cache
-		const urlCacheKey = `url_${urls}`;
-		if (urlCache[urlCacheKey] === true) {
-			const result = { name: movies.blockid.replace('minecraft:', ''), url: 'https://' + urls };
-			urlCache[cacheKey] = result;
-			return result;
-		}
+		try {
+			// Check if this specific URL is already in cache
+			const urlCacheKey = `url_${urls}`;
+			if (urlCache[urlCacheKey] === true) {
+				const result = { name: movies.blockid.replace('minecraft:', ''), url: 'https://' + urls };
+				urlCache[cacheKey] = result;
+				return result;
+			}
 
-		// }
-		// Check if URL is in error set
-		if (errorUrls.has(urls)) {
-			// Set URL to fallback image
-			urls = await getmonsterimage(movies.blockid.replace('minecraft:', ''));
-			const result = { name: movies.blockid.replace('minecraft:', ''), url: 'https://' + urls };
-			urlCache[cacheKey] = result;
-			return result;
-		}
+			// }
+			// Check if URL is in error set
+			if (errorUrls.has(urls)) {
+				// Set URL to fallback image
+				urls = await getmonsterimage(movies.blockid.replace('minecraft:', ''));
+				const result = { name: movies.blockid.replace('minecraft:', ''), url: 'https://' + urls };
+				urlCache[cacheKey] = result;
+				return result;
+			}
 
-		const lastchange = await fetch('https://cors-fany.vercel.app/' + urls);
-		if (lastchange.status == 404) {
-			// Add to error set
-			errorUrls.add(urls);
-			// Set URL to fallback image
-			urls = await getmonsterimage(movies.blockid.replace('minecraft:', ''));
+			const lastchange = await fetch('https://cors-fany.vercel.app/' + urls);
+			if (lastchange.status == 404) {
+				// Add to error set
+				errorUrls.add(urls);
+				// Set URL to fallback image
+				urls = await getmonsterimage(movies.blockid.replace('minecraft:', ''));
+				const result = { name: movies.blockid.replace('minecraft:', ''), url: 'https://' + urls };
+				urlCache[cacheKey] = result;
+				return result;
+				//return movies.blockid;
+			} else {
+				// Add successful URL to cache
+				urlCache[urlCacheKey] = true;
+				const result = { name: movies.blockid.replace('minecraft:', ''), url: 'https://' + urls };
+				urlCache[cacheKey] = result;
+				return result;
+			}
+		} catch(error) {
 			const result = { name: movies.blockid.replace('minecraft:', ''), url: 'https://' + urls };
-			urlCache[cacheKey] = result;
-			return result;
-			//return movies.blockid;
-		} else {
-			// Add successful URL to cache
-			urlCache[urlCacheKey] = true;
-			const result = { name: movies.blockid.replace('minecraft:', ''), url: 'https://' + urls };
-			urlCache[cacheKey] = result;
 			return result;
 		}
 	}
@@ -396,7 +401,7 @@
 			const response = await fetch('https://cors-fany.vercel.app/' + urls);
 			//const movies = await response.json();
 			//if response is 404 then return png url
-			if (response.status == 404) {
+			if (response.status == 404 || response.status == 403) {
 				// Add to error set
 				errorUrls.add(urls);
 				urls = 'minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.png';
@@ -426,7 +431,7 @@
 
 		if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 			const response2 = await fetch('https://cors-fany.vercel.app/' + urls);
-			if (response2.status == 404) {
+			if (response2.status == 404 || response2.status == 403) {
 				// Add to error set
 				errorUrls.add(urls);
 				// urls = "https://minecraftitemids.com/item/64/" + currentTest + ".png";
@@ -463,7 +468,7 @@
 
 		if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 			const response3 = await fetch('https://cors-fany.vercel.app/' + urls);
-			if (response3.status == 404) {
+			if (response3.status == 404 || response3.status == 403) {
 				// Add to error set
 				errorUrls.add(urls);
 				urls =
@@ -485,7 +490,7 @@
 
 		if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 			const lastchange = await fetch('https://cors-fany.vercel.app/' + urls);
-			if (lastchange.status == 404) {
+			if (lastchange.status == 404 || lastchange.status == 403) {
 				// Add to error set
 				errorUrls.add(urls);
 				//change _ to -
@@ -497,7 +502,7 @@
 					const response4 = await fetch('https://cors-fany.vercel.app/' + urls);
 					//const movies = await response.json();
 					//if response is 404 then return png url
-					if (response4.status == 404) {
+					if (response4.status == 404 || response4.status == 403) {
 						// Add to error set
 						errorUrls.add(urls);
 						urls =
@@ -514,7 +519,7 @@
 
 				if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 					const response5 = await fetch('https://cors-fany.vercel.app/' + urls);
-					if (response5.status == 404) {
+					if (response5.status == 404 || response5.status == 403) {
 						// Add to error set
 						errorUrls.add(urls);
 						// urls = "https://minecraftitemids.com/item/64/" + currentTest + ".png";
@@ -551,7 +556,7 @@
 
 				if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 					const response6 = await fetch('https://cors-fany.vercel.app/' + urls);
-					if (response6.status == 404) {
+					if (response6.status == 404 || response6.status == 403) {
 						// Add to error set
 						errorUrls.add(urls);
 						urls =
@@ -573,7 +578,7 @@
 
 				if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 					const secondlastchange = await fetch('https://cors-fany.vercel.app/' + urls);
-					if (secondlastchange.status == 404) {
+					if (secondlastchange.status == 404 || secondlastchange.status == 403) {
 						// Add to error set
 						errorUrls.add(urls);
 						//split string by -
@@ -588,7 +593,7 @@
 								const response7 = await fetch('https://cors-fany.vercel.app/' + urls);
 								//const movies = await response.json();
 								//if response is 404 then return png url
-								if (response7.status == 404) {
+								if (response7.status == 404 || response7.status == 403) {
 									// Add to error set
 									errorUrls.add(urls);
 									urls =
@@ -606,7 +611,7 @@
 
 							if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 								const response8 = await fetch('https://cors-fany.vercel.app/' + urls);
-								if (response8.status == 404) {
+								if (response8.status == 404 || response8.status == 403) {
 									// Add to error set
 									errorUrls.add(urls);
 									// urls = "https://minecraftitemids.com/item/64/" + loopTest + ".png";
@@ -644,7 +649,7 @@
 
 							if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 								const response9 = await fetch('https://cors-fany.vercel.app/' + urls);
-								if (response9.status == 404) {
+								if (response9.status == 404 || response9.status == 403) {
 									// Add to error set
 									errorUrls.add(urls);
 									urls =
@@ -666,7 +671,7 @@
 
 							if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
 								const lasttest = await fetch('https://cors-fany.vercel.app/' + urls);
-								if (lasttest.status != 404) {
+								if (lasttest.status != 404 && lasttest.status != 403) {
 									urlCache[urlCacheKey] = true;
 									//end loop
 									break;
@@ -955,13 +960,23 @@
 										<small class="text-muted">ลำดับ {item.id}</small>
 									</Col>
 									<Col class="d-flex justify-content-end gap-1">
+										1
 										{#if value.indexOf('#') != -1}
 											{#await getmonsterimage(value.replace('#', '')) then imgurl}
-												{imgurl}
 												<Avatar
 													randomBgColor
 													name={value.replace('#', '')}
 													src={imgurl}
+													size="40px"
+												/>
+											{:catch error}
+												<Avatar
+													randomBgColor
+													name={value.replace('#', '')}
+													src="https://minecraftfaces.com/wp-content/bigfaces/big-{value.replace(
+														'#',
+														''
+													)}-face.png"
 													size="40px"
 												/>
 											{/await}
@@ -974,7 +989,6 @@
 											/>
 										{/if}
 										{#await getblockname(item.type) then value}
-										{value?.url ?? ''}
 											<Avatar
 												randomBgColor
 												name={value?.name ?? ''}
