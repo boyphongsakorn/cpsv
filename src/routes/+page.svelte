@@ -439,7 +439,7 @@
 					.find((item) => item.path.toLowerCase().includes(currentTest.toLowerCase()));
 				console.log(find);
 				if (find == undefined) {
-					urls = 'minecraftitemids.com/item/64/' + currentTest + '.png';
+					urls = 'static.minecraftitemids.com/64/' + currentTest + '.png';
 				} else {
 					urls = 'raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
 				}
@@ -454,7 +454,7 @@
 				.reverse()
 				.find((item) => item.path.toLowerCase().includes(currentTest.toLowerCase()));
 			if (find == undefined) {
-				urls = 'minecraftitemids.com/item/64/' + currentTest + '.png';
+				urls = 'static.minecraftitemids.com/64/' + currentTest + '.png';
 			} else {
 				urls = 'raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
 			}
@@ -527,7 +527,7 @@
 							.find((item) => item.path.toLowerCase().includes(currentTest.toLowerCase()));
 						console.log(find);
 						if (find == undefined) {
-							urls = 'minecraftitemids.com/item/64/' + currentTest + '.png';
+							urls = 'static.minecraftitemids.com/64/' + currentTest + '.png';
 						} else {
 							urls = 'raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
 						}
@@ -542,7 +542,7 @@
 						.reverse()
 						.find((item) => item.path.toLowerCase().includes(currentTest.toLowerCase()));
 					if (find == undefined) {
-						urls = 'https://minecraftitemids.com/item/64/' + currentTest + '.png';
+						urls = 'static.minecraftitemids.com/64/' + currentTest + '.png';
 					} else {
 						urls = 'https://raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
 					}
@@ -619,7 +619,7 @@
 										.find((item) => item.path.toLowerCase().includes(loopTest.toLowerCase()));
 									console.log(find);
 									if (find == undefined) {
-										urls = 'minecraftitemids.com/item/64/' + loopTest + '.png';
+										urls = 'static.minecraftitemids.com/64/' + loopTest + '.png';
 									} else {
 										urls =
 											'raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
@@ -635,7 +635,7 @@
 									.reverse()
 									.find((item) => item.path.toLowerCase().includes(loopTest.toLowerCase()));
 								if (find == undefined) {
-									urls = 'minecraftitemids.com/item/64/' + loopTest + '.png';
+									urls = 'static.minecraftitemids.com/64/' + loopTest + '.png';
 								} else {
 									urls = 'raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
 								}
