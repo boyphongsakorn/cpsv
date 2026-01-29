@@ -960,7 +960,6 @@
 										<small class="text-muted">ลำดับ {item.id}</small>
 									</Col>
 									<Col class="d-flex justify-content-end gap-1">
-										1
 										{#if value.indexOf('#') != -1}
 											{#await getmonsterimage(value.replace('#', '')) then imgurl}
 												<Avatar
