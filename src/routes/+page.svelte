@@ -879,7 +879,7 @@
 																	<Avatar
 																		randomBgColor
 																		initials={item.user.replace('#', '')}
-																		src={imgurl}
+																		src={'https://' + imgurl}
 																	/>
 																{/await}
 															</Button>
@@ -959,7 +959,7 @@
 												<Avatar
 													randomBgColor
 													name={value.replace('#', '')}
-													src={imgurl}
+													src={'https://' + imgurl}
 													size="40px"
 												/>
 											{/await}
@@ -975,7 +975,7 @@
 											<Avatar
 												randomBgColor
 												name={value?.name ?? ''}
-												src={value?.url ?? ''}
+												src={value?.url ? 'https://' + value?.url : ''}
 												size="40px"
 											/>
 										{/await}
