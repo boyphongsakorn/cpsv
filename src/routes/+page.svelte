@@ -338,7 +338,7 @@
 		// //remove minecraft: from the string and return the rest
 		// return movies.blockid.replace("minecraft:", "");
 		let urls =
-			'https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
+			'img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
 			movies.blockid.replace('minecraft:', '') +
 			'.png';
 
@@ -360,7 +360,7 @@
 			return result;
 		}
 
-		const lastchange = await fetch('https://anywhere.pwisetthon.com/' + urls);
+		const lastchange = await fetch('https://cors-fany.vercel.app/' + urls);
 		if (lastchange.status == 404) {
 			// Add to error set
 			errorUrls.add(urls);
@@ -388,25 +388,25 @@
 
 		// Preserve original test value to avoid cache key issues
 		let currentTest = test;
-		let urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.jpg';
+		let urls = 'minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.jpg';
 
 		// Check if this URL is cached as valid
 		let urlCacheKey = `url_${urls}`;
 		if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
-			const response = await fetch('https://anywhere.pwisetthon.com/' + urls);
+			const response = await fetch('https://cors-fany.vercel.app/' + urls);
 			//const movies = await response.json();
 			//if response is 404 then return png url
 			if (response.status == 404) {
 				// Add to error set
 				errorUrls.add(urls);
-				urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.png';
+				urls = 'minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.png';
 				urlCacheKey = `url_${urls}`;
 			} else {
 				urlCache[urlCacheKey] = true;
 			}
 		} else if (errorUrls.has(urls)) {
 			// URL is in error set, skip to next fallback
-			urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.png';
+			urls = 'minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.png';
 			urlCacheKey = `url_${urls}`;
 		}
 
@@ -425,7 +425,7 @@
 		};
 
 		if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
-			const response2 = await fetch('https://anywhere.pwisetthon.com/' + urls);
+			const response2 = await fetch('https://cors-fany.vercel.app/' + urls);
 			if (response2.status == 404) {
 				// Add to error set
 				errorUrls.add(urls);
@@ -439,9 +439,9 @@
 					.find((item) => item.path.toLowerCase().includes(currentTest.toLowerCase()));
 				console.log(find);
 				if (find == undefined) {
-					urls = 'https://minecraftitemids.com/item/64/' + currentTest + '.png';
+					urls = 'minecraftitemids.com/item/64/' + currentTest + '.png';
 				} else {
-					urls = 'https://raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
+					urls = 'raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
 				}
 				urlCacheKey = `url_${urls}`;
 			} else {
@@ -454,20 +454,20 @@
 				.reverse()
 				.find((item) => item.path.toLowerCase().includes(currentTest.toLowerCase()));
 			if (find == undefined) {
-				urls = 'https://minecraftitemids.com/item/64/' + currentTest + '.png';
+				urls = 'minecraftitemids.com/item/64/' + currentTest + '.png';
 			} else {
-				urls = 'https://raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
+				urls = 'raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
 			}
 			urlCacheKey = `url_${urls}`;
 		}
 
 		if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
-			const response3 = await fetch('https://anywhere.pwisetthon.com/' + urls);
+			const response3 = await fetch('https://cors-fany.vercel.app/' + urls);
 			if (response3.status == 404) {
 				// Add to error set
 				errorUrls.add(urls);
 				urls =
-					'https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
+					'img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
 					currentTest +
 					'.png';
 				urlCacheKey = `url_${urls}`;
@@ -477,43 +477,43 @@
 		} else if (errorUrls.has(urls)) {
 			// URL is in error set, skip to next fallback
 			urls =
-				'https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
+				'img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
 				currentTest +
 				'.png';
 			urlCacheKey = `url_${urls}`;
 		}
 
 		if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
-			const lastchange = await fetch('https://anywhere.pwisetthon.com/' + urls);
+			const lastchange = await fetch('https://cors-fany.vercel.app/' + urls);
 			if (lastchange.status == 404) {
 				// Add to error set
 				errorUrls.add(urls);
 				//change _ to -
 				currentTest = currentTest.replace(/_/g, '-');
-				urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.jpg';
+				urls = 'minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.jpg';
 				urlCacheKey = `url_${urls}`;
 
 				if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
-					const response4 = await fetch('https://anywhere.pwisetthon.com/' + urls);
+					const response4 = await fetch('https://cors-fany.vercel.app/' + urls);
 					//const movies = await response.json();
 					//if response is 404 then return png url
 					if (response4.status == 404) {
 						// Add to error set
 						errorUrls.add(urls);
 						urls =
-							'https://minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.png';
+							'minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.png';
 						urlCacheKey = `url_${urls}`;
 					} else {
 						urlCache[urlCacheKey] = true;
 					}
 				} else if (errorUrls.has(urls)) {
 					// URL is in error set, skip to next fallback
-					urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.png';
+					urls = 'minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.png';
 					urlCacheKey = `url_${urls}`;
 				}
 
 				if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
-					const response5 = await fetch('https://anywhere.pwisetthon.com/' + urls);
+					const response5 = await fetch('https://cors-fany.vercel.app/' + urls);
 					if (response5.status == 404) {
 						// Add to error set
 						errorUrls.add(urls);
@@ -527,9 +527,9 @@
 							.find((item) => item.path.toLowerCase().includes(currentTest.toLowerCase()));
 						console.log(find);
 						if (find == undefined) {
-							urls = 'https://minecraftitemids.com/item/64/' + currentTest + '.png';
+							urls = 'minecraftitemids.com/item/64/' + currentTest + '.png';
 						} else {
-							urls = 'https://raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
+							urls = 'raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
 						}
 						urlCacheKey = `url_${urls}`;
 					} else {
@@ -550,12 +550,12 @@
 				}
 
 				if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
-					const response6 = await fetch('https://anywhere.pwisetthon.com/' + urls);
+					const response6 = await fetch('https://cors-fany.vercel.app/' + urls);
 					if (response6.status == 404) {
 						// Add to error set
 						errorUrls.add(urls);
 						urls =
-							'https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
+							'img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
 							currentTest +
 							'.png';
 						urlCacheKey = `url_${urls}`;
@@ -565,14 +565,14 @@
 				} else if (errorUrls.has(urls)) {
 					// URL is in error set, skip to next fallback
 					urls =
-						'https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
+						'img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
 						currentTest +
 						'.png';
 					urlCacheKey = `url_${urls}`;
 				}
 
 				if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
-					const secondlastchange = await fetch('https://anywhere.pwisetthon.com/' + urls);
+					const secondlastchange = await fetch('https://cors-fany.vercel.app/' + urls);
 					if (secondlastchange.status == 404) {
 						// Add to error set
 						errorUrls.add(urls);
@@ -581,18 +581,18 @@
 						//loop
 						for (let i = 0; i < split.length; i++) {
 							let loopTest = split[i];
-							urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + loopTest + '-face.jpg';
+							urls = 'minecraftfaces.com/wp-content/bigfaces/big-' + loopTest + '-face.jpg';
 							urlCacheKey = `url_${urls}`;
 
 							if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
-								const response7 = await fetch('https://anywhere.pwisetthon.com/' + urls);
+								const response7 = await fetch('https://cors-fany.vercel.app/' + urls);
 								//const movies = await response.json();
 								//if response is 404 then return png url
 								if (response7.status == 404) {
 									// Add to error set
 									errorUrls.add(urls);
 									urls =
-										'https://minecraftfaces.com/wp-content/bigfaces/big-' + loopTest + '-face.png';
+										'minecraftfaces.com/wp-content/bigfaces/big-' + loopTest + '-face.png';
 									urlCacheKey = `url_${urls}`;
 								} else {
 									urlCache[urlCacheKey] = true;
@@ -600,12 +600,12 @@
 							} else if (errorUrls.has(urls)) {
 								// URL is in error set, skip to next fallback
 								urls =
-									'https://minecraftfaces.com/wp-content/bigfaces/big-' + loopTest + '-face.png';
+									'minecraftfaces.com/wp-content/bigfaces/big-' + loopTest + '-face.png';
 								urlCacheKey = `url_${urls}`;
 							}
 
 							if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
-								const response8 = await fetch('https://anywhere.pwisetthon.com/' + urls);
+								const response8 = await fetch('https://cors-fany.vercel.app/' + urls);
 								if (response8.status == 404) {
 									// Add to error set
 									errorUrls.add(urls);
@@ -619,10 +619,10 @@
 										.find((item) => item.path.toLowerCase().includes(loopTest.toLowerCase()));
 									console.log(find);
 									if (find == undefined) {
-										urls = 'https://minecraftitemids.com/item/64/' + loopTest + '.png';
+										urls = 'minecraftitemids.com/item/64/' + loopTest + '.png';
 									} else {
 										urls =
-											'https://raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
+											'raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
 									}
 									urlCacheKey = `url_${urls}`;
 								} else {
@@ -635,20 +635,20 @@
 									.reverse()
 									.find((item) => item.path.toLowerCase().includes(loopTest.toLowerCase()));
 								if (find == undefined) {
-									urls = 'https://minecraftitemids.com/item/64/' + loopTest + '.png';
+									urls = 'minecraftitemids.com/item/64/' + loopTest + '.png';
 								} else {
-									urls = 'https://raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
+									urls = 'raw.githubusercontent.com/undrfined/mc-icons/master/' + find.path;
 								}
 								urlCacheKey = `url_${urls}`;
 							}
 
 							if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
-								const response9 = await fetch('https://anywhere.pwisetthon.com/' + urls);
+								const response9 = await fetch('https://cors-fany.vercel.app/' + urls);
 								if (response9.status == 404) {
 									// Add to error set
 									errorUrls.add(urls);
 									urls =
-										'https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
+										'img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
 										loopTest +
 										'.png';
 									urlCacheKey = `url_${urls}`;
@@ -658,14 +658,14 @@
 							} else if (errorUrls.has(urls)) {
 								// URL is in error set, skip to next fallback
 								urls =
-									'https://img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
+									'img.gs/fhcphvsghs/quality=low/https://mc.nerothe.com/img/1.21.6/' +
 									loopTest +
 									'.png';
 								urlCacheKey = `url_${urls}`;
 							}
 
 							if (urlCache[urlCacheKey] !== true && !errorUrls.has(urls)) {
-								const lasttest = await fetch('https://anywhere.pwisetthon.com/' + urls);
+								const lasttest = await fetch('https://cors-fany.vercel.app/' + urls);
 								if (lasttest.status != 404) {
 									urlCache[urlCacheKey] = true;
 									//end loop
@@ -687,12 +687,12 @@
 					let split = currentTest.split('-');
 					for (let i = 0; i < split.length; i++) {
 						let loopTest = split[i];
-						urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + loopTest + '-face.jpg';
+						urls = 'minecraftfaces.com/wp-content/bigfaces/big-' + loopTest + '-face.jpg';
 						urlCacheKey = `url_${urls}`;
 						if (!errorUrls.has(urls)) {
 							break;
 						}
-						urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + loopTest + '-face.png';
+						urls = 'minecraftfaces.com/wp-content/bigfaces/big-' + loopTest + '-face.png';
 						urlCacheKey = `url_${urls}`;
 						if (!errorUrls.has(urls)) {
 							break;
@@ -705,11 +705,11 @@
 		} else if (errorUrls.has(urls)) {
 			// URL is in error set, skip to next fallback
 			currentTest = currentTest.replace(/_/g, '-');
-			urls = 'https://minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.jpg';
+			urls = 'minecraftfaces.com/wp-content/bigfaces/big-' + currentTest + '-face.jpg';
 			urlCacheKey = `url_${urls}`;
 		}
 
-		urls = 'https://img.gs/fhcphvsghs/64x64,crop/' + urls;
+		urls = 'img.gs/fhcphvsghs/64x64,crop/' + urls;
 		// Cache the final result
 		urlCache[cacheKey] = urls;
 		return urls;
