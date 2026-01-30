@@ -951,108 +951,110 @@
 	<Row class="g-3">
 		{#each items as item}
 			<Col xs="12" sm="6" md="4" lg="3">
-				<Card class="mb-3 h-100">
-					<CardHeader>
-						{#await getusername(item.user) then value}
-							<CardTitle>
-								<Row class="align-items-center">
-									<Col xs="auto">
-										<small class="text-muted">ลำดับ {item.id}</small>
-									</Col>
-									<Col class="d-flex justify-content-end gap-1">
-										{#if value.indexOf('#') != -1}
-											{#await getmonsterimage(value.replace('#', '')) then imgurl}
+				{#await getusername(item.user) then value}
+					<Card class="mb-3 h-100">
+						<CardHeader>
+							
+								<CardTitle>
+									<Row class="align-items-center">
+										<Col xs="auto">
+											<small class="text-muted">ลำดับ {item.id}</small>
+										</Col>
+										<Col class="d-flex justify-content-end gap-1">
+											{#if value.indexOf('#') != -1}
+												{#await getmonsterimage(value.replace('#', '')) then imgurl}
+													<Avatar
+														randomBgColor
+														name={value.replace('#', '')}
+														src={imgurl}
+														size="40px"
+													/>
+												{:catch error}
+													<Avatar
+														randomBgColor
+														name={value.replace('#', '')}
+														src="https://minecraftfaces.com/wp-content/bigfaces/big-{value.replace(
+															'#',
+															''
+														)}-face.png"
+														size="40px"
+													/>
+												{/await}
+											{:else}
 												<Avatar
 													randomBgColor
-													name={value.replace('#', '')}
-													src={imgurl}
+													name={value}
+													src="https://cravatar.eu/avatar/{value}"
 													size="40px"
 												/>
-											{:catch error}
+											{/if}
+											{#await getblockname(item.type) then value}
 												<Avatar
 													randomBgColor
-													name={value.replace('#', '')}
-													src="https://minecraftfaces.com/wp-content/bigfaces/big-{value.replace(
-														'#',
-														''
-													)}-face.png"
+													name={value?.name ?? ''}
+													src={value?.url ?? ''}
 													size="40px"
 												/>
 											{/await}
-										{:else}
-											<Avatar
-												randomBgColor
-												name={value}
-												src="https://cravatar.eu/avatar/{value}"
-												size="40px"
-											/>
-										{/if}
-										{#await getblockname(item.type) then value}
-											<Avatar
-												randomBgColor
-												name={value?.name ?? ''}
-												src={value?.url ?? ''}
-												size="40px"
-											/>
-										{/await}
-									</Col>
-								</Row>
-							</CardTitle>
-						{/await}
-					</CardHeader>
-					<CardBody>
-						<!--CardSubtitle>Card subtitle</CardSubtitle-->
-						<CardText>
-							<ul class="list-unstyled mb-0">
-								<li class="mb-2">
-									<div class="text-muted small">วันที่</div>
-									<div class="small">{convertUnixTime(item.time)}</div>
-								</li>
-								<li class="mb-2">
-									<div class="text-muted small">ตำแหน่ง</div>
-									<div class="small">{item.x}, {item.y}, {item.z}</div>
-								</li>
-								{#await getblockname(item.type) then value}
+										</Col>
+									</Row>
+								</CardTitle>
+							
+						</CardHeader>
+						<CardBody>
+							<!--CardSubtitle>Card subtitle</CardSubtitle-->
+							<CardText>
+								<ul class="list-unstyled mb-0">
 									<li class="mb-2">
-										<div class="text-muted small">บล็อก</div>
-										<div class="small">{value.name}</div>
+										<div class="text-muted small">วันที่</div>
+										<div class="small">{convertUnixTime(item.time)}</div>
 									</li>
-								{/await}
-								<li class="mb-2">
-									<div class="text-muted small">การกระทำ</div>
-									<div class="small">
-										{#if item.action == 0}
-											<span class="text-danger">ทุบบล็อก</span>
-										{:else if item.action == 1}
-											<span class="text-success">วางบล็อก</span>
-										{:else if item.action == 2}
-											<span class="text-info">คลิก/ใช้งาน</span>
-										{:else}
-											อื่นๆ
-										{/if}
-									</div>
-								</li>
-							</ul>
-						</CardText>
-						<!--Button>Button</Button-->
-					</CardBody>
-					{#await getusername(item.user) then value}
-						{#if value.indexOf('#') == -1 && checkUnixTimeif14days(item.time) == false}
-							<CardFooter>
-								<!-- <a href="/rollback/?id={item.id}">
-                  <Button outline color="primary" style="margin-right: 5px;">
-                    Rollback / ย้อนบล็อกกับคืนมา
-                  </Button>
-                </a> -->
-								<a href="/rollback/?id={item.id}">
-									<Button outline color="primary" size="sm" class="w-100">
-										Rollback / ย้อนบล็อกกับคืนมา
-									</Button>
-								</a>
-							</CardFooter>
-						{/if}
-					{/await}
-				</Card>
+									<li class="mb-2">
+										<div class="text-muted small">ตำแหน่ง</div>
+										<div class="small">{item.x}, {item.y}, {item.z}</div>
+									</li>
+									{#await getblockname(item.type) then value}
+										<li class="mb-2">
+											<div class="text-muted small">บล็อก</div>
+											<div class="small">{value.name}</div>
+										</li>
+									{/await}
+									<li class="mb-2">
+										<div class="text-muted small">การกระทำ</div>
+										<div class="small">
+											{#if item.action == 0}
+												<span class="text-danger">ทุบบล็อก</span>
+											{:else if item.action == 1}
+												<span class="text-success">วางบล็อก</span>
+											{:else if item.action == 2}
+												<span class="text-info">คลิก/ใช้งาน</span>
+											{:else}
+												อื่นๆ
+											{/if}
+										</div>
+									</li>
+								</ul>
+							</CardText>
+							<!--Button>Button</Button-->
+						</CardBody>
+						<!-- {#await getusername(item.user) then value} -->
+							{#if value.indexOf('#') == -1 && checkUnixTimeif14days(item.time) == false}
+								<CardFooter>
+									<!-- <a href="/rollback/?id={item.id}">
+					<Button outline color="primary" style="margin-right: 5px;">
+						Rollback / ย้อนบล็อกกับคืนมา
+					</Button>
+					</a> -->
+									<a href="/rollback/?id={item.id}">
+										<Button outline color="primary" size="sm" class="w-100">
+											Rollback / ย้อนบล็อกกับคืนมา
+										</Button>
+									</a>
+								</CardFooter>
+							{/if}
+						<!-- {/await} -->
+					</Card>
+				{/await}
 			</Col>
 		{/each}
 	</Row>
